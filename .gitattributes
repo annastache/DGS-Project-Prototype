@@ -1,2 +1,24 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalize line endings: store text files with LF in the repo,
+# check out with the platform-native ending on each machine.
+* text=auto eol=lf
+
+# Explicit text files
+*.dart    text eol=lf
+*.yaml    text eol=lf
+*.yml     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+*.lock    text eol=lf
+*.gitignore     text eol=lf
+*.gitattributes text eol=lf
+
+# Binary files — never touch
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.otf     binary
+*.ttf     binary
+*.frag    binary
+*.bin     binary
