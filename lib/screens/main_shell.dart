@@ -51,7 +51,7 @@ class MainShell extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         height: 70,
-        color: AppColors.surface.withOpacity(0.98),
+        color: AppColors.surface.withValues(alpha: 0.98),
         elevation: 16,
         notchMargin: 5,
         shape: const CircularNotchedRectangle(),

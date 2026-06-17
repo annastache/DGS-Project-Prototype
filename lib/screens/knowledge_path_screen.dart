@@ -49,9 +49,9 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Lektion 0 ist von Beginn an offen. Danach wird pro Tag nach der ersten Mahlzeit die Tageslektion freigeschaltet.',
-                  style: const TextStyle(fontSize: 12.5, color: AppColors.textSoft, height: 1.3),
+                  style: TextStyle(fontSize: 12.5, color: AppColors.textSoft, height: 1.3),
                 ),
               ],
             ),
@@ -172,7 +172,7 @@ class _PathNode extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: stars > 0 ? AppColors.primaryLight : AppColors.accentYellow.withOpacity(0.72),
+                  color: stars > 0 ? AppColors.primaryLight : AppColors.accentYellow.withValues(alpha: 0.72),
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
@@ -203,7 +203,7 @@ class _PathNode extends StatelessWidget {
                 top: 3,
               ),
               decoration: BoxDecoration(
-                color: color.withOpacity(unlocked ? 0.95 : 0.4),
+                color: color.withValues(alpha: unlocked ? 0.95 : 0.4),
                 borderRadius: BorderRadius.circular(999),
               ),
             ),

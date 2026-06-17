@@ -60,7 +60,7 @@ class _PhonePreviewFrame extends StatelessWidget {
             borderRadius: BorderRadius.circular(34),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.32),
+                color: Colors.black.withValues(alpha: 0.32),
                 blurRadius: 28,
                 offset: const Offset(0, 16),
               ),

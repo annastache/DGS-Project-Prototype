@@ -90,7 +90,7 @@ class _CutePlantPainter extends CustomPainter {
   void _drawGroundShadow(Canvas canvas, double cx, double h) {
     final shadowPaint = Paint()
       ..shader = RadialGradient(
-        colors: [Colors.black.withOpacity(0.13), Colors.transparent],
+        colors: [Colors.black.withValues(alpha: 0.13), Colors.transparent],
       ).createShader(Rect.fromCenter(center: Offset(cx, h - 12), width: 132, height: 24));
     canvas.drawOval(Rect.fromCenter(center: Offset(cx, h - 12), width: 132, height: 22), shadowPaint);
   }
@@ -184,7 +184,7 @@ class _CutePlantPainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     final vein = Paint()
-      ..color = Colors.white.withOpacity(0.35)
+      ..color = Colors.white.withValues(alpha: 0.35)
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round;
     canvas.drawLine(
@@ -217,7 +217,7 @@ class _CutePlantPainter extends CustomPainter {
       Offset(center.dx, center.dy - height * 0.25),
       Offset(center.dx, center.dy + height * 0.28),
       Paint()
-        ..color = Colors.white.withOpacity(0.35)
+        ..color = Colors.white.withValues(alpha: 0.35)
         ..strokeWidth = 4
         ..strokeCap = StrokeCap.round,
     );
@@ -225,7 +225,7 @@ class _CutePlantPainter extends CustomPainter {
 
   void _drawFlower(Canvas canvas, Offset center, double radius) {
     final petalPaint = Paint()
-      ..shader = RadialGradient(colors: const [_flowerLight, _flower]).createShader(
+      ..shader = const RadialGradient(colors: [_flowerLight, _flower]).createShader(
         Rect.fromCircle(center: center, radius: radius * 1.5),
       );
     for (var i = 0; i < 6; i++) {
@@ -263,7 +263,7 @@ class _CutePlantPainter extends CustomPainter {
       ).createShader(Rect.fromLTWH(cx - 56, h - 58, 112, 54));
     canvas.drawPath(potPath, potPaint);
 
-    final highlight = Paint()..color = Colors.white.withOpacity(0.17);
+    final highlight = Paint()..color = Colors.white.withValues(alpha: 0.17);
     canvas.drawPath(
       Path()
         ..moveTo(cx - 42, h - 55)
@@ -275,13 +275,13 @@ class _CutePlantPainter extends CustomPainter {
     );
 
     final blush = Paint()
-      ..color = const Color(0xFFFF7FB0).withOpacity(0.42)
+      ..color = const Color(0xFFFF7FB0).withValues(alpha: 0.42)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 0.5);
     canvas.drawOval(Rect.fromCenter(center: Offset(cx - 39, h - 34), width: 22, height: 13), blush);
     canvas.drawOval(Rect.fromCenter(center: Offset(cx + 39, h - 34), width: 22, height: 13), blush);
 
     final eyePaint = Paint()..color = _face;
-    final shinePaint = Paint()..color = Colors.white.withOpacity(0.92);
+    final shinePaint = Paint()..color = Colors.white.withValues(alpha: 0.92);
     canvas.drawOval(Rect.fromCenter(center: Offset(cx - 22, h - 38), width: 18, height: 23), eyePaint);
     canvas.drawOval(Rect.fromCenter(center: Offset(cx + 22, h - 38), width: 18, height: 23), eyePaint);
     canvas.drawCircle(Offset(cx - 19, h - 42), 3.2, shinePaint);
