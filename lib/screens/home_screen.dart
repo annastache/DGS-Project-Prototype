@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:timed_widget/timed_widget.dart';
 
 import '../core/app_colors.dart';
 import '../models/meal.dart';
@@ -84,11 +85,11 @@ class HomeScreen extends StatelessWidget {
                         onTap: controller.openQuickAdd,
                       ),
                       const ActionTile(icon: Icons.health_and_safety, label: 'Symptom\nerfassen', iconColor: Colors.redAccent),
-//                      ActionTile(
-//                        icon: Icons.search,
-//                        label: 'Lebensmittel\nsuchen',
-//                        onTap: controller.openQuickAdd,
-//                      ),
+                        /*ActionTile(
+                          icon: Icons.search,
+                          label: 'Lebensmittel\nsuchen',
+                          onTap: controller.openQuickAdd,
+                        ),*/
                       ActionTile(
                         icon: Icons.signpost_outlined,
                         label: 'Zum\nWissenspfad',
@@ -105,7 +106,18 @@ class HomeScreen extends StatelessWidget {
                     size: 152, // 152
                   ),
                 ),
-                if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay), 
+
+                //if (controller.todayQuizUnlocked && controller.starsForLesson(lesson.index) > 0) 
+                /*if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
+                TimedVisibility(
+                  delay: Duration(milliseconds: 400),
+                  reverseAfter: Duration(seconds: 5),
+                  loop: false,
+                  child: _SpeechBubble(day: controller.currentDay),
+                ),*/
+                if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
+                _SpeechBubble(day: controller.currentDay), 
+                //you did a great job today - message
               ],
             ),
           ),
@@ -298,7 +310,14 @@ class _SpeechBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final controller = AppStateScope.of(context);
+   /* return ActionTile(
+                        icon: Icons.signpost_outlined,
+                        label: 'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
+                        onTap: () => controller.setSelectedIndex(4),
+                      );*/
+    
+    /*return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -311,6 +330,25 @@ class _SpeechBubble extends StatelessWidget {
         textAlign: TextAlign.center,
         style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
       ),
+    ); */
+    return InkWell(
+      child: Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: AppColors.primary, width: 2),
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Text(
+        'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+      ),
+    ),
+    onTap: () => controller.setSelectedIndex(4),
     );
+    
+    
   }
 }
