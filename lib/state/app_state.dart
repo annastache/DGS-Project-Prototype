@@ -97,7 +97,7 @@ class AppController extends ChangeNotifier {
 
   bool isQuizAvailable(int lessonIndex) {
     if (lessonIndex == 0) {
-      return quizStarsByLesson.containsKey(0);
+      return true;
     }
     return unlockedQuizLessons.contains(lessonIndex) || quizStarsByLesson.containsKey(lessonIndex);
   }
