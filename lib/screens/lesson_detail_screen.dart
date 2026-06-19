@@ -14,7 +14,7 @@ class LessonDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
     final quizAvailable = controller.isQuizAvailable(lesson.index);
-    final hasQuizConcept = lesson.index > 0;
+    final hasQuizConcept = true;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -28,7 +28,7 @@ class LessonDetailScreen extends StatelessWidget {
             Text(
               lesson.title,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
             ),
             Text(
               lesson.readingTime,
@@ -47,6 +47,7 @@ class LessonDetailScreen extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 14),
+                  elevation: 0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                 ),
                 onPressed: () {
@@ -58,7 +59,7 @@ class LessonDetailScreen extends StatelessWidget {
                 },
                 child: Text(
                   controller.starsForLesson(lesson.index) > 0 ? 'Quiz wiederholen' : 'Quiz starten',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -99,16 +100,6 @@ class LessonDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             const Text(
               'Jeden Tag startet deine Pflanze klein. Durch die Tagesdokumentation wächst sie in vier Stufen. Der Wissenspfad begleitet dich parallel und schaltet neue Inhalte passend zu deinem Fortschritt frei.',
-              style: TextStyle(fontSize: 17, height: 1.45, color: AppColors.text),
-            ),
-          ] else ...[
-            Text(
-              'Merke dir für heute',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Die Lektion ist für den Click-Dummy bewusst kurz gehalten. Im echten Prototyp kann hier später der vollständige Lerninhalt aus eurem Konzept eingesetzt werden.',
               style: TextStyle(fontSize: 17, height: 1.45, color: AppColors.text),
             ),
           ],

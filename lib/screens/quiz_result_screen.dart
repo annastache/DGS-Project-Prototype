@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
 import '../core/app_colors.dart';
+import '../models/lesson.dart';
 import '../state/app_state.dart';
+import 'quiz_screen.dart';
 
 class QuizResultScreen extends StatelessWidget {
   const QuizResultScreen({
-    required this.lessonTitle,
+    required this.lesson,
     required this.correctAnswers,
     required this.totalQuestions,
     super.key,
   });
 
-  final String lessonTitle;
+  final Lesson lesson;
   final int correctAnswers;
   final int totalQuestions;
+
+  String get lessonTitle => lesson.title;
 
   @override
   Widget build(BuildContext context) {
@@ -44,38 +48,32 @@ class QuizResultScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 34),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 22),
                     color: AppColors.primary,
                   ),
+                  const SizedBox(width: 4),
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Text(
-                        'Quiz: $lessonTitle',
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
-                      ),
+                    child: Text(
+                      lessonTitle,
+                      textAlign: TextAlign.left,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 17, color: AppColors.primary, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],
               ),
-              const Spacer(),
+              const SizedBox(height:100),
               Container(
                 padding: const EdgeInsets.fromLTRB(18, 28, 18, 28),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(34),
+                  borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.25),
-                      blurRadius: 18,
-                      offset: const Offset(0, 8),
+                      color: AppColors.primary.withValues(alpha: 0.35),
+                      blurRadius: 14,
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
@@ -86,38 +84,44 @@ class QuizResultScreen extends StatelessWidget {
                       children: List.generate(3, (index) {
                         return Icon(
                           Icons.star,
-                          size: 74,
-                          color: index < stars ? AppColors.accentYellow : const Color(0xFF9BA49C),
+                          size: 64,
+                          color: index < stars ? AppColors.accentYellow : Colors.white.withValues(alpha: 0.35),
                         );
                       }),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
                     Text(
                       headline,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white, fontSize: 27, fontWeight: FontWeight.w900),
+                      style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
                     ),
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 14),
                     Text(
                       message,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w900, height: 1.25),
-                    ),
-                    const SizedBox(height: 28),
-                    const Text(
-                      'Weiter so!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900),
+                      style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w500, height: 1.4),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 28),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.primary,
+                  side: const BorderSide(color: AppColors.primary, width: 2),
+                  padding: const EdgeInsets.symmetric(vertical: 17),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+                ),
+                onPressed: () => _retakeQuiz(context),
+                child: const Text('Quiz wiederholen', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+              ),
+              const SizedBox(height: 14),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 17),
+                  elevation: 0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
                 ),
                 onPressed: () {
@@ -130,6 +134,14 @@ class QuizResultScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _retakeQuiz(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (_) => QuizScreen(lesson: lesson),
       ),
     );
   }
