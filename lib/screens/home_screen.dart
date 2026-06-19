@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: ListView(
+        physics: const NeverScrollableScrollPhysics(), // stop screen from scrolling
         padding: const EdgeInsets.fromLTRB(18, 4, 18, 112),
         children: [
           const TopBrandHeader(),
@@ -65,17 +66,17 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 16),
           _MealCard(controller: controller),
           const SizedBox(height: 8),
-          if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
-          const SizedBox(height: 12),
+          //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
+          //const SizedBox(height: 12), // 12
           SizedBox(
-            height: 318,
+            height: 220, //318 ---------------------------------------------------------------------------------
             child: Stack(
-              clipBehavior: Clip.none,
+              clipBehavior: Clip.hardEdge, // clipBehavior: Clip.none,
               children: [
                 Positioned(
                   left: 0,
-                  bottom: 10,
-                  child: Column(
+                  bottom: 0, // 10
+                  child: Column(                   
                     children: [
                       ActionTile(
                         icon: Icons.add_circle,
@@ -83,11 +84,11 @@ class HomeScreen extends StatelessWidget {
                         onTap: controller.openQuickAdd,
                       ),
                       const ActionTile(icon: Icons.health_and_safety, label: 'Symptom\nerfassen', iconColor: Colors.redAccent),
-                      ActionTile(
-                        icon: Icons.search,
-                        label: 'Lebensmittel\nsuchen',
-                        onTap: controller.openQuickAdd,
-                      ),
+//                      ActionTile(
+//                        icon: Icons.search,
+//                        label: 'Lebensmittel\nsuchen',
+//                        onTap: controller.openQuickAdd,
+//                      ),
                       ActionTile(
                         icon: Icons.signpost_outlined,
                         label: 'Zum\nWissenspfad',
@@ -101,9 +102,10 @@ class HomeScreen extends StatelessWidget {
                   bottom: 0,
                   child: PlantBuddy(
                     stage: controller.plantStage,
-                    size: 152,
+                    size: 152, // 152
                   ),
                 ),
+                if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay), 
               ],
             ),
           ),
