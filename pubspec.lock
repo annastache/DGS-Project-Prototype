@@ -192,6 +192,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
+  timed_widget:
+    dependency: "direct main"
+    description:
+      name: timed_widget
+      sha256: "7c862a89d9451911c1bd35658e93b2c8b2626e0d31191cb787cab310339b8564"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   vector_math:
     dependency: transitive
     description:
