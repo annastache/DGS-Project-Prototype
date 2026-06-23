@@ -106,6 +106,8 @@ class JournalScreen extends StatelessWidget {
               );
             },
           ),
+          
+          // reset button - for test only --- remove after -------------------------------------------------------
           const SizedBox(height: 32),
           const Divider(color: AppColors.primaryLight),
           const SizedBox(height: 12),
@@ -155,6 +157,8 @@ class JournalScreen extends StatelessWidget {
             },
             child: const Text('Zurücksetzen', style: TextStyle(fontWeight: FontWeight.w700)),
           ),
+        // reset button - for test only --- remove after -------------------------------------------------------
+
         ],
       ),
     );

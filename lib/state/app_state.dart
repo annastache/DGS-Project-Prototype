@@ -115,6 +115,7 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
+  // reset logic - for test only --- remove after -------------------------------------------------------------------
   void reset() {
     selectedIndex = 0;
     currentDay = 1;
@@ -126,6 +127,7 @@ class AppController extends ChangeNotifier {
     quizStarsByLesson.clear();
     notifyListeners();
   }
+  // reset logic - for test only --- remove after -------------------------------------------------------------------
 
   int _clampDay(int day) => day < 1 ? 1 : (day > 14 ? 14 : day);
 
