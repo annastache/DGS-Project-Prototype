@@ -8,6 +8,7 @@ class AppController extends ChangeNotifier {
   int unlockedLessonIndex = 0;
   int? latestQuizHintLesson;
   bool knowledgeHintSeen = false;
+  bool hintDismissed = false; // Introductionary hint on home screen -L
 
   final DateTime startDate = DateTime(2026, 6, 15);
   final List<String> mealNames = const ['Frühstück', 'Mittagessen', 'Abendessen'];
@@ -115,6 +116,13 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
+// home page start message -L
+  void dismissHint() {
+    hintDismissed = true;
+    notifyListeners();
+  }
+// home page start message -L
+
   // reset logic - for test only --- remove after -------------------------------------------------------------------
   void reset() {
     selectedIndex = 0;
@@ -125,6 +133,7 @@ class AppController extends ChangeNotifier {
     _mealStatusesByDay.clear();
     unlockedQuizLessons.clear();
     quizStarsByLesson.clear();
+    hintDismissed = false; // home page start message -L
     notifyListeners();
   }
   // reset logic - for test only --- remove after -------------------------------------------------------------------

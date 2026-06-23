@@ -17,9 +17,18 @@ class HomeScreen extends StatelessWidget {
 
     return SafeArea(
       bottom: false,
-      child: ListView(
+      /*child: ListView(
         physics: const NeverScrollableScrollPhysics(), // stop screen from scrolling
-        padding: const EdgeInsets.fromLTRB(18, 4, 18, 112),
+        padding: const EdgeInsets.fromLTRB(18, 4, 18, 112), */
+        //start layout fix
+        child: LayoutBuilder(
+      builder: (context, constraints) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(18, 4, 18, 80),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            // Ende außer Klammern
         children: [
           const TopBrandHeader(),
           const Divider(height: 1, color: AppColors.primary),
@@ -30,14 +39,16 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.primary),
             ),
           ),
-          const SizedBox(height: 8),
+          //const SizedBox(height: 8),
+          const Spacer(flex: 1),
           Center(
             child: Text(
               'Tag ${controller.currentDay} von 14',
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.text),
             ),
           ),
-          const SizedBox(height: 10),
+          //const SizedBox(height: 10),
+          const Spacer(flex: 1),
           Row(
             children: [
               const Icon(Icons.accessibility_new, color: Colors.redAccent, size: 24),
@@ -57,21 +68,78 @@ class HomeScreen extends StatelessWidget {
               const Icon(Icons.flag, color: Color(0xFF7FD18E), size: 24),
             ],
           ),
-          const SizedBox(height: 12),
+          //const SizedBox(height: 12),
+          const Spacer(flex: 2),
           _ProgressHint(controller: controller),
-          const SizedBox(height: 12),
-          const Text(
+          //const SizedBox(height: 12),
+          const Spacer(flex: 3),
+          /*const Text(
             'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.',
             style: TextStyle(fontSize: 12.5, color: AppColors.text),
+          ),*/ // dauerhaft eingeblendeter text -> ersetzt durch eimaaliges anzeigen
+          //introductionary message L------------------
+          if (!controller.hintDismissed && !controller.todayQuizUnlocked)
+  GestureDetector(
+    onTap: controller.dismissHint,
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primaryLight,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          const Expanded(
+            child: Text(
+              'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.',
+              style: TextStyle(fontSize: 12.5, color: AppColors.text),
+            ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(width: 8),
+          const Icon(Icons.close, size: 16, color: AppColors.text),
+        ],
+      ),
+    ),
+  ),
+  //introductionary message L-------------------------------
+          //const SizedBox(height: 16),
+          const Spacer(flex: 3),
           _MealCard(controller: controller),
-          const SizedBox(height: 8),
+          //const SizedBox(height: 8),
+          const Spacer(flex: 3),
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
           //const SizedBox(height: 12), // 12
+          //Expanded(
+          if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
+                 Container(
+                  //right: 0,
+                  //bottom: 0,
+                  child: TimedVisibility(
+                  delay: Duration(milliseconds: 0),
+                  reverseAfter: Duration(seconds: 10),
+                  loop: false,
+                  child: _SpeechBubble(day: controller.currentDay),
+                ),
+            ),
+           if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) > 0)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: AppColors.primary, width: 2),
+                borderRadius: BorderRadius.circular(24),
+                ),
+                child: Text(
+                  'Super! Du hast alles für heute erledigt!',
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+                  ),
+                ),
+          const Spacer(), // ← füllt den leeren Raum oberhalb
           SizedBox(
-            height: 220, //318 ---------------------------------------------------------------------------------
-            child: Stack(
+          height: 220, //318 ---------------------------------------------------------------------------------      
+               child: Stack(
               clipBehavior: Clip.hardEdge, // clipBehavior: Clip.none,
               children: [
                 Positioned(
@@ -115,13 +183,28 @@ class HomeScreen extends StatelessWidget {
                   loop: false,
                   child: _SpeechBubble(day: controller.currentDay),
                 ),*/
-                if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
-                _SpeechBubble(day: controller.currentDay), 
+                /*if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
+                 Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: TimedVisibility(
+                  delay: Duration(milliseconds: 500),
+                  reverseAfter: Duration(seconds: 10),
+                  loop: false,
+                  child: _SpeechBubble(day: controller.currentDay),
+                ),
+                ),
+                */
+                //_SpeechBubble(day: controller.currentDay), 
                 //you did a great job today - message
               ],
             ),
           ),
+          
         ],
+          ),
+        );
+      },
       ),
     );
   }
@@ -171,7 +254,7 @@ class _MealCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      //elevation: 2,
       color: AppColors.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       child: Padding(
