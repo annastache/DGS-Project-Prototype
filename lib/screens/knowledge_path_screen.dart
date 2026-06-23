@@ -9,8 +9,8 @@ import 'lesson_detail_screen.dart';
 Color _nodeColor(int lessonIndex, bool unlocked) {
   if (!unlocked) return AppColors.muted;
   if (lessonIndex <= 4) return AppColors.accentYellow;
-  if (lessonIndex <= 9) return AppColors.primary;
-  return AppColors.accentBlue;
+  if (lessonIndex <= 9) return AppColors.accentBlue;
+  return AppColors.primary;
 }
 
 class KnowledgePathScreen extends StatefulWidget {
@@ -189,12 +189,13 @@ class _PathNode extends StatelessWidget {
               ),
             ),
 
-            // Sterne — schräg außen oben neben dem Circle (gegenüber dem Text)
-            Positioned(
-              left: starsLeft,
-              top: 20,
-              child: _Stars(stars: stars, color: color),
-            ),
+            // Sterne — nur wenn Quiz verfügbar
+            if (quizAvailable && unlocked)
+              Positioned(
+                left: starsLeft,
+                top: 20,
+                child: _Stars(stars: stars, color: color),
+              ),
 
             // Titel — auf der gegenüberliegenden Seite des Circles
             Positioned(
@@ -216,33 +217,6 @@ class _PathNode extends StatelessWidget {
               ),
             ),
 
-            // Quiz-Badge — über dem Titel
-            if (quizAvailable && unlocked)
-              Positioned(
-                left: _circleOnRight ? textLeft : null,
-                right: _circleOnRight
-                    ? null
-                    : screenWidth - textLeft - textWidth,
-                top: 4,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    'Quiz',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      color: color == AppColors.accentYellow
-                          ? AppColors.text
-                          : Colors.white,
-                    ),
-                  ),
-                ),
-              ),
           ],
         ),
       ),
@@ -340,26 +314,33 @@ class _RoadPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
-    final double circleR = 34.0;
-    final double edgeMargin = 40.0;
-    final double x1 = circleOnRight
+    const double edgeMargin = 40.0;
+    const double circleR = 34.0;
+    const double circleTop = 22.0;
+    const double circleBottom = circleTop + 68.0; // 90
+    // Symmetrisch: gleicher Abstand über und unter dem Circle
+    const double gap = circleTop; // 22px — genau wie der Abstand oben
+    const double horizY = circleBottom + gap; // 112
+
+    final double xOwn = circleOnRight
         ? screenWidth - edgeMargin - circleR
         : edgeMargin + circleR;
-    final double x2 = circleOnRight
+    final double xNext = circleOnRight
         ? edgeMargin + circleR
         : screenWidth - edgeMargin - circleR;
-    // Pfad startet an Unterkante des aktuellen Circles
-    // und endet bei y=0 des nächsten Nodes (= Oberkante des nächsten Circles bei top:22)
-    // Wir zeichnen von 0 bis size.height damit der Pfad lückenlos verbindet
-    final double circleBottom = 22 + 68.0;
-    final double midY = circleBottom + (size.height - circleBottom) * 0.5;
 
+    // Pfad läuft von y=0 bis size.height:
+    // y=0     → y=circleTop  : eingehender Abstand (vom Ende des vorherigen Nodes)
+    // y=circleTop → y=circleBottom : durch den Circle
+    // y=circleBottom → y=horizY   : ausgehender Abstand (= gap = 22px, symmetrisch)
+    // y=horizY, xOwn → xNext      : horizontal rüber
+    // y=horizY → size.height      : runter zum nächsten Node
     final path = Path();
-    path.moveTo(x1, 0);             // startet am Anfang des Nodes (= Unterkante vorheriger Circle)
-    path.lineTo(x1, circleBottom);  // senkrecht zur Unterkante des Circles
-    path.lineTo(x1, midY);          // weiter runter zur Mitte
-    path.lineTo(x2, midY);          // waagerecht rüber
-    path.lineTo(x2, size.height);   // senkrecht zum Ende des Nodes
+    path.moveTo(xOwn, 0);
+    path.lineTo(xOwn, horizY);   // senkrecht runter (durch Circle + gap darunter)
+    path.lineTo(xNext, horizY);  // horizontal rüber
+    path.lineTo(xNext, size.height); // runter zum nächsten Node
+
     canvas.drawPath(path, paint);
   }
 
