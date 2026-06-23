@@ -106,6 +106,55 @@ class JournalScreen extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 32),
+          const Divider(color: AppColors.primaryLight),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.danger,
+              side: const BorderSide(color: AppColors.danger, width: 1.5),
+              padding: const EdgeInsets.symmetric(vertical: 13),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+            ),
+            onPressed: () => _confirmReset(context, controller),
+            icon: const Icon(Icons.refresh_rounded),
+            label: const Text('App zurücksetzen', style: TextStyle(fontWeight: FontWeight.w700)),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Setzt alle Fortschritte zurück – nur für Testzwecke.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 12, color: AppColors.muted),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _confirmReset(BuildContext context, AppController controller) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('App zurücksetzen?', style: TextStyle(fontWeight: FontWeight.w800)),
+        content: const Text('Alle Fortschritte, Mahlzeiten und Quiz-Ergebnisse werden gelöscht. Dies kann nicht rückgängig gemacht werden.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Abbrechen'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.danger,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+            ),
+            onPressed: () {
+              Navigator.pop(ctx);
+              controller.reset();
+            },
+            child: const Text('Zurücksetzen', style: TextStyle(fontWeight: FontWeight.w700)),
+          ),
         ],
       ),
     );

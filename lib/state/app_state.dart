@@ -8,8 +8,8 @@ class AppController extends ChangeNotifier {
   int unlockedLessonIndex = 0;
   int? latestQuizHintLesson;
   bool knowledgeHintSeen = false;
-  
-  final DateTime startDate = DateTime(2026, 6, 26);
+
+  final DateTime startDate = DateTime(2026, 6, 15);
   final List<String> mealNames = const ['Frühstück', 'Mittagessen', 'Abendessen'];
   final Map<int, List<MealStatus>> _mealStatusesByDay = {};
   final Set<int> unlockedQuizLessons = <int>{};
@@ -112,6 +112,18 @@ class AppController extends ChangeNotifier {
     final normalized = totalQuestions <= 0 ? 0 : ((correctAnswers / totalQuestions) * 3).round();
     quizStarsByLesson[lessonIndex] = normalized < 0 ? 0 : (normalized > 3 ? 3 : normalized);
     knowledgeHintSeen = true;
+    notifyListeners();
+  }
+
+  void reset() {
+    selectedIndex = 0;
+    currentDay = 1;
+    unlockedLessonIndex = 0;
+    latestQuizHintLesson = null;
+    knowledgeHintSeen = false;
+    _mealStatusesByDay.clear();
+    unlockedQuizLessons.clear();
+    quizStarsByLesson.clear();
     notifyListeners();
   }
 
