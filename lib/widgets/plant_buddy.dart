@@ -113,20 +113,7 @@ class _CutePlantPainter extends CustomPainter {
     _drawTopOvalLeaf(canvas, Offset(cx, top + 10), 42, 54);
   }
 
-  void _drawStageThree(Canvas canvas, double cx, double potTopY) {
-    final bottom = potTopY + 4;
-    final top = bottom - 94;
-    _drawStem(canvas, Offset(cx, bottom), Offset(cx, top), width: 9);
-    _drawLeaf(canvas, Offset(cx, bottom - 18), 48, 30, left: true, angleOffset: -0.08);
-    _drawLeaf(canvas, Offset(cx, bottom - 18), 48, 30, left: false, angleOffset: 0.08);
-    _drawLeaf(canvas, Offset(cx, bottom - 49), 42, 27, left: true);
-    _drawLeaf(canvas, Offset(cx, bottom - 49), 42, 27, left: false);
-    _drawLeaf(canvas, Offset(cx, bottom - 74), 36, 24, left: true);
-    _drawLeaf(canvas, Offset(cx, bottom - 74), 36, 24, left: false);
-    _drawTopOvalLeaf(canvas, Offset(cx, top + 7), 36, 46);
-  }
-
-  void _drawStageFour(Canvas canvas, double cx, double potTopY) {
+void _drawStageThree(Canvas canvas, double cx, double potTopY) {
     final bottom = potTopY + 4;
     final top = bottom - 98;
     _drawStem(canvas, Offset(cx, bottom), Offset(cx, top), width: 9);
@@ -139,6 +126,21 @@ class _CutePlantPainter extends CustomPainter {
     _drawFlower(canvas, Offset(cx + 48, top + 6), 13);
     _drawFlower(canvas, Offset(cx, top - 20), 15);
   }
+
+  void _drawStageFour(Canvas canvas, double cx, double potTopY) {
+    final bottom = potTopY + 4;
+    final top = bottom - 94;
+    _drawStem(canvas, Offset(cx, bottom), Offset(cx, top), width: 9);
+    _drawLeaf(canvas, Offset(cx, bottom - 18), 48, 30, left: true, angleOffset: -0.08);
+    _drawLeaf(canvas, Offset(cx, bottom - 18), 48, 30, left: false, angleOffset: 0.08);
+    _drawLeaf(canvas, Offset(cx, bottom - 49), 42, 27, left: true);
+    _drawLeaf(canvas, Offset(cx, bottom - 49), 42, 27, left: false);
+    _drawLeaf(canvas, Offset(cx, bottom - 74), 36, 24, left: true);
+    _drawLeaf(canvas, Offset(cx, bottom - 74), 36, 24, left: false);
+    _drawTopOvalLeaf(canvas, Offset(cx, top + 7), 36, 46);
+  }
+
+  
 
   void _drawStem(Canvas canvas, Offset from, Offset to, {required double width}) {
     final paint = Paint()
