@@ -22,29 +22,40 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   late int _displayedStage;
   late AnimationController _blinkController;
   late Animation<double> _blinkAnimation;
+  late AnimationController _swayController;
+  late Animation<double> _swayAnimation;
   bool _showHearts = false;
  
   @override
   void initState() {
     super.initState();
     _displayedStage = widget.stage;
- 
+
     _blinkController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
- 
+
     _blinkAnimation = Tween<double>(begin: 1.0, end: 0.08).animate(
       CurvedAnimation(parent: _blinkController, curve: Curves.easeInOut),
     );
- 
+
+    _swayController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3500),
+    )..repeat(reverse: true);
+
+    _swayAnimation = Tween<double>(begin: -0.06, end: 0.06).animate(
+      CurvedAnimation(parent: _swayController, curve: Curves.easeInOut),
+    );
+
     _scheduleBlink();
   }
  
   void _scheduleBlink() async {
     final random = math.Random();
     while (mounted) {
-      final delay = 5000 + random.nextInt(10001); // random between 5000ms and 15000ms
+      final delay = 10000 + random.nextInt(20001); // random between 5000ms and 15000ms
       await Future.delayed(Duration(milliseconds: delay));
       if (!mounted) break;
       await _blinkController.forward();
@@ -68,7 +79,10 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
         _displayedStage = widget.stage;
         _showHearts = true;
       });
-      Future.delayed(const Duration(milliseconds: 1500), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (mounted) _blinkController.forward().then((_) => _blinkController.reverse());
+        });
+      Future.delayed(const Duration(milliseconds: 2000), () {
         if (mounted) setState(() => _showHearts = false);
       });
     }
@@ -77,6 +91,7 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   @override
   void dispose() {
     _blinkController.dispose();
+    _swayController.dispose();
     super.dispose();
   }
  
@@ -85,7 +100,14 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        AnimatedSwitcher(
+        AnimatedBuilder(
+          animation: _swayAnimation,
+          builder: (context, child) => Transform.rotate(
+            angle: _swayAnimation.value,
+            alignment: Alignment.bottomCenter,
+            child: child,
+          ),
+          child: AnimatedSwitcher(
       duration: const Duration(milliseconds: 420),
       switchInCurve: Curves.easeOutBack,
       switchOutCurve: Curves.easeIn,
@@ -107,6 +129,7 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
         ),
       ),
         ),
+        ),
         if (_showHearts) const _HeartBurst(),
         
       ],
@@ -127,6 +150,7 @@ class _HeartBurstState extends State<_HeartBurst> with TickerProviderStateMixin 
   late List<Animation<double>> _opacities;
 
   final _heartOffsets = [-30.0, 0.0, 30.0];
+  final _heartStartY = [19.0, 0.0, 20.0];
 
   @override
   void initState() {
@@ -174,7 +198,7 @@ class _HeartBurstState extends State<_HeartBurst> with TickerProviderStateMixin 
             animation: _controllers[i],
             builder: (context, _) {
               return Transform.translate(
-                offset: Offset(_heartOffsets[i], _positions[i].value),
+                offset: Offset(_heartOffsets[i], _positions[i].value + _heartStartY[i]),
                 child: Opacity(
                   opacity: _opacities[i].value,
                   child: const Text(
