@@ -5,7 +5,7 @@ import '../core/app_colors.dart';
 import '../models/meal.dart';
 import '../state/app_state.dart';
 import '../widgets/action_tile.dart';
-import '../widgets/plant_buddy.dart';
+import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -87,16 +87,16 @@ class HomeScreen extends StatelessWidget {
         color: AppColors.primaryLight,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Row(
+      child: const Row(
         children: [
-          const Expanded(
+           Expanded(
             child: Text(
               'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.',
               style: TextStyle(fontSize: 12.5, color: AppColors.text),
             ),
           ),
-          const SizedBox(width: 8),
-          const Icon(Icons.close, size: 16, color: AppColors.text),
+           SizedBox(width: 8),
+           Icon(Icons.close, size: 16, color: AppColors.text),
         ],
       ),
     ),
@@ -111,16 +111,17 @@ class HomeScreen extends StatelessWidget {
           //const SizedBox(height: 12), // 12
           //Expanded(
           if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
-                 Container(
+                 
+                  _SpeechBubble(day: controller.currentDay),
                   //right: 0,
                   //bottom: 0,
-                  child: TimedVisibility(
+                  /*child: TimedVisibility(
                   delay: Duration(milliseconds: 0),
                   reverseAfter: Duration(seconds: 10),
                   loop: false,
                   child: _SpeechBubble(day: controller.currentDay),
-                ),
-            ),
+                ),*/
+            
            if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) > 0)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -130,10 +131,10 @@ class HomeScreen extends StatelessWidget {
                 border: Border.all(color: AppColors.primary, width: 2),
                 borderRadius: BorderRadius.circular(24),
                 ),
-                child: Text(
+                child: const Text(
                   'Super! Du hast alles für heute erledigt!',
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+                style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
                   ),
                 ),
           const Spacer(), // ← füllt den leeren Raum oberhalb
