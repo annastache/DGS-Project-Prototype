@@ -6,12 +6,28 @@ import '../state/app_state.dart';
 import '../widgets/top_brand_header.dart';
 import 'lesson_detail_screen.dart';
 
+// Konstanten die Painter und Layout teilen
+const double _nodeHeight = 130.0;
+const double _circleD = 68.0;
+const double _circleR = _circleD / 2;
+const double _circleTop = 22.0;
+const double _circleBottom = _circleTop + _circleD; // 90
+const double _gap = _circleTop; // 22px — symmetrisch oben und unten
+const double _horizY = _circleBottom + _gap; // 112 — wo die horizontale Linie liegt
+const double _edgeMargin = 40.0;
+
 Color _nodeColor(int lessonIndex, bool unlocked) {
   if (!unlocked) return AppColors.muted;
   if (lessonIndex <= 4) return AppColors.accentYellow;
   if (lessonIndex <= 9) return AppColors.accentBlue;
   return AppColors.primary;
 }
+
+bool _circleOnRight(int lessonIndex) => lessonIndex.isEven;
+
+double _circleCx(int lessonIndex, double screenWidth) => _circleOnRight(lessonIndex)
+    ? screenWidth - _edgeMargin - _circleR
+    : _edgeMargin + _circleR;
 
 class KnowledgePathScreen extends StatefulWidget {
   const KnowledgePathScreen({super.key});
@@ -37,6 +53,18 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final totalHeight = demoLessons.length * _nodeHeight;
+
+    // Baut Liste der Node-Daten für Painter
+    final nodes = demoLessons.map((lesson) {
+      final unlocked = controller.isLessonUnlocked(lesson.index);
+      return _NodeData(
+        lessonIndex: lesson.index,
+        unlocked: unlocked,
+        color: _nodeColor(lesson.index, unlocked),
+      );
+    }).toList();
 
     return SafeArea(
       bottom: false,
@@ -66,32 +94,49 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.fromLTRB(0, 8, 0, 112),
-              itemCount: demoLessons.length,
-              itemBuilder: (context, index) {
-                final lesson = demoLessons[index];
-                final unlocked = controller.isLessonUnlocked(lesson.index);
-                final isLast = lesson.index == demoLessons.length - 1;
-
-                return _PathNode(
-                  lessonIndex: lesson.index,
-                  title: lesson.title,
-                  unlocked: unlocked,
-                  isCurrent: lesson.index == controller.unlockedLessonIndex,
-                  quizAvailable: controller.isQuizAvailable(lesson.index),
-                  stars: controller.starsForLesson(lesson.index),
-                  isLast: isLast,
-                  onTap: unlocked
-                      ? () => Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) =>
-                                  LessonDetailScreen(lesson: lesson),
-                            ),
-                          )
-                      : null,
-                );
-              },
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 112),
+              child: SizedBox(
+                width: screenWidth,
+                height: totalHeight,
+                child: Stack(
+                  children: [
+                    // Globaler Pfad-Painter über alle Nodes
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: _GlobalRoadPainter(
+                          nodes: nodes,
+                          screenWidth: screenWidth,
+                        ),
+                      ),
+                    ),
+                    // Node-Widgets darüber
+                    for (final lesson in demoLessons)
+                      Positioned(
+                        top: lesson.index * _nodeHeight,
+                        left: 0,
+                        right: 0,
+                        height: _nodeHeight,
+                        child: _PathNode(
+                          lesson: lesson,
+                          unlocked: controller.isLessonUnlocked(lesson.index),
+                          isCurrent: lesson.index == controller.unlockedLessonIndex,
+                          quizAvailable: controller.isQuizAvailable(lesson.index),
+                          stars: controller.starsForLesson(lesson.index),
+                          screenWidth: screenWidth,
+                          onTap: controller.isLessonUnlocked(lesson.index)
+                              ? () => Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder: (_) =>
+                                          LessonDetailScreen(lesson: lesson),
+                                    ),
+                                  )
+                              : null,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -100,92 +145,119 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
   }
 }
 
+class _NodeData {
+  const _NodeData({
+    required this.lessonIndex,
+    required this.unlocked,
+    required this.color,
+  });
+  final int lessonIndex;
+  final bool unlocked;
+  final Color color;
+}
+
+// Zeichnet den kompletten Pfad für alle Nodes in einem einzigen Paint-Aufruf
+class _GlobalRoadPainter extends CustomPainter {
+  const _GlobalRoadPainter({
+    required this.nodes,
+    required this.screenWidth,
+  });
+
+  final List<_NodeData> nodes;
+  final double screenWidth;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (var i = 0; i < nodes.length - 1; i++) {
+      final node = nodes[i];
+      final nextNode = nodes[i + 1];
+      final segmentUnlocked = node.unlocked && nextNode.unlocked;
+      final paint = Paint()
+        ..color = segmentUnlocked
+            ? node.color
+            : AppColors.muted.withValues(alpha: 0.35)
+        ..strokeWidth = 8
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round;
+
+      final double nodeTop = i * _nodeHeight;
+      final double xOwn = _circleCx(node.lessonIndex, screenWidth);
+      final double xNext = _circleCx(nodes[i + 1].lessonIndex, screenWidth);
+
+      // Absoluter y-Wert der horizontalen Linie für diesen Node
+      final double absHorizY = nodeTop + _horizY;
+
+      final path = Path();
+      // Von Unterkante Circle senkrecht runter bis horizY
+      path.moveTo(xOwn, nodeTop + _circleBottom);
+      path.lineTo(xOwn, absHorizY);
+      // Horizontal rüber
+      path.lineTo(xNext, absHorizY);
+      // Senkrecht runter bis Oberkante des nächsten Circles
+      path.lineTo(xNext, nodeTop + _nodeHeight + _circleTop);
+
+      canvas.drawPath(path, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_GlobalRoadPainter old) => true;
+}
+
 class _PathNode extends StatelessWidget {
   const _PathNode({
-    required this.lessonIndex,
-    required this.title,
+    required this.lesson,
     required this.unlocked,
     required this.isCurrent,
     required this.quizAvailable,
     required this.stars,
-    required this.isLast,
+    required this.screenWidth,
     required this.onTap,
   });
 
-  final int lessonIndex;
-  final String title;
+  final dynamic lesson;
   final bool unlocked;
   final bool isCurrent;
   final bool quizAvailable;
   final int stars;
-  final bool isLast;
+  final double screenWidth;
   final VoidCallback? onTap;
-
-  // Ungerade = Circle rechts, gerade = Circle links (wie im Mockup)
-  bool get _circleOnRight => lessonIndex.isEven;
 
   @override
   Widget build(BuildContext context) {
-    final color = _nodeColor(lessonIndex, unlocked);
-    final pathColor = unlocked
-        ? _nodeColor(lessonIndex, true)
-        : AppColors.muted.withValues(alpha: 0.4);
+    final color = _nodeColor(lesson.index, unlocked);
+    final onRight = _circleOnRight(lesson.index);
+    final circleCx = _circleCx(lesson.index, screenWidth);
+    final circleLeft = circleCx - _circleR;
 
-    // Breite des Screens für relative Positionierung
-    final screenWidth = MediaQuery.of(context).size.width;
+    const double starsW = 20.0;
+    const double starsGap = 8.0;
+    final double starsLeft = onRight
+        ? circleCx + _circleR + starsGap
+        : circleCx - _circleR - starsGap - starsW;
 
-    const double circleD = 68.0;
-    const double circleR = circleD / 2;
-    const double edgeMargin = 40.0;   // Abstand Circle-Rand zum Screen-Rand
-    const double starsW = 20.0;       // Breite der vertikalen Sterne (Icon-Größe)
-    const double starsGap = 5.0;     // gleicher Abstand Circle ↔ Sterne auf beiden Seiten
-
-    // Circle-Mittelpunkt: nah am Rand
-    final double circleCx = _circleOnRight
-        ? screenWidth - edgeMargin - circleR
-        : edgeMargin + circleR;
-    final double circleLeft = circleCx - circleR;
-
-    // Text auf der gegenüberliegenden Seite
-    const double textWidth = 140.0;
-    final double textLeft = _circleOnRight
-        ? circleCx - circleR - textWidth - 12
-        : circleCx + circleR + 12;
-
-    // Sterne: gleicher Abstand zum Circle auf beiden Seiten, Breite berücksichtigt
-    final double starsLeft = _circleOnRight
-        ? circleCx + circleR + starsGap          // rechter Circle → Sterne rechts davon
-        : circleCx - circleR - starsGap - starsW; // linker Circle → Sterne links davon
+    const double textWidth = 145.0;
+    final double textLeft = onRight
+        ? circleCx - _circleR - textWidth - 12
+        : circleCx + _circleR + 12;
 
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        height: 130,
+        height: _nodeHeight,
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            // Verbindungspfad
-            if (!isLast)
-              Positioned.fill(
-                child: CustomPaint(
-                  painter: _RoadPainter(
-                    circleOnRight: _circleOnRight,
-                    pathColor: pathColor,
-                    screenWidth: screenWidth,
-                  ),
-                ),
-              ),
-
             // Circle
             Positioned(
               left: circleLeft,
-              top: 22,
+              top: _circleTop,
               child: _NodeCircle(
-                lessonIndex: lessonIndex,
+                lessonIndex: lesson.index,
                 color: color,
                 isCurrent: isCurrent,
                 unlocked: unlocked,
-                size: circleD,
               ),
             ),
 
@@ -193,19 +265,18 @@ class _PathNode extends StatelessWidget {
             if (quizAvailable && unlocked)
               Positioned(
                 left: starsLeft,
-                top: 20,
+                top: _circleTop + 4,
                 child: _Stars(stars: stars, color: color),
               ),
 
-            // Titel — auf der gegenüberliegenden Seite des Circles
+            // Titel
             Positioned(
               left: textLeft,
-              top: 36,
+              top: _circleTop + 12,
               width: textWidth,
               child: Text(
-                title,
-                textAlign:
-                    _circleOnRight ? TextAlign.right : TextAlign.left,
+                lesson.title,
+                textAlign: onRight ? TextAlign.right : TextAlign.left,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -216,7 +287,6 @@ class _PathNode extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -230,20 +300,18 @@ class _NodeCircle extends StatelessWidget {
     required this.color,
     required this.isCurrent,
     required this.unlocked,
-    required this.size,
   });
 
   final int lessonIndex;
   final Color color;
   final bool isCurrent;
   final bool unlocked;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
-      height: size,
+      width: _circleD,
+      height: _circleD,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: unlocked ? AppColors.background : const Color(0xFFEEEEEE),
@@ -292,59 +360,4 @@ class _Stars extends StatelessWidget {
       }),
     );
   }
-}
-
-class _RoadPainter extends CustomPainter {
-  const _RoadPainter({
-    required this.circleOnRight,
-    required this.pathColor,
-    required this.screenWidth,
-  });
-
-  final bool circleOnRight;
-  final Color pathColor;
-  final double screenWidth;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = pathColor
-      ..strokeWidth = 8
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round;
-
-    const double edgeMargin = 40.0;
-    const double circleR = 34.0;
-    const double circleTop = 22.0;
-    const double circleBottom = circleTop + 68.0; // 90
-    // Symmetrisch: gleicher Abstand über und unter dem Circle
-    const double gap = circleTop; // 22px — genau wie der Abstand oben
-    const double horizY = circleBottom + gap; // 112
-
-    final double xOwn = circleOnRight
-        ? screenWidth - edgeMargin - circleR
-        : edgeMargin + circleR;
-    final double xNext = circleOnRight
-        ? edgeMargin + circleR
-        : screenWidth - edgeMargin - circleR;
-
-    // Pfad läuft von y=0 bis size.height:
-    // y=0     → y=circleTop  : eingehender Abstand (vom Ende des vorherigen Nodes)
-    // y=circleTop → y=circleBottom : durch den Circle
-    // y=circleBottom → y=horizY   : ausgehender Abstand (= gap = 22px, symmetrisch)
-    // y=horizY, xOwn → xNext      : horizontal rüber
-    // y=horizY → size.height      : runter zum nächsten Node
-    final path = Path();
-    path.moveTo(xOwn, 0);
-    path.lineTo(xOwn, horizY);   // senkrecht runter (durch Circle + gap darunter)
-    path.lineTo(xNext, horizY);  // horizontal rüber
-    path.lineTo(xNext, size.height); // runter zum nächsten Node
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(_RoadPainter old) =>
-      old.pathColor != pathColor || old.circleOnRight != circleOnRight;
 }
