@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../core/app_colors.dart';
 
 class TopBrandHeader extends StatelessWidget {
@@ -16,7 +15,14 @@ class TopBrandHeader extends StatelessWidget {
             icon: const Icon(Icons.account_circle_outlined),
             color: AppColors.primary,
           ),
-          Expanded(
+        Expanded(
+        child: Image.asset(
+          'lib/pictures/logo_viatolea.png',
+          height: 40,
+        ),
+        ),
+            /*
+            Expanded(
             child: Center(
               child: RichText(
                 text: const TextSpan(
@@ -37,7 +43,7 @@ class TopBrandHeader extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ), */
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.help_outline),
