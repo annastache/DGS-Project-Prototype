@@ -433,8 +433,8 @@ class _CutePlantPainter extends CustomPainter {
     final potPath = Path()
       ..moveTo(cx - 54, h - 58)
       ..lineTo(cx + 54, h - 58)
-      ..lineTo(cx + 42, h - 4)
-      ..lineTo(cx - 42, h - 4)
+      ..lineTo(cx + 42, h + 5)
+      ..lineTo(cx - 42, h + 5)
       ..close();
     final potPaint = Paint()
       ..shader = const LinearGradient(
@@ -444,7 +444,7 @@ class _CutePlantPainter extends CustomPainter {
       ).createShader(Rect.fromLTWH(cx - 56, h - 58, 112, 54));
     canvas.drawPath(potPath, potPaint);
  
-    final highlight = Paint()..color = Colors.white.withValues(alpha: 0.17);
+    /*final highlight = Paint()..color = Colors.white.withValues(alpha: 0.17);
     canvas.drawPath(
       Path()
         ..moveTo(cx - 42, h - 55)
@@ -453,7 +453,7 @@ class _CutePlantPainter extends CustomPainter {
         ..lineTo(cx - 46, h - 6)
         ..close(),
       highlight,
-    );
+    );*/
  
     final blush = Paint()
       ..color = const Color(0xFFFF7FB0).withValues(alpha: 0.42)
@@ -469,12 +469,14 @@ class _CutePlantPainter extends CustomPainter {
     canvas.drawCircle(Offset(cx + 25, h - 42), 3.2 * eyeScale, shinePaint);
  
     final mouth = Path()
-      ..moveTo(cx - 14, h - 24)
-      ..quadraticBezierTo(cx, h - 9, cx + 14, h - 24)
-      ..quadraticBezierTo(cx, h - 15, cx - 14, h - 24)
-      ..close();
+    ..moveTo(cx - 10, h - 26)                          
+    ..quadraticBezierTo(cx - 12, h - 24, cx - 12, h - 23) 
+    ..quadraticBezierTo(cx, h - 5, cx + 12, h - 23)   
+    ..quadraticBezierTo(cx + 12, h - 24, cx + 10, h - 26) 
+    ..quadraticBezierTo(cx, h - 23, cx - 10, h - 25)      
+    ..close();
     canvas.drawPath(mouth, Paint()..color = const Color(0xFF5A2F3E));
-    canvas.drawOval(Rect.fromCenter(center: Offset(cx, h - 17), width: 14, height: 8), Paint()..color = const Color(0xFFFF7FA8));
+    canvas.drawOval(Rect.fromCenter(center: Offset(cx, h - 17), width: 10, height: 7), Paint()..color = const Color(0xFFFF7FA8));
   }
  
   @override
