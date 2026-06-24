@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timed_widget/timed_widget.dart';
-
+//import 'package:timed_widget/timed_widget.dart'; //currently unused, but useful
 import '../core/app_colors.dart';
 import '../models/meal.dart';
 import '../state/app_state.dart';
