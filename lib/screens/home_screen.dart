@@ -6,6 +6,7 @@ import '../state/app_state.dart';
 import '../widgets/action_tile.dart';
 import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
