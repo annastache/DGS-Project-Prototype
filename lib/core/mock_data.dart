@@ -78,7 +78,7 @@ Es ist überaus wichtig, zwischen einer Allergie und einer Unverträglichkeit zu
   ),
   Lesson(
     index: 3,
-    title: 'Atemtests zur Diagnose von Unverträglichkeiten',
+    title: 'Atemtests zur Diagnose von Unverträglichkeiten 2',
     readingTime: '1 Minute Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
 
