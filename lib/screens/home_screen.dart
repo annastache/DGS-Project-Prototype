@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
           //const SizedBox(height: 12), // 12
           //Expanded(
-          if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
+          if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)
                  
                   _SpeechBubble(day: controller.currentDay),
                   //right: 0,
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                   child: _SpeechBubble(day: controller.currentDay),
                 ),*/
             
-           if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) > 0)
+           if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) > 0)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(14),
