@@ -33,7 +33,7 @@ Um alle Nährstoffe aufzunehmen, die für eine gesunde Darmflora und effiziente 
 Während des Essens kann eine moderate Wasserzufuhr dabei helfen, die Nahrung zu verdünnen und den Transport durch den Verdauungstrakt zu erleichtern. Trinke dazu ruhig ab und zu einen Schluck Wasser. Vermeide jedoch übermäßiges Trinken während der Mahlzeiten, da dies zu einer Verdünnung der Verdauungssäfte und damit zu einer Beeinträchtigung der Verdauung führen kann.''',
   ),
   Lesson(
-    index: 2,
+    index: 1,
     title: 'Atemtests zur Diagnose von Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
@@ -58,7 +58,7 @@ Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang 
 ''',
   ),
   Lesson(
-    index: 1,
+    index: 2,
     title: 'Lebensmittelallergie vs. Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Oft hört man die Begriffe "Allergie" und "Unverträglichkeit" und viele verwenden sie sogar synonym. Aber was bedeuten sie eigentlich genau und wie unterscheiden sie sich voneinander?
