@@ -294,8 +294,8 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
     ),
     QuizQuestion(
       question: 'Was misst der H₂-Atemtest?',
-      answers: ['Wasserstoff in der Ausatemluft', 'Pulsfrequenz', 'Blutzucker dauerhaft', 'Schlafqualität'],
-      correctIndex: 0,
+      answers: [ 'Pulsfrequenz', 'Blutzucker dauerhaft', 'Schlafqualität', 'Wasserstoff in der Ausatemluft'],
+      correctIndex: 3,
     ),
     QuizQuestion(
       question: 'Warum kann H₂ als Marker geeignet sein?',
@@ -306,8 +306,8 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   2: [
     QuizQuestion(
       question: 'Was unterscheidet Allergien von Unverträglichkeiten grundsätzlich?',
-      answers: ['Allergien betreffen das Immunsystem', 'Allergien sind immer ungefährlich', 'Unverträglichkeiten betreffen nur die Haut', 'Es gibt keinen Unterschied'],
-      correctIndex: 0,
+      answers: ['Allergien sind immer ungefährlich', 'Unverträglichkeiten betreffen nur die Haut', 'Allergien betreffen das Immunsystem', 'Es gibt keinen Unterschied'],
+      correctIndex: 2,
     ),
     QuizQuestion(
       question: 'Womit hängen Unverträglichkeiten häufig zusammen?',
@@ -316,15 +316,15 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
     ),
     QuizQuestion(
       question: 'Können Allergien und Unverträglichkeiten ähnliche Beschwerden auslösen?',
-      answers: ['Nein, nie', 'Ja, das kann vorkommen', 'Nur bei Kindern', 'Nur bei schwerem Verlauf'],
-      correctIndex: 1,
+      answers: ['Ja, das kann vorkommen', 'Nein, nie', 'Nur bei Kindern', 'Nur bei schwerem Verlauf'],
+      correctIndex: 0,
     ),
   ],
   3: [
     QuizQuestion(
       question: 'Für welche Unverträglichkeiten gilt der H₂-Atemtest als Goldstandard?',
-      answers: ['Fruktose- und Laktosemalabsorption', 'Glutenunverträglichkeit', 'Histaminintoleranz', 'Nussallergien'],
-      correctIndex: 0,
+      answers: ['Glutenunverträglichkeit', 'Histaminintoleranz', 'Nussallergien', 'Fruktose- und Laktosemalabsorption'],
+      correctIndex: 3,
     ),
     QuizQuestion(
       question: 'Was passiert, wenn der Zucker im Dünndarm nicht ausreichend aufgenommen wird?',
@@ -333,15 +333,15 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
     ),
     QuizQuestion(
       question: 'Wie gelangen die entstehenden Gase in die Ausatemluft?',
-      answers: ['Über das Blut in die Lunge', 'Über die Speiseröhre', 'Über die Haut', 'Über den Speichel'],
-      correctIndex: 0,
+      answers: ['Über die Speiseröhre', 'Über das Blut in die Lunge', 'Über die Haut', 'Über den Speichel'],
+      correctIndex: 1,
     ),
   ],
   4: [
     QuizQuestion(
       question: 'Sind alle Tests für jede Fragestellung gleich gut geeignet?',
-      answers: ['Ja, immer', 'Nein, nicht jeder Test passt zu jeder Frage', 'Nur Bluttests sind sinnvoll', 'Das spielt keine Rolle'],
-      correctIndex: 1,
+      answers: ['Ja, immer', 'Nur Bluttests sind sinnvoll', 'Nein, nicht jeder Test passt zu jeder Frage', 'Das spielt keine Rolle'],
+      correctIndex: 2,
     ),
     QuizQuestion(
       question: 'Welche Art von Selbsttests sollte kritisch betrachtet werden?',
@@ -350,8 +350,8 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
     ),
     QuizQuestion(
       question: 'Worum geht es beim sinnvollen Einordnen von Testergebnissen?',
-      answers: ['Ergebnisse richtig zu verstehen und einzuordnen', 'Ergebnisse zu ignorieren', 'Nur das positive Ergebnis zu beachten', 'Tests mehrfach zu wiederholen'],
-      correctIndex: 0,
+      answers: ['Ergebnisse zu ignorieren', 'Nur das positive Ergebnis zu beachten', 'Tests mehrfach zu wiederholen', 'Ergebnisse richtig zu verstehen und einzuordnen'],
+      correctIndex: 3,
     ),
   ],
   5: [
@@ -362,13 +362,13 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
     ),
     QuizQuestion(
       question: 'Was hilft dabei, Beschwerden besser zu verstehen?',
-      answers: ['Wiederkehrende Muster beobachten', 'Beschwerden ignorieren', 'Nur auf ein Lebensmittel achten', 'Beschwerden nicht dokumentieren'],
-      correctIndex: 0,
+      answers: [ 'Beschwerden ignorieren', 'Nur auf ein Lebensmittel achten', 'Wiederkehrende Muster beobachten', 'Beschwerden nicht dokumentieren'],
+      correctIndex: 2,
     ),
     QuizQuestion(
       question: 'Was sollte bei starken oder anhaltenden Beschwerden passieren?',
-      answers: ['Ärztliche Abklärung', 'Abwarten ohne Maßnahme', 'Nur die App nutzen', 'Ernährung sofort komplett umstellen'],
-      correctIndex: 0,
+      answers: ['Abwarten ohne Maßnahme', 'Ärztliche Abklärung',  'Nur die App nutzen', 'Ernährung sofort komplett umstellen'],
+      correctIndex: 1,
     ),
   ],
   6: [
