@@ -32,8 +32,28 @@ Um alle Nährstoffe aufzunehmen, die für eine gesunde Darmflora und effiziente 
 
 Während des Essens kann eine moderate Wasserzufuhr dabei helfen, die Nahrung zu verdünnen und den Transport durch den Verdauungstrakt zu erleichtern. Trinke dazu ruhig ab und zu einen Schluck Wasser. Vermeide jedoch übermäßiges Trinken während der Mahlzeiten, da dies zu einer Verdünnung der Verdauungssäfte und damit zu einer Beeinträchtigung der Verdauung führen kann.''',
   ),
+ 
   Lesson(
     index: 1,
+    title: 'Lebensmittelallergie vs. Unverträglichkeiten',
+    readingTime: '2 Minuten Lesezeit',
+    body: '''Oft hört man die Begriffe "Allergie" und "Unverträglichkeit" und viele verwenden sie sogar synonym. Aber was bedeuten sie eigentlich genau und wie unterscheiden sie sich voneinander?
+
+Allergie
+
+Eine Nahrungsmittelallergie ist eine überempfindliche Reaktion des Immunsystems auf bestimmte Lebensmittelproteine. Dies führt zu einer sofortigen Reaktion, die oft schwerwiegend sein kann. Typische Symptome sind Hautausschläge, Juckreiz, Schwellungen, Atembeschwerden und sogar eine Anaphylaxie. Dabei handelt es sich um eine extrem schwere und lebensbedrohliche allergische Reaktion, die den gesamten Körper betrifft und eine schnelle Behandlung erfordert. Allergien werden durch spezifische Immunreaktionen verursacht, bei denen das Immunsystem fälschlicherweise ein harmloses Lebensmittelprotein als Bedrohung betrachtet und Antikörper gegen dieses Protein produziert
+
+Unverträglichkeit
+
+Eine Nahrungsmittelunverträglichkeit hingegen betrifft den Verdauungstrakt und ist meist weniger schwerwiegend als eine Allergie. Sie tritt auf, wenn der Körper Schwierigkeiten hat, bestimmte Nahrungsmittel zu verdauen oder zu verarbeiten. Symptome können Magenbeschwerden, Bauchschmerzen, Blähungen, Durchfall oder Verstopfung sein. Im Gegensatz zu Allergien sind Nahrungsmittelunverträglichkeiten oft verzögerte Reaktionen, die Stunden oder sogar Tage nach dem Verzehr des Lebensmittels auftreten können. Sie werden nicht durch das Immunsystem verursacht, sondern durch Probleme wie Enzymmangel (z.B. Laktoseintoleranz), Reizdarmsyndrom oder Nahrungsmittelintoleranz.
+
+Fazit
+
+Es ist überaus wichtig, zwischen einer Allergie und einer Unverträglichkeit zu unterscheiden, da sowohl die Auswirkungen als auch die Behandlung unterschiedlich sind. Allergien erfordern oft eine strikte Vermeidung des auslösenden Lebensmittels und möglicherweise die Verwendung von Notfallmedikamenten. Unverträglichkeiten können zwar sehr unangenehme Beschwerden verursachen, sind aber in der Regel nicht lebensbedrohlich. Oft können zudem kleine Mengen toleriert werden oder es stehen Enzympräparate zur Verfügung, die bei der Verdauung unterstützen können. Während nur 2-5% der Deutschen von Allergien betroffen sind, liegt bei etwa 25-30% der Bevölkerung eine Lebensmittelunverträglichkeit vor. Solltest du von einer Unverträglichkeit betroffen sein, werden wir diese erkennen und dich unterstützen. Bei allergischen Symptomen solltest du umgehend einen Arzt aufsuchen.
+''',
+  ),
+  Lesson(
+    index: 2,
     title: 'Atemtests zur Diagnose von Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
@@ -58,26 +78,7 @@ Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang 
 ''',
   ),
   Lesson(
-    index: 2,
-    title: 'Lebensmittelallergie vs. Unverträglichkeiten',
-    readingTime: '2 Minuten Lesezeit',
-    body: '''Oft hört man die Begriffe "Allergie" und "Unverträglichkeit" und viele verwenden sie sogar synonym. Aber was bedeuten sie eigentlich genau und wie unterscheiden sie sich voneinander?
-
-Allergie
-
-Eine Nahrungsmittelallergie ist eine überempfindliche Reaktion des Immunsystems auf bestimmte Lebensmittelproteine. Dies führt zu einer sofortigen Reaktion, die oft schwerwiegend sein kann. Typische Symptome sind Hautausschläge, Juckreiz, Schwellungen, Atembeschwerden und sogar eine Anaphylaxie. Dabei handelt es sich um eine extrem schwere und lebensbedrohliche allergische Reaktion, die den gesamten Körper betrifft und eine schnelle Behandlung erfordert. Allergien werden durch spezifische Immunreaktionen verursacht, bei denen das Immunsystem fälschlicherweise ein harmloses Lebensmittelprotein als Bedrohung betrachtet und Antikörper gegen dieses Protein produziert
-
-Unverträglichkeit
-
-Eine Nahrungsmittelunverträglichkeit hingegen betrifft den Verdauungstrakt und ist meist weniger schwerwiegend als eine Allergie. Sie tritt auf, wenn der Körper Schwierigkeiten hat, bestimmte Nahrungsmittel zu verdauen oder zu verarbeiten. Symptome können Magenbeschwerden, Bauchschmerzen, Blähungen, Durchfall oder Verstopfung sein. Im Gegensatz zu Allergien sind Nahrungsmittelunverträglichkeiten oft verzögerte Reaktionen, die Stunden oder sogar Tage nach dem Verzehr des Lebensmittels auftreten können. Sie werden nicht durch das Immunsystem verursacht, sondern durch Probleme wie Enzymmangel (z.B. Laktoseintoleranz), Reizdarmsyndrom oder Nahrungsmittelintoleranz.
-
-Fazit
-
-Es ist überaus wichtig, zwischen einer Allergie und einer Unverträglichkeit zu unterscheiden, da sowohl die Auswirkungen als auch die Behandlung unterschiedlich sind. Allergien erfordern oft eine strikte Vermeidung des auslösenden Lebensmittels und möglicherweise die Verwendung von Notfallmedikamenten. Unverträglichkeiten können zwar sehr unangenehme Beschwerden verursachen, sind aber in der Regel nicht lebensbedrohlich. Oft können zudem kleine Mengen toleriert werden oder es stehen Enzympräparate zur Verfügung, die bei der Verdauung unterstützen können. Während nur 2-5% der Deutschen von Allergien betroffen sind, liegt bei etwa 25-30% der Bevölkerung eine Lebensmittelunverträglichkeit vor. Solltest du von einer Unverträglichkeit betroffen sein, werden wir diese erkennen und dich unterstützen. Bei allergischen Symptomen solltest du umgehend einen Arzt aufsuchen.
-''',
-  ),
-  Lesson(
-    index: 3,
+    index: 5,
     title: 'Atemtests zur Diagnose von Unverträglichkeiten 2',
     readingTime: '1 Minute Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
@@ -142,7 +143,7 @@ Für eine ärztliche Abklärung von Unverträglichkeiten sind gastroenterologisc
 Um herauszufinden, ob eine Allergie vorliegt, wird üblicherweise ein Pricktest auf der Haut durchgeführt oder spezifische IgE-Antikörper im Blut bestimmt. Allergien können potenziell schwere Reaktionen auslösen - deshalb ist eine professionelle Abklärung in einer dermatologischen oder allergologischen''',
   ),
   Lesson(
-    index: 5,
+    index: 3,
     title: 'Tipps zur Linderung von Bauchschmerzen',
     readingTime: '2 Minuten Lesezeit',
     body: '''Was dir bei Blähungen und Bauchschmerzen hilft
@@ -286,7 +287,7 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 2,
     ),
   ],
-  1: [
+  2: [
     QuizQuestion(
       question: 'Was wird vor dem H₂-Atemtest getrunken?',
       answers: ['Wasser', 'Zucker', 'Mundspülung', 'Coke zero'],
@@ -303,7 +304,7 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
   ],
-  2: [
+  1: [
     QuizQuestion(
       question: 'Was unterscheidet Allergien von Unverträglichkeiten grundsätzlich?',
       answers: ['Allergien sind immer ungefährlich', 'Unverträglichkeiten betreffen nur die Haut', 'Allergien betreffen das Immunsystem', 'Es gibt keinen Unterschied'],
@@ -320,7 +321,7 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
   ],
-  3: [
+  5: [
     QuizQuestion(
       question: 'Für welche Unverträglichkeiten gilt der H₂-Atemtest als Goldstandard?',
       answers: ['Glutenunverträglichkeit', 'Histaminintoleranz', 'Nussallergien', 'Fruktose- und Laktosemalabsorption'],
@@ -354,7 +355,7 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 3,
     ),
   ],
-  5: [
+  3: [
     QuizQuestion(
       question: 'Was kann laut Lektion bei Bauchschmerzen helfen?',
       answers: ['Wärme, Ruhe und langsames Essen', 'Schnelles Essen', 'Kälte und Bewegung', 'Längeres Hungern'],
