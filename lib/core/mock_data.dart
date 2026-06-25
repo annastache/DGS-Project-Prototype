@@ -33,7 +33,7 @@ Um alle Nährstoffe aufzunehmen, die für eine gesunde Darmflora und effiziente 
 Während des Essens kann eine moderate Wasserzufuhr dabei helfen, die Nahrung zu verdünnen und den Transport durch den Verdauungstrakt zu erleichtern. Trinke dazu ruhig ab und zu einen Schluck Wasser. Vermeide jedoch übermäßiges Trinken während der Mahlzeiten, da dies zu einer Verdünnung der Verdauungssäfte und damit zu einer Beeinträchtigung der Verdauung führen kann.''',
   ),
   Lesson(
-    index: 1,
+    index: 2,
     title: 'Atemtests zur Diagnose von Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
@@ -58,7 +58,7 @@ Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang 
 ''',
   ),
   Lesson(
-    index: 2,
+    index: 1,
     title: 'Lebensmittelallergie vs. Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Oft hört man die Begriffe "Allergie" und "Unverträglichkeit" und viele verwenden sie sogar synonym. Aber was bedeuten sie eigentlich genau und wie unterscheiden sie sich voneinander?
@@ -128,7 +128,7 @@ IgG-Tests zielen darauf ab, ein Gefühl von Selbstwirksamkeit und Klarheit zu ve
 
 Die Logik von IgG-Tests läuft von vorneherein auf ein Missverständnis hinaus: Die Ergebnisse wirken wie eine persönliche Anleitung zur Eliminationsdiät, die man einhalten sollte, um Beschwerden zu vermeiden. Und da dein Körper mit häufig verzehrten Lebensmitteln besonders vertraut ist, tendieren IgG-Tests dazu, gerade auf deine Alltagsroutinen - dein Lieblingsessen besonders anzuschlagen.
 
-All das kann zu unnötigen und starken Einschränkungen führen. Statt eine niedrigschwellige Lösu zu bieten, legen die Ergebnisse eine weniger ausgewogene
+All das kann zu unnötigen und starken Einschränkungen führen. Statt eine niedrigschwellige Lösung zu bieten, legen die Ergebnisse eine weniger ausgewogene
 Ernährung nahe und verstärken potenziell ohnehin schon bestehende Unsicherheiten im Zusammenhang mit dem Essen.
 
 Rechtlich fallen IgG-Selbsttests unter die In vitro Diagnostika Verordnung als „Produkte zur Eigenanwendung" (IVDR Art. 2 (5)). Hersteller müssen lediglich nachweisen, dass das Gerät oder der Test das misst, was er vorgibt - ob also IgG-Antikörper im Blut erhöht sind. Wie aussagekräftig dieser Wert medizinisch ist, spielt für die Zulassung hingegen keine Rolle.
