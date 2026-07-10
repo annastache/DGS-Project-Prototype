@@ -78,7 +78,7 @@ Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang 
 ''',
   ),
   Lesson(
-    index: 5,
+    index: 3,
     title: 'Atemtests zur Diagnose von Unverträglichkeiten 2',
     readingTime: '1 Minute Lesezeit',
     body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
@@ -143,7 +143,7 @@ Für eine ärztliche Abklärung von Unverträglichkeiten sind gastroenterologisc
 Um herauszufinden, ob eine Allergie vorliegt, wird üblicherweise ein Pricktest auf der Haut durchgeführt oder spezifische IgE-Antikörper im Blut bestimmt. Allergien können potenziell schwere Reaktionen auslösen - deshalb ist eine professionelle Abklärung in einer dermatologischen oder allergologischen''',
   ),
   Lesson(
-    index: 3,
+    index: 5,
     title: 'Tipps zur Linderung von Bauchschmerzen',
     readingTime: '2 Minuten Lesezeit',
     body: '''Was dir bei Blähungen und Bauchschmerzen hilft
