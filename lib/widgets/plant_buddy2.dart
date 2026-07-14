@@ -1,8 +1,9 @@
 import 'dart:math' as math;
  
 import 'package:flutter/material.dart';
- 
+ import "package:flutter/foundation.dart";
 import '../core/app_colors.dart';
+
  
 class PlantBuddy extends StatefulWidget {
   const PlantBuddy({
@@ -25,7 +26,9 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   late AnimationController _swayController;
   late Animation<double> _swayAnimation;
   bool _showHearts = false;
- 
+   List<int> _tapHearts = [];
+  int _tapId = 0;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +53,7 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
     );
 
     _scheduleBlink();
+    
   }
  
   void _scheduleBlink() async {
@@ -61,6 +65,20 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
       await _blinkController.forward();
       await _blinkController.reverse();
     }
+  }
+  void _handleTap() {
+   _blinkController.forward().then((_) {
+      Future.delayed(const Duration(milliseconds: 135), () {   // ADD — hold closed
+        if (mounted) _blinkController.reverse();
+      });
+    });
+    final myTap = ++_tapId; 
+    setState(() => _tapHearts.add(myTap));   
+    Future.delayed(const Duration(milliseconds: 900), () {
+      if (mounted) {
+        setState(() => _tapHearts.remove(myTap));           // CHANGE — was the myTap == _tapId check
+      }
+    });
   }
 
  
@@ -97,7 +115,10 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
  
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return GestureDetector(              
+      behavior: HitTestBehavior.opaque,  
+      onTap: _handleTap,                 
+      child: Stack(
       clipBehavior: Clip.none,
       children: [
         AnimatedBuilder(
@@ -131,8 +152,10 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
         ),
         ),
         if (_showHearts) const _HeartBurst(),
+        ..._tapHearts.map((id) => _SingleTapHeart(key: ValueKey(id))),
         
       ],
+      ),
     );
   }
 }
@@ -214,7 +237,90 @@ class _HeartBurstState extends State<_HeartBurst> with TickerProviderStateMixin 
     );
   }
 }
+class _SingleTapHeart extends StatefulWidget {
+  const _SingleTapHeart({super.key});
 
+  @override
+  State<_SingleTapHeart> createState() => _SingleTapHeartState();
+}
+
+class _SingleTapHeartState extends State<_SingleTapHeart> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _position;
+  late final Animation<double> _opacity;
+  late final Animation<double> _scale;
+  late final double _startTop;
+  late final double _startRight;
+  late final double _randomsize;
+  late final Color _heartColor;
+
+  @override
+  void initState() {
+    super.initState();
+    final random = math.Random();
+    _startTop = 90 + (random.nextDouble() - 0.5) * 50;   
+    _startRight = 50 + (random.nextDouble() - 0.5) * 70; 
+    _randomsize = 40 + (random.nextDouble() - 0.5) * 30; 
+    _heartColor = HSLColor.fromColor(Colors.green)          // ADD
+        .withLightness(
+          (HSLColor.fromColor(Colors.green).lightness +
+                  (random.nextDouble() - 0.5) * 0.25)
+              .clamp(0.25, 0.75),
+        )
+        .withHue(
+          (HSLColor.fromColor(Colors.green).hue + (random.nextDouble() - 0.5) * 20)
+              .clamp(90.0, 150.0),
+        )
+        .toColor();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {   // ADD
+      if (mounted) _controller.forward();                // ADD
+    });
+
+    _position = Tween<double>(begin: 0, end: -36).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+    _opacity = Tween<double>(begin: 1, end: 0).animate(
+      CurvedAnimation(parent: _controller, curve: const Interval(0.35, 1.0)),
+    );
+    _scale = Tween<double>(begin: 0.4, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.4, curve: Curves.easeOut)),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) { 
+    return Positioned(
+      top: _startTop,
+      right: _startRight,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return Transform.translate(
+            offset: Offset(0, _position.value),
+            child: Opacity(
+              opacity: _opacity.value,
+              child: Transform.scale(
+                scale: _scale.value,
+                child: Icon(Icons.favorite_rounded, color: _heartColor, size: _randomsize),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
 class _CutePlantPainter extends CustomPainter {
   const _CutePlantPainter({
     required this.stage,
