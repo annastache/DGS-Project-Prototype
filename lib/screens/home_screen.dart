@@ -109,9 +109,9 @@ class HomeScreen extends StatelessWidget {
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
           //const SizedBox(height: 12), // 12
           //Expanded(
-          if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)
+         // if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)
                  
-                  _SpeechBubble(day: controller.currentDay),
+                 // _SpeechBubble(day: controller.currentDay),
                   //right: 0,
                   //bottom: 0,
                   /*child: TimedVisibility(
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                   child: _SpeechBubble(day: controller.currentDay),
                 ),*/
             
-           if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) > 0)
+          /* if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) > 0)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(14),
@@ -136,11 +136,12 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
                   ),
                 ),
+                */
           const Spacer(), // ← füllt den leeren Raum oberhalb
           SizedBox(
           height: 220, //318 ---------------------------------------------------------------------------------      
                child: Stack(
-              clipBehavior: Clip.hardEdge, // clipBehavior: Clip.none,
+              clipBehavior: Clip.none, // clipBehavior: Clip.none,
               children: [
                 Positioned(
                   left: 0,
@@ -174,7 +175,12 @@ class HomeScreen extends StatelessWidget {
                     size: 152, // 152
                   ),
                 ),
-
+                //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  // ADD
+                  Positioned(                                                                                // ADD
+                    right: 4,                                                                                 // ADD
+                    bottom: 190,                                                                               // ADD — sits just above the plant's head
+                    child: _SpeechBubble(day: controller.currentDay),                                          // ADD
+                  ),   
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(lesson.index) > 0) 
                 /*if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
                 TimedVisibility(
@@ -390,48 +396,83 @@ class _SpeechBubble extends StatelessWidget {
   const _SpeechBubble({required this.day});
 
   final int day;
+  String _bubbleText(AppController controller) {
+    final unlocked = controller.todayQuizUnlocked;
+    final stars = controller.starsForLesson(controller.currentDay);
 
-  @override
+    return switch ((unlocked, stars)) {
+      (false, _) => 'Füge alle Mahlzeiten hinzu, um das Quiz freizuschalten!',
+      (true, 0) => 'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
+      (true, 1) => 'Gut gemacht! Vielleicht schaffst du beim nächsten Versuch noch mehr Sterne?',
+      (true, 2) => 'Fast perfekt! Nur noch ein Stern bis zur Bestleistung!',
+      (true, 3) => 'Perfekt! Du hast alle Sterne für heute geholt!',
+      (true, _) => 'Weiter so!',
+    };
+  }
+
+   @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
-   /* return ActionTile(
-                        icon: Icons.signpost_outlined,
-                        label: 'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
-                        onTap: () => controller.setSelectedIndex(4),
-                      );*/
-    
-    /*return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: AppColors.primary, width: 2),
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Text(
-        'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
-      ),
-    ); */
     return InkWell(
-      child: Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: AppColors.primary, width: 2),
-        borderRadius: BorderRadius.circular(24),
+      onTap: () => controller.setSelectedIndex(4),
+      child: Column(                                   
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,     // tail hugs the right side, toward the plant
+        children: [
+          ConstrainedBox(                                  //  caps the bubble's width
+            constraints: const BoxConstraints(maxWidth:300), 
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: AppColors.primary, width: 2),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Text(
+              _bubbleText(controller),
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+            ),
+          ),
+          ),
+          Transform.translate(                        // CHANGE — use Transform.translate instead of Padding
+            offset: const Offset(0, -2),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 34),
+              child: CustomPaint(
+                size: const Size(22, 12),
+                painter: const _BubbleTailPainter(),
+              ),
+            ),
+          ),
+        ],
       ),
-      child: Text(
-        'Klasse! Du hast alle Mahlzeiten hinzugefügt und Quiz $day freigeschaltet!',
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
-      ),
-    ),
-    onTap: () => controller.setSelectedIndex(4),
     );
-    
-    
   }
 }
+class _BubbleTailPainter extends CustomPainter {
+  const _BubbleTailPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path()
+      ..moveTo(size.width * 0.15, 0)
+      ..lineTo(size.width * 0.75, 0)
+      ..lineTo(size.width * 0.3, size.height)
+      ..close();
+
+    canvas.drawPath(path, Paint()..color = Colors.white);
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = AppColors.primary
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
