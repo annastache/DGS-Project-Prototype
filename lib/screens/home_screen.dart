@@ -179,9 +179,9 @@ class _ProgressHint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = switch (controller.completedMealEntries) {
-      0 => 'Neuer Tag: Deine Pflanze startet wieder klein.',
-      1 => 'Gut gestartet! Lektion ${controller.currentDay} ist jetzt offen.',
-      2 => 'Fast geschafft: Noch eine Mahlzeit bis zum Quiz.',
+      0 => 'Deine Pflanze startet wieder klein.',
+      1 => 'Wissenslektion ${controller.currentDay} ist jetzt offen.',
+      2 => 'Noch ein Mahlzeiteintag bis zum Quiz.',
       _ => 'Quiz ${controller.currentDay} ist freigeschaltet!',
     };
 
