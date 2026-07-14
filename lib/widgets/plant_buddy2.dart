@@ -409,9 +409,9 @@ class _CutePlantPainter extends CustomPainter {
     _drawLeaf(canvas, Offset(cx, bottom - 68), 38, 25, left: true);
     _drawLeaf(canvas, Offset(cx, bottom - 68), 38, 25, left: false);
  
-    _drawFlower(canvas, Offset(cx - 48, top + 6), 13);
-    _drawFlower(canvas, Offset(cx + 48, top + 6), 13);
-    _drawFlower(canvas, Offset(cx, top - 20), 15);
+    //_drawFlower(canvas, Offset(cx - 48, top + 6), 13);
+    //_drawFlower(canvas, Offset(cx + 48, top + 6), 13);
+    _drawFlower(canvas, Offset(cx, top - 20), 30);
   }
  
   void _drawStageFour(Canvas canvas, double cx, double potTopY) {
