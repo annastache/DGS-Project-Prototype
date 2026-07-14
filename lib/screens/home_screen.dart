@@ -22,7 +22,9 @@ class HomeScreen extends StatelessWidget {
         //start layout fix
         child: LayoutBuilder(
       builder: (context, constraints) {
-        return Padding(
+        return Stack(
+          children:[
+            Padding(
           padding: const EdgeInsets.fromLTRB(18, 4, 18, 80),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,16 +40,16 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.primary),
             ),
           ),
-          //const SizedBox(height: 8),
-          const Spacer(flex: 1),
+          const SizedBox(height: 8),
+          //const Spacer(flex: 1),
           Center(
             child: Text(
               'Tag ${controller.currentDay} von 14',
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.text),
             ),
           ),
-          //const SizedBox(height: 10),
-          const Spacer(flex: 1),
+          const SizedBox(height: 6),
+          //const Spacer(flex: 1),
           Row(
             children: [
               const Icon(Icons.accessibility_new, color: Colors.redAccent, size: 24),
@@ -67,77 +69,20 @@ class HomeScreen extends StatelessWidget {
               const Icon(Icons.flag, color: Color(0xFF7FD18E), size: 24),
             ],
           ),
-          //const SizedBox(height: 12),
-          const Spacer(flex: 2),
+
+          //const Spacer(flex: 2),
+          const SizedBox(height: 16),
           _ProgressHint(controller: controller),
-          //const SizedBox(height: 12),
-          const Spacer(flex: 3),
-          /*const Text(
-            'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.',
-            style: TextStyle(fontSize: 12.5, color: AppColors.text),
-          ),*/ // dauerhaft eingeblendeter text -> ersetzt durch eimaaliges anzeigen
-          //introductionary message L------------------
-          if (!controller.hintDismissed && !controller.todayQuizUnlocked)
-  GestureDetector(
-    onTap: controller.dismissHint,
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: AppColors.primaryLight,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: const Row(
-        children: [
-           Expanded(
-            child: Text(
-              'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.',
-              style: TextStyle(fontSize: 12.5, color: AppColors.text),
-            ),
-          ),
-           SizedBox(width: 8),
-           Icon(Icons.close, size: 16, color: AppColors.text),
-        ],
-      ),
-    ),
-  ),
-  //introductionary message L-------------------------------
-          //const SizedBox(height: 16),
-          const Spacer(flex: 3),
+        
+         // const Spacer(flex: 3),
+         
+          const SizedBox(height: 16),
+          //const Spacer(flex: 3),
           _MealCard(controller: controller),
-          //const SizedBox(height: 8),
-          const Spacer(flex: 3),
+          //const Spacer(flex: 3),
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
-          //const SizedBox(height: 12), // 12
-          //Expanded(
-         // if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)
-                 
-                 // _SpeechBubble(day: controller.currentDay),
-                  //right: 0,
-                  //bottom: 0,
-                  /*child: TimedVisibility(
-                  delay: Duration(milliseconds: 0),
-                  reverseAfter: Duration(seconds: 10),
-                  loop: false,
-                  child: _SpeechBubble(day: controller.currentDay),
-                ),*/
-            
-          /* if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) > 0)
-              Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: AppColors.primary, width: 2),
-                borderRadius: BorderRadius.circular(24),
-                ),
-                child: const Text(
-                  'Super! Du hast alles für heute erledigt!',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
-                  ),
-                ),
-                */
-          const Spacer(), // ← füllt den leeren Raum oberhalb
+          const SizedBox(height: 90), // 12
+          //const Spacer(), // ← füllt den leeren Raum oberhalb
           SizedBox(
           height: 220, //318 ---------------------------------------------------------------------------------      
                child: Stack(
@@ -178,37 +123,47 @@ class HomeScreen extends StatelessWidget {
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  // ADD
                   Positioned(                                                                                // ADD
                     right: 4,                                                                                 // ADD
-                    bottom: 190,                                                                               // ADD — sits just above the plant's head
+                    bottom: 209,                                                                               // ADD — sits just above the plant's head
                     child: _SpeechBubble(day: controller.currentDay),                                          // ADD
                   ),   
-                //if (controller.todayQuizUnlocked && controller.starsForLesson(lesson.index) > 0) 
-                /*if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
-                TimedVisibility(
-                  delay: Duration(milliseconds: 400),
-                  reverseAfter: Duration(seconds: 5),
-                  loop: false,
-                  child: _SpeechBubble(day: controller.currentDay),
-                ),*/
-                /*if (controller.todayQuizUnlocked && controller.starsForLesson(controller.unlockedLessonIndex) == 0)
-                 Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: TimedVisibility(
-                  delay: Duration(milliseconds: 500),
-                  reverseAfter: Duration(seconds: 10),
-                  loop: false,
-                  child: _SpeechBubble(day: controller.currentDay),
-                ),
-                ),
-                */
-                //_SpeechBubble(day: controller.currentDay), 
-                //you did a great job today - message
+                
               ],
             ),
           ),
           
         ],
           ),
+        ),
+        if (!controller.hintDismissed && !controller.todayQuizUnlocked)           
+            Positioned(                                                            
+              top: 160,                                                             
+              left: 18,                                                            
+              right: 18,                                                           
+              child: GestureDetector(                                              
+                onTap: controller.dismissHint,                                     
+                child: Container(                                                  
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  decoration: BoxDecoration(                                       
+                    color: AppColors.primaryLight,                                 
+                    borderRadius: BorderRadius.circular(8),                        
+                  ),                                                               
+                  child: const Row(                                                
+                    children: [                                                    
+                      Expanded(                                                    
+                        child: Text(                                               
+                          'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', // ADD
+                          style: TextStyle(fontSize: 12.5, color: AppColors.text), 
+                        ),                                                         
+                      ),                                                           
+                      SizedBox(width: 8),                                         
+                      Icon(Icons.close, size: 16, color: AppColors.text),          
+                    ],                                                             
+                  ),                                                              
+                ),                                                                 
+              ),                                                             
+            ),                                                               
+                                                                                                                                                      
+          ]
         );
       },
       ),
@@ -420,7 +375,7 @@ class _SpeechBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,     // tail hugs the right side, toward the plant
         children: [
           ConstrainedBox(                                  //  caps the bubble's width
-            constraints: const BoxConstraints(maxWidth:300), 
+            constraints: const BoxConstraints(maxWidth:350), 
           child: Container(
             margin: const EdgeInsets.only(bottom: 8),
             padding: const EdgeInsets.all(14),
@@ -436,7 +391,7 @@ class _SpeechBubble extends StatelessWidget {
             ),
           ),
           ),
-          Transform.translate(                        // CHANGE — use Transform.translate instead of Padding
+          Transform.translate(                        
             offset: const Offset(0, -2),
             child: Padding(
               padding: const EdgeInsets.only(right: 34),
