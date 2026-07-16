@@ -2,7 +2,7 @@ import 'dart:math' as math;
  
 import 'package:flutter/material.dart';
  import "package:flutter/foundation.dart";
-import '../core/app_colors.dart';
+//import '../core/app_colors.dart';
 
  const List<Color> _flowerPalette = [
   Color(0xFFFF8FBB), 
