@@ -10,7 +10,7 @@ class AppController extends ChangeNotifier {
   bool knowledgeHintSeen = false;
   bool hintDismissed = false; // Introductionary hint on home screen -L
 
-  final DateTime startDate = DateTime(2026, 6, 15);
+  final DateTime startDate = DateTime(2026, 7, 20);
   final List<String> mealNames = const ['Frühstück', 'Mittagessen', 'Abendessen'];
   final Map<int, List<MealStatus>> _mealStatusesByDay = {};
   final Set<int> unlockedQuizLessons = <int>{};
