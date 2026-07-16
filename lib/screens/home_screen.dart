@@ -117,6 +117,7 @@ class HomeScreen extends StatelessWidget {
                   bottom: 15,
                   child: PlantBuddy(
                     stage: controller.plantStage,
+                    day: controller.currentDay,
                     size: 152, // 152
                   ),
                 ),
