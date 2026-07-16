@@ -267,43 +267,37 @@ Wir verstehen, dass die Dokumentation all deiner Mahlzeiten und Symptome mit Zei
   ),
 ];
 
+
 /// Quiz-Fragen gruppiert nach Lektion (Key = Lesson.index).
 /// Jede Lektion hat genau 3 Fragen.
+///
+/// Fragetypen-Freischaltung: Lektion 0 startet bewusst mit reinem Multiple
+/// Choice. Ab Lektion 1 wird in jeder Lektion GENAU EIN neuer Fragetyp
+/// eingeführt (siehe _typeUnlockLesson in quiz_screen.dart), bevor er ab
+/// Lektion 8 frei mit den bereits freigeschalteten Typen gemischt wird:
+///   0 Baseline · 1 Richtig/Falsch · 2 Was passt nicht? · 3 Lückentext ·
+///   4 Mehrfachauswahl · 5 Zuordnen · 6 Reihenfolge · 7 Schätzfrage
 const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
+  // --- 0: Baseline — nur Multiple Choice, damit die Grundmechanik sitzt ---
   0: [
     QuizQuestion(
-      question: 'Was passiert, wenn du eine Antwort im Quiz auswählst?',
-      answers: ['Sie wird sofort als richtig oder falsch markiert', 'Nichts, du musst erst bestätigen', 'Das Quiz startet neu', 'Die Frage wird übersprungen'],
+      question: 'Was dokumentierst du laut Lektion in den nächsten Tagen?',
+      answers: ['Mahlzeiten und Symptome', 'Nur Mahlzeiten', 'Nur Symptome', 'Nur deine Stimmung'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Wofür stehen die Sterne auf der Ergebnis-Seite?',
-      answers: ['Für die Anzahl der Lektionen', 'Für dein Abschneiden im Quiz', 'Für die Lesezeit', 'Für deine Tagesserie'],
-      correctIndex: 1,
+      question: 'Was kann laut Lektion helfen, die Verdauung zu verbessern?',
+      answers: ['Langsames Kauen', 'Sehr schnelles Essen', 'Große Portionen auf einmal', 'Essen ohne Pausen'],
+      correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was kannst du tun, wenn dir das Ergebnis nicht gefällt?',
-      answers: ['Nichts, das Ergebnis ist final', 'Die App neu installieren', 'Das Quiz wiederholen', 'Den Support kontaktieren'],
-      correctIndex: 2,
-    ),
-  ],
-  2: [
-    QuizQuestion(
-      question: 'Was wird vor dem H₂-Atemtest getrunken?',
-      answers: ['Wasser', 'Zucker', 'Mundspülung', 'Coke zero'],
-      correctIndex: 1,
-    ),
-    QuizQuestion(
-      question: 'Was misst der H₂-Atemtest?',
-      answers: [ 'Pulsfrequenz', 'Blutzucker dauerhaft', 'Schlafqualität', 'Wasserstoff in der Ausatemluft'],
-      correctIndex: 3,
-    ),
-    QuizQuestion(
-      question: 'Warum kann H₂ als Marker geeignet sein?',
-      answers: ['Er kommt im Stoffwechsel kaum vor', 'Er ist immer in Lebensmitteln', 'Er färbt den Urin', 'Er senkt automatisch Beschwerden'],
+      question: 'Wie viele Tipps zur Verdauung werden in der Lektion genannt?',
+      answers: ['Fünf', 'Zwei', 'Zehn', 'Drei'],
       correctIndex: 0,
     ),
   ],
+
+  // --- 1: Unlock Richtig/Falsch ---
   1: [
     QuizQuestion(
       question: 'Was unterscheidet Allergien von Unverträglichkeiten grundsätzlich?',
@@ -311,101 +305,170 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 2,
     ),
     QuizQuestion(
-      question: 'Womit hängen Unverträglichkeiten häufig zusammen?',
-      answers: ['Mit dem Immunsystem', 'Mit Verdauung oder Aufnahme bestimmter Stoffe', 'Mit der Hautpflege', 'Mit dem Schlafrhythmus'],
-      correctIndex: 1,
+      question: 'Wie viel Prozent der Bevölkerung sind laut Lektion von einer Unverträglichkeit betroffen?',
+      answers: ['Etwa 25-30%', 'Etwa 2-5%', 'Etwa 60%', 'Fast niemand'],
+      correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Können Allergien und Unverträglichkeiten ähnliche Beschwerden auslösen?',
-      answers: ['Ja, das kann vorkommen', 'Nein, nie', 'Nur bei Kindern', 'Nur bei schwerem Verlauf'],
+      type: QuestionType.trueFalse,
+      question: 'Allergien und Unverträglichkeiten können ähnliche Beschwerden auslösen.',
+      answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
   ],
-  5: [
+
+  // --- 2: Unlock "Was passt nicht?" (Odd-one-out) ---
+  2: [
     QuizQuestion(
-      question: 'Für welche Unverträglichkeiten gilt der H₂-Atemtest als Goldstandard?',
-      answers: ['Glutenunverträglichkeit', 'Histaminintoleranz', 'Nussallergien', 'Fruktose- und Laktosemalabsorption'],
+      question: 'Was wird vor dem H₂-Atemtest getrunken?',
+      answers: ['Wasser', 'Zucker', 'Mundspülung', 'Coke zero'],
+      correctIndex: 1,
+    ),
+    QuizQuestion(
+      type: QuestionType.trueFalse,
+      question: 'Der H₂-Atemtest gilt als diagnostischer Goldstandard bei Fruktose- und Laktosemalabsorption.',
+      answers: ['Richtig', 'Falsch'],
+      correctIndex: 0,
+    ),
+    QuizQuestion(
+      type: QuestionType.oddOneOut,
+      question: 'Welche Aussage passt NICHT zum H₂-Atemtest?',
+      answers: [
+        'Er misst Wasserstoff in der Ausatemluft',
+        'Er gilt als Goldstandard bei Fruktose-/Laktosemalabsorption',
+        'Er wird vor dem Test mit einer Zuckerlösung vorbereitet',
+        'Er wird ausschließlich im Schlaflabor durchgeführt',
+      ],
       correctIndex: 3,
     ),
+  ],
+
+  // --- 3: Unlock Lückentext (Fill-in-blank) ---
+  3: [
     QuizQuestion(
       question: 'Was passiert, wenn der Zucker im Dünndarm nicht ausreichend aufgenommen wird?',
       answers: ['Er wird von Darmbakterien vergoren', 'Er wird sofort ausgeschieden', 'Er wird im Magen neutralisiert', 'Er wird in der Leber gespeichert'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Wie gelangen die entstehenden Gase in die Ausatemluft?',
-      answers: ['Über die Speiseröhre', 'Über das Blut in die Lunge', 'Über die Haut', 'Über den Speichel'],
-      correctIndex: 1,
-    ),
-  ],
-  4: [
-    QuizQuestion(
-      question: 'Sind alle Tests für jede Fragestellung gleich gut geeignet?',
-      answers: ['Ja, immer', 'Nur Bluttests sind sinnvoll', 'Nein, nicht jeder Test passt zu jeder Frage', 'Das spielt keine Rolle'],
+      type: QuestionType.oddOneOut,
+      question: 'Welche Aussage passt NICHT zu den Grenzen des H₂-Atemtests?',
+      answers: [
+        'Er kann bei Non-H2-Producern falsch negativ ausfallen',
+        'Er kann bei SIBO falsch positiv ausfallen',
+        'Er liefert immer ein hundertprozentig sicheres Ergebnis',
+        'Er sollte im Zusammenhang mit Symptomen bewertet werden',
+      ],
       correctIndex: 2,
     ),
+    QuizQuestion(
+      type: QuestionType.fillBlank,
+      question: 'Da ___ im menschlichen Stoffwechsel kaum vorkommt, eignet es sich gut als Marker für eine Malabsorption.',
+      answers: ['Wasserstoff', 'Sauerstoff', 'Kohlenstoff', 'Stickstoff'],
+      correctIndex: 0,
+    ),
+  ],
+
+  // --- 4: Unlock Mehrfachauswahl (Multi-select) ---
+  4: [
     QuizQuestion(
       question: 'Welche Art von Selbsttests sollte kritisch betrachtet werden?',
       answers: ['IgG-Selbsttests', 'H₂-Atemtests', 'Blutdruckmessungen', 'Gewichtskontrollen'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Worum geht es beim sinnvollen Einordnen von Testergebnissen?',
-      answers: ['Ergebnisse zu ignorieren', 'Nur das positive Ergebnis zu beachten', 'Tests mehrfach zu wiederholen', 'Ergebnisse richtig zu verstehen und einzuordnen'],
-      correctIndex: 3,
-    ),
-  ],
-  3: [
-    QuizQuestion(
-      question: 'Was kann laut Lektion bei Bauchschmerzen helfen?',
-      answers: ['Wärme, Ruhe und langsames Essen', 'Schnelles Essen', 'Kälte und Bewegung', 'Längeres Hungern'],
+      type: QuestionType.fillBlank,
+      question: 'IgG-Antikörper zeigen nur an, womit der Körper in ___ war, nicht was er tatsächlich verträgt.',
+      answers: ['Kontakt', 'Widerspruch', 'Konkurrenz', 'Einklang'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was hilft dabei, Beschwerden besser zu verstehen?',
-      answers: [ 'Beschwerden ignorieren', 'Nur auf ein Lebensmittel achten', 'Wiederkehrende Muster beobachten', 'Beschwerden nicht dokumentieren'],
-      correctIndex: 2,
-    ),
-    QuizQuestion(
-      question: 'Was sollte bei starken oder anhaltenden Beschwerden passieren?',
-      answers: ['Abwarten ohne Maßnahme', 'Ärztliche Abklärung',  'Nur die App nutzen', 'Ernährung sofort komplett umstellen'],
-      correctIndex: 1,
+      type: QuestionType.multiSelect,
+      question: 'Was kritisieren Fachleute an IgG-Selbsttests? (Mehrfachauswahl)',
+      answers: ['Sie können zu unnötigen Einschränkungen führen', 'Sie zeigen nur Kontakt, nicht Verträglichkeit', 'Sie sind gesetzlich verboten', 'Sie verzögern die Suche nach echten Auslösern'],
+      correctIndices: [0, 1, 3],
     ),
   ],
+
+  // --- 5: Unlock Zuordnen (Matching) ---
+  5: [
+    QuizQuestion(
+      question: 'Was kann laut Lektion bei akuten Bauchschmerzen helfen?',
+      answers: ['Wärme, Tee und leichte Bewegung', 'Nur strenges Fasten', 'Kalte Duschen und Sport', 'Größere Mahlzeiten'],
+      correctIndex: 0,
+    ),
+    QuizQuestion(
+      type: QuestionType.multiSelect,
+      question: 'Welche der folgenden Maßnahmen werden in der Lektion empfohlen? (Mehrfachauswahl)',
+      answers: ['Wärmflasche auflegen', 'Kräutertee trinken', 'Anstrengendes Training', 'Tiefe Bauchatmung'],
+      correctIndices: [0, 1, 3],
+    ),
+    QuizQuestion(
+      type: QuestionType.matching,
+      question: 'Ordne jeden Tipp seiner Wirkung zu.',
+      pairs: [
+        MatchPair(left: 'Wärme anwenden', right: 'Entspannt die Muskulatur'),
+        MatchPair(left: 'Tee trinken', right: 'Wirkt krampflösend'),
+        MatchPair(left: 'Leichte Bewegung', right: 'Regt die Verdauung an'),
+        MatchPair(left: 'Atemübungen', right: 'Entspannt den Magen'),
+      ],
+    ),
+  ],
+
+  // --- 6: Unlock Reihenfolge (Sequence) ---
   6: [
     QuizQuestion(
-      question: 'Wann sollten Symptome notiert werden?',
-      answers: ['Möglichst zeitnah', 'Erst am nächsten Tag', 'Nur einmal pro Woche', 'Gar nicht'],
+      question: 'Wie viele Lebensmittel enthält die Datenbank für die Autovervollständigung laut Lektion ungefähr?',
+      answers: ['Über 10.000', 'Etwa 100', 'Etwa 500', 'Über 1 Million'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Welche Angaben sind beim Dokumentieren besonders hilfreich?',
-      answers: ['Zeitpunkt, Stärke und Dauer', 'Nur die Uhrzeit', 'Nur das Wetter', 'Nur die Mahlzeit'],
-      correctIndex: 0,
+      type: QuestionType.matching,
+      question: 'Ordne jeden Schritt der Dokumentation seinem Zweck zu.',
+      pairs: [
+        MatchPair(left: 'Zutaten einzeln erfassen', right: 'Damit der Algorithmus richtig klassifiziert'),
+        MatchPair(left: 'Autovervollständigung nutzen', right: 'Für eine genauere Analyse'),
+        MatchPair(left: 'Mengenangaben schätzen', right: 'Grobe Menge reicht aus'),
+        MatchPair(left: 'Zeitnah dokumentieren', right: 'Damit kein Eintrag vergessen wird'),
+      ],
     ),
     QuizQuestion(
-      question: 'Warum hilft zeitnahes Dokumentieren?',
-      answers: ['Auslöser können später leichter erkannt werden', 'Es macht die App schneller', 'Es ersetzt den Arztbesuch', 'Es hat keinen Nutzen'],
-      correctIndex: 0,
+      type: QuestionType.sequence,
+      question: 'Bring die Schritte der Mahlzeiten-Erfassung in die richtige Reihenfolge.',
+      sequenceItems: [
+        '"+"-Button drücken',
+        '"+ Zutat hinzufügen" antippen',
+        'Zutaten einzeln auswählen',
+        'Menge angeben',
+      ],
     ),
   ],
+
+  // --- 7: Unlock Schätzfrage (Estimate) ---
   7: [
-    QuizQuestion(
-      question: 'Was hilft dabei, Muster bei Mahlzeiten zu erkennen?',
-      answers: ['Genaue Erfassung von Zutaten und Portionsgrößen', 'Mahlzeiten gar nicht erfassen', 'Nur die Uhrzeit notieren', 'Nur Fotos ohne Beschreibung'],
-      correctIndex: 0,
-    ),
     QuizQuestion(
       question: 'Wie detailliert ist die Eingabe im Prototyp gehalten?',
       answers: ['Vereinfacht', 'Maximal komplex', 'Nur per Sprachsteuerung', 'Automatisch ohne Eingabe'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was wird in dieser Lektion zum Thema Mahlzeiten erklärt?',
-      answers: ['Wie Mahlzeiten verständlich erfasst werden', 'Wie man kocht', 'Wie man einkauft', 'Wie man Rezepte erstellt'],
-      correctIndex: 0,
+      type: QuestionType.oddOneOut,
+      question: 'Welcher Aspekt gehört NICHT zu einer genauen Mahlzeiten-Erfassung?',
+      answers: ['Zutaten einzeln erfassen', 'Portionsgröße angeben', 'Uhrzeit der Mahlzeit', 'Lieblingsfarbe angeben'],
+      correctIndex: 3,
+    ),
+    QuizQuestion(
+      type: QuestionType.estimate,
+      question: 'Erinnerst du dich? Wie viele Tage sollst du laut App durchgehend dokumentieren?',
+      estimateMin: 0,
+      estimateMax: 30,
+      estimateTarget: 14,
+      estimateUnit: 'Tage',
+      estimateTolerance: 0.15,
     ),
   ],
+
+  // --- 8 ff.: freie Mischung aus allen freigeschalteten Fragetypen ---
   8: [
     QuizQuestion(
       question: 'Was unterstützt ausreichende Flüssigkeitszufuhr laut Lektion?',
@@ -413,13 +476,15 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was kann bei Beschwerden zusätzlich hilfreich sein?',
-      answers: ['Getränke mitdokumentieren', 'Nur feste Nahrung dokumentieren', 'Getränke weglassen', 'Nur Wasser trinken'],
+      type: QuestionType.trueFalse,
+      question: 'Bei Beschwerden kann es hilfreich sein, auch Getränke zu dokumentieren.',
+      answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Worum geht es in dieser Lektion primär?',
-      answers: ['Trinken und Verdauung', 'Bewegung im Alltag', 'Stressbewältigung', 'Symptomdokumentation'],
+      type: QuestionType.fillBlank,
+      question: 'Ausreichend ___ unterstützt alltägliche Körperfunktionen.',
+      answers: ['Flüssigkeit', 'Schlaf', 'Bewegung', 'Sonnenlicht'],
       correctIndex: 0,
     ),
   ],
@@ -430,14 +495,16 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was kann zusätzliche Hinweise liefern?',
-      answers: ['Ein kurzer Stimmungseintrag', 'Ein Wetterbericht', 'Eine Gewichtsmessung', 'Ein Schrittzähler'],
+      type: QuestionType.trueFalse,
+      question: 'Ein kurzer Stimmungseintrag kann zusätzliche Hinweise liefern.',
+      answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was beeinflusst Stress laut Lektion zusätzlich zur Verdauung?',
-      answers: ['Die Wahrnehmung von Beschwerden', 'Die Körpergröße', 'Den Geschmackssinn', 'Die Augenfarbe'],
-      correctIndex: 0,
+      type: QuestionType.multiSelect,
+      question: 'Was kann Stress laut Lektion beeinflussen? (Mehrfachauswahl)',
+      answers: ['Die Wahrnehmung von Beschwerden', 'Die Verdauung', 'Die Augenfarbe', 'Die Schuhgröße'],
+      correctIndices: [0, 1],
     ),
   ],
   10: [
@@ -447,14 +514,21 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Worauf kommt es laut Lektion entscheidend an?',
-      answers: ['Eigene Muster zu beobachten', 'Alles auf ein Lebensmittel zurückzuführen', 'Bewegung komplett zu vermeiden', 'Nur auf Empfehlungen anderer zu hören'],
-      correctIndex: 0,
+      type: QuestionType.trueFalse,
+      question: 'Beschwerden sollten immer auf ein einzelnes Lebensmittel zurückgeführt werden.',
+      answers: ['Richtig', 'Falsch'],
+      correctIndex: 1,
     ),
     QuizQuestion(
-      question: 'Sollte man Beschwerden immer auf einzelne Lebensmittel zurückführen?',
-      answers: ['Nein, das wird in der Lektion nicht empfohlen', 'Ja, immer', 'Nur bei Allergien', 'Nur am Wochenende'],
-      correctIndex: 0,
+      type: QuestionType.oddOneOut,
+      question: 'Welche Aussage passt NICHT zum Thema „Bewegung im Alltag"?',
+      answers: [
+        'Leichte Bewegung kann nach dem Essen guttun',
+        'Eigene Muster sollten beobachtet werden',
+        'Beschwerden sollten nicht vorschnell einem Lebensmittel zugeordnet werden',
+        'Schweres Training direkt nach dem Essen wird empfohlen',
+      ],
+      correctIndex: 3,
     ),
   ],
   11: [
@@ -464,42 +538,48 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was kann die Analyse sichtbar machen?',
-      answers: ['Zusammenhänge', 'Nur das Wetter', 'Nur die Kalorienzahl', 'Nur die Schrittzahl'],
+      type: QuestionType.fillBlank,
+      question: 'Je ___ dein Tagebuch ist, desto besser kann die Analyse Zusammenhänge sichtbar machen.',
+      answers: ['vollständiger', 'kürzer', 'unvollständiger', 'bunter'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Worum geht es in dieser Lektion?',
-      answers: ['Die Analyse vorzubereiten', 'Das Quiz zu wiederholen', 'Eine neue Lektion freizuschalten', 'Den Wissenspfad zu starten'],
-      correctIndex: 0,
+      type: QuestionType.multiSelect,
+      question: 'Was kann eine vollständige Dokumentation laut Lektion sichtbar machen? (Mehrfachauswahl)',
+      answers: ['Zusammenhänge zwischen Mahlzeiten und Beschwerden', 'Muster im Alltag', 'Die Kalorienzahl', 'Den Wetterbericht'],
+      correctIndices: [0, 1],
     ),
   ],
   12: [
-    QuizQuestion(
-      question: 'Wobei hilft der Lebensmittelguide?',
-      answers: ['Empfehlungen im Alltag umzusetzen', 'Rezepte zu erfinden', 'Kalorien zu zählen', 'Einkaufslisten zu drucken'],
-      correctIndex: 0,
-    ),
-    QuizQuestion(
-      question: 'Was lässt sich mit dem Lebensmittelguide leichter finden?',
-      answers: ['Passende Alternativen', 'Neue Symptome', 'Termine beim Arzt', 'Stressfaktoren'],
-      correctIndex: 0,
-    ),
     QuizQuestion(
       question: 'Worum geht es in dieser Lektion?',
       answers: ['Den Lebensmittelguide zu verstehen', 'Symptome zu dokumentieren', 'Den H₂-Atemtest durchzuführen', 'Bewegung im Alltag zu steigern'],
       correctIndex: 0,
     ),
+    QuizQuestion(
+      type: QuestionType.multiSelect,
+      question: 'Wobei hilft der Lebensmittelguide laut Lektion? (Mehrfachauswahl)',
+      answers: ['Empfehlungen im Alltag umzusetzen', 'Passende Alternativen zu finden', 'Kalorien automatisch zu zählen', 'Rezepte zu erfinden'],
+      correctIndices: [0, 1],
+    ),
+    QuizQuestion(
+      type: QuestionType.oddOneOut,
+      question: 'Welche Aussage passt NICHT zum Lebensmittelguide?',
+      answers: ['Er hilft, Empfehlungen leichter umzusetzen', 'Er zeigt passende Alternativen', 'Er wird in dieser Lektion vorgestellt', 'Er ersetzt die persönliche Beratung komplett'],
+      correctIndex: 3,
+    ),
   ],
   13: [
     QuizQuestion(
-      question: 'Wie sollten Empfehlungen nach der Analyse umgesetzt werden?',
-      answers: ['Schritt für Schritt', 'Alle sofort gleichzeitig', 'Gar nicht', 'Nur am ersten Tag'],
+      type: QuestionType.fillBlank,
+      question: 'Nach der Analyse geht es darum, Empfehlungen ___ in den Alltag zu übertragen.',
+      answers: ['Schritt für Schritt', 'Sofort alle gleichzeitig', 'Nur am Wochenende', 'Gar nicht'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Worum geht es in dieser Lektion vor allem?',
-      answers: ['Empfehlungen anzuwenden', 'Den Atemtest zu erklären', 'Stress zu reduzieren', 'Das Tagebuch zu starten'],
+      type: QuestionType.trueFalse,
+      question: 'Diese Lektion behandelt die Zeit nach der Analyse.',
+      answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
     QuizQuestion(
@@ -515,14 +595,16 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Was kann im nächsten Schritt passieren?',
-      answers: ['Ergebnisse und Empfehlungen besprochen werden', 'Die Erkennungsphase neu beginnen', 'Das Tagebuch gelöscht werden', 'Die App deinstalliert werden'],
+      type: QuestionType.trueFalse,
+      question: 'Nach der Erkennungsphase können Ergebnisse und Empfehlungen besprochen werden.',
+      answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Wie heißt diese letzte Lektion?',
-      answers: ['Ziel erreicht', 'Stress als Einflussfaktor', 'Analyse vorbereiten', 'Bewegung im Alltag'],
-      correctIndex: 0,
+      type: QuestionType.multiSelect,
+      question: 'Was kann im nächsten Schritt laut Lektion passieren? (Mehrfachauswahl)',
+      answers: ['Ergebnisse werden besprochen', 'Empfehlungen werden besprochen', 'Die App wird gelöscht', 'Die Erkennungsphase beginnt erneut'],
+      correctIndices: [0, 1],
     ),
   ],
 };
