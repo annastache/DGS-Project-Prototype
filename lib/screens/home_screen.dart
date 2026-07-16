@@ -7,12 +7,64 @@ import '../widgets/action_tile.dart';
 import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _plantKey = GlobalKey<PlantBuddyState>();   
+
+  Future<void> _selectSymptom(BuildContext context) async {   
+    const symptoms = [
+      'Bauchschmerzen',
+      'Übelkeit',
+      'Kopfschmerzen',
+      'Müdigkeit',
+      'Blähungen',
+      'Sodbrennen',
+    ];
+
+    final selected = await showModalBottomSheet<String>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  'Welches Symptom möchtest du erfassen?',
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                ),
+              ),
+              for (final symptom in symptoms)
+                ListTile(
+                  title: Text(symptom),
+                  onTap: () => Navigator.pop(context, symptom),
+                ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (selected != null) {
+      _plantKey.currentState?.triggerHearts();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
+  
 
     return SafeArea(
       bottom: false,
@@ -99,12 +151,12 @@ class HomeScreen extends StatelessWidget {
                         label: 'Snack\nhinzufügen',
                         onTap: controller.openQuickAdd,
                       ),
-                      const ActionTile(icon: Icons.health_and_safety, label: 'Symptom\nerfassen', iconColor: Colors.redAccent),
-                        /*ActionTile(
-                          icon: Icons.search,
-                          label: 'Lebensmittel\nsuchen',
-                          onTap: controller.openQuickAdd,
-                        ),*/
+                      ActionTile(                                                                                                 // TO
+                        icon: Icons.health_and_safety,
+                        label: 'Symptom\nerfassen',
+                        iconColor: Colors.redAccent,
+                        onTap: () => _selectSymptom(context),
+                      ),
                       ActionTile(
                         icon: Icons.signpost_outlined,
                         label: 'Zum\nWissenspfad',
@@ -117,6 +169,7 @@ class HomeScreen extends StatelessWidget {
                   right: 15,
                   bottom: 15,
                   child: PlantBuddy(
+                    key: _plantKey,
                     stage: controller.plantStage,
                     day: controller.currentDay,
                     size: 152, // 152
@@ -172,6 +225,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+  
 }
 
 class _ProgressHint extends StatelessWidget {
