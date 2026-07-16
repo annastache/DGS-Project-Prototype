@@ -2,17 +2,52 @@ import 'dart:math' as math;
  
 import 'package:flutter/material.dart';
  import "package:flutter/foundation.dart";
-import '../core/app_colors.dart';
+//import '../core/app_colors.dart';
 
- 
+ const List<Color> _flowerPalette = [
+  Color(0xFFFF8FBB), 
+  Color.fromARGB(255, 255, 67, 142), 
+  Color.fromARGB(255, 255, 119, 0), 
+  Color.fromARGB(255, 183, 0, 255), 
+  Color(0xFF8FD9FF), 
+  Color.fromARGB(255, 255, 217, 0), 
+  Color.fromARGB(255, 249, 73, 255),
+  Color.fromARGB(255, 255, 63, 63), 
+];
+
+const List<Color> _flowerLightPalette = [
+  Color(0xFFFFE6D0),
+  Color.fromARGB(255, 255, 239, 245),
+  Color.fromARGB(255, 255, 238, 206),
+  Color.fromARGB(255, 0, 51, 145),
+  Color.fromARGB(255, 255, 252, 234),
+  Color.fromARGB(255, 255, 253, 237),
+  Color.fromARGB(230, 255, 223, 252),
+  Color(0xFFE0D0FF),
+];
+
+const List<Color> _flowerCenterPalette = [
+  Color.fromARGB(255, 255, 230, 146), 
+  Color.fromARGB(255, 255, 235, 120), 
+  Color.fromARGB(255, 255, 103, 15), 
+  Color.fromARGB(255, 255, 238, 82), 
+  Color.fromARGB(255, 253, 255, 120), 
+  Color.fromARGB(255, 252, 148, 122), 
+  Color.fromARGB(255, 248, 216, 75), 
+  Color(0xFFFF8A65), 
+
+];
+
 class PlantBuddy extends StatefulWidget {
   const PlantBuddy({
     required this.stage,
+    required this.day,
     this.size = 164,
     super.key,
   });
  
   final int stage;
+  final int day; 
   final double size;
  
   @override
@@ -32,6 +67,7 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+   
     _displayedStage = widget.stage;
 
     _blinkController = AnimationController(
@@ -145,6 +181,9 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
           painter: _CutePlantPainter(
             stage: _displayedStage.clamp(0, 3).toInt(),
             eyeScale: _blinkAnimation.value,
+            flower: _flowerPalette[(widget.day % _flowerPalette.length)],           
+            flowerLight: _flowerLightPalette[(widget.day % _flowerLightPalette.length)],
+            flowerCenter: _flowerCenterPalette[widget.day % _flowerCenterPalette.length],
           ),
           child: SizedBox(width: widget.size, height: widget.size * 1.26),
         ),
@@ -325,10 +364,16 @@ class _CutePlantPainter extends CustomPainter {
   const _CutePlantPainter({
     required this.stage,
     this.eyeScale = 1.0,
+    required this.flower,        
+    required this.flowerLight,
+    required this.flowerCenter,
   });
  
   final int stage;
   final double eyeScale;
+  final Color flower;        
+  final Color flowerLight;
+  final Color flowerCenter;
  
   static const _potTop = Color(0xFFEF9AA9);
   static const _potBody = Color(0xFFE08AA0);
@@ -337,8 +382,8 @@ class _CutePlantPainter extends CustomPainter {
   static const _leafDark = Color(0xFF56B87C);
   static const _stem = Color(0xFF4FAF74);
   static const _face = Color(0xFF4A3340);
-  static const _flower = Color(0xFFFF8FBB);
-  static const _flowerLight = Color(0xFFFFD6E6);
+  //static const _flower = Color(0xFFFF8FBB);
+  //static const _flowerLight = Color(0xFFFFD6E6);
  
   @override
   void paint(Canvas canvas, Size size) {
@@ -512,7 +557,7 @@ class _CutePlantPainter extends CustomPainter {
  
   void _drawFlower(Canvas canvas, Offset center, double radius) {
     final petalPaint = Paint()
-      ..shader = const RadialGradient(colors: [_flowerLight, _flower]).createShader(
+      ..shader = RadialGradient(colors: [flowerLight, flower]).createShader(
         Rect.fromCircle(center: center, radius: radius * 1.5),
       );
     for (var i = 0; i < 6; i++) {
@@ -520,7 +565,7 @@ class _CutePlantPainter extends CustomPainter {
       final petalCenter = center + Offset(math.cos(angle), math.sin(angle)) * radius * 0.72;
       canvas.drawCircle(petalCenter, radius * 0.46, petalPaint);
     }
-    canvas.drawCircle(center, radius * 0.42, Paint()..color = AppColors.accentYellow);
+    canvas.drawCircle(center, radius * 0.42, Paint()..color = flowerCenter);
   }
  
   void _drawPot(Canvas canvas, double cx, double h) {
