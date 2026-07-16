@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           //const Spacer(flex: 1),
-          Row(
+         /* Row(
             children: [
               const Icon(Icons.accessibility_new, color: Colors.redAccent, size: 24),
               const SizedBox(width: 8),
@@ -68,7 +68,8 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(width: 8),
               const Icon(Icons.flag, color: Color(0xFF7FD18E), size: 24),
             ],
-          ),
+          ),*/
+          _BudProgressRow(currentDay: controller.currentDay),
 
           //const Spacer(flex: 2),
           const SizedBox(height: 16),
@@ -121,11 +122,11 @@ class HomeScreen extends StatelessWidget {
                     size: 152, // 152
                   ),
                 ),
-                //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  // ADD
-                  Positioned(                                                                                // ADD
-                    right: 4,                                                                                 // ADD
-                    bottom: 209,                                                                               // ADD — sits just above the plant's head
-                    child: _SpeechBubble(day: controller.currentDay),                                          // ADD
+                //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  
+                  Positioned(                                                                               
+                    right: 4,                                                                                 
+                    bottom: 209,                                                                              
+                    child: _SpeechBubble(day: controller.currentDay),                                          
                   ),   
                 
               ],
@@ -137,9 +138,10 @@ class HomeScreen extends StatelessWidget {
         ),
         if (!controller.hintDismissed && !controller.todayQuizUnlocked)           
             Positioned(                                                            
-              top: 160,                                                             
+              top: 235,                                                             
               left: 18,                                                            
-              right: 18,                                                           
+              right: 18,      
+              height: 200,                                                     
               child: GestureDetector(                                              
                 onTap: controller.dismissHint,                                     
                 child: Container(                                                  
@@ -152,8 +154,8 @@ class HomeScreen extends StatelessWidget {
                     children: [                                                    
                       Expanded(                                                    
                         child: Text(                                               
-                          'Dokumentiere täglich Frühstück, Mittagessen und Abendessen. Nach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', // ADD
-                          style: TextStyle(fontSize: 12.5, color: AppColors.text), 
+                          'Dokumentiere täglich:\n\nFrühstück,\nMittagessen\nund Abendessen.\n\n\nNach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', 
+                          style: TextStyle(fontSize: 12.5, color: AppColors.text), textAlign: TextAlign.center,
                         ),                                                         
                       ),                                                           
                       SizedBox(width: 8),                                         
@@ -347,6 +349,33 @@ class _MealRow extends StatelessWidget {
     );
   }
 }
+
+class _BudProgressRow extends StatelessWidget {
+  const _BudProgressRow({required this.currentDay});
+
+  final int currentDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(14, (i) {
+        final day = i + 1;
+        final bloomed = day < currentDay;   
+        final isToday = day == currentDay;
+
+        return Icon(
+          bloomed || isToday ? Icons.local_florist : Icons.spa,   
+          size: isToday ? 26 : 18,
+          color: bloomed
+              ?    AppColors.primary
+              : (isToday ?  const Color.fromARGB(255, 31, 109, 0) : const Color.fromARGB(255, 183, 201, 182)),
+        );
+      }),
+    );
+  }
+}
+ // static const primaryDark = Color(0xFF557255); AppColors.primary; const Color.fromARGB(255, 54, 100, 36)
 
 class _SpeechBubble extends StatelessWidget {
   const _SpeechBubble({required this.day});
