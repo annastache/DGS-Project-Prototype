@@ -280,9 +280,9 @@ class _PathNode extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 13.5,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: unlocked ? AppColors.text : AppColors.muted,
+                  color: unlocked ? AppColors.primary : AppColors.muted,
                   height: 1.3,
                 ),
               ),
