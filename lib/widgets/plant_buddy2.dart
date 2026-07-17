@@ -51,10 +51,10 @@ class PlantBuddy extends StatefulWidget {
   final double size;
  
   @override
-  State<PlantBuddy> createState() => _PlantBuddyState();
+  State<PlantBuddy> createState() => PlantBuddyState();
 }
  
-class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
+class PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   late int _displayedStage;
   late AnimationController _blinkController;
   late Animation<double> _blinkAnimation;
@@ -104,7 +104,7 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
   }
   void _handleTap() {
    _blinkController.forward().then((_) {
-      Future.delayed(const Duration(milliseconds: 135), () {   // ADD — hold closed
+      Future.delayed(const Duration(milliseconds: 135), () {   
         if (mounted) _blinkController.reverse();
       });
     });
@@ -112,11 +112,19 @@ class _PlantBuddyState extends State<PlantBuddy> with TickerProviderStateMixin {
     setState(() => _tapHearts.add(myTap));   
     Future.delayed(const Duration(milliseconds: 900), () {
       if (mounted) {
-        setState(() => _tapHearts.remove(myTap));           // CHANGE — was the myTap == _tapId check
+        setState(() => _tapHearts.remove(myTap));           
       }
     });
   }
 
+void triggerHearts() {                                    
+    setState(() => _showHearts = true);                   
+    _blinkController.forward().then((_) => _blinkController.reverse());   
+    Future.delayed(const Duration(milliseconds: 2000), () {  
+      if (mounted) setState(() => _showHearts = false);      
+    }
+    );                                                      
+  }
  
   @override
   void didUpdateWidget(PlantBuddy oldWidget) {
