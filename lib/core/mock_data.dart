@@ -5,10 +5,18 @@ const demoLessons = <Lesson>[
   Lesson(
     index: 0,
     title: 'Einleitung',
-    readingTime: '2 Minute Lesezeit',
+    readingTime: '1 Minute Lesezeit',
     body: '''Willkommen in der Erkennungsphase. In den nächsten Tagen dokumentierst du Mahlzeiten und Symptome. Dadurch entsteht eine Grundlage, auf der dein Ernährungsberater eine aussagekräftige Analyse erstellen kann.
-    
-    Wie du deine Verdauung verbessern kannst
+    Hier im Wissenspfad erhälts du dazu passende Lektionen: kurze, verständliche Einblicke rund um Lebensmittelunverträglichkeiten, Diagnostik und einen gesunden Alltag. Jede Lektion schaltest du frei, sobald du an dem Tag eine Mahlzeiten dokumentiert hast.
+    Wenn du alle drei Mahlzeiten er Tages eingetragen hast wartet ein kurzes Quiz mit drei Fragen auf dich. Damit kannst du dein neues Wissen direkt anwenden und bis zu drei Sterne sammeln. 
+    ''',
+  ),
+ 
+  Lesson(
+    index: 1,
+    title: 'Wie du deine Verdauung verbessern kannst',
+    readingTime: '2 Minuten Lesezeit',
+    body: '''Wie du deine Verdauung verbessern kannst
 
 Lebensmittelunverträglichkeiten können zu vielfältigen unangenehmen Verdauungsbeschwerden führen. Gesunde Essgewohnheiten können dazu beitragen, die allgemeine Verdauung zu verbessern und Beschwerden zu lindern. Im Folgenden haben wir dir fünf Tipps zusammengestellt, wie auch du deine Verdauung fördern kannst:
 
@@ -32,9 +40,8 @@ Um alle Nährstoffe aufzunehmen, die für eine gesunde Darmflora und effiziente 
 
 Während des Essens kann eine moderate Wasserzufuhr dabei helfen, die Nahrung zu verdünnen und den Transport durch den Verdauungstrakt zu erleichtern. Trinke dazu ruhig ab und zu einen Schluck Wasser. Vermeide jedoch übermäßiges Trinken während der Mahlzeiten, da dies zu einer Verdünnung der Verdauungssäfte und damit zu einer Beeinträchtigung der Verdauung führen kann.''',
   ),
- 
   Lesson(
-    index: 1,
+    index: 2,
     title: 'Lebensmittelallergie vs. Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
     body: '''Oft hört man die Begriffe "Allergie" und "Unverträglichkeit" und viele verwenden sie sogar synonym. Aber was bedeuten sie eigentlich genau und wie unterscheiden sie sich voneinander?
@@ -50,31 +57,6 @@ Eine Nahrungsmittelunverträglichkeit hingegen betrifft den Verdauungstrakt und 
 Fazit
 
 Es ist überaus wichtig, zwischen einer Allergie und einer Unverträglichkeit zu unterscheiden, da sowohl die Auswirkungen als auch die Behandlung unterschiedlich sind. Allergien erfordern oft eine strikte Vermeidung des auslösenden Lebensmittels und möglicherweise die Verwendung von Notfallmedikamenten. Unverträglichkeiten können zwar sehr unangenehme Beschwerden verursachen, sind aber in der Regel nicht lebensbedrohlich. Oft können zudem kleine Mengen toleriert werden oder es stehen Enzympräparate zur Verfügung, die bei der Verdauung unterstützen können. Während nur 2-5% der Deutschen von Allergien betroffen sind, liegt bei etwa 25-30% der Bevölkerung eine Lebensmittelunverträglichkeit vor. Solltest du von einer Unverträglichkeit betroffen sein, werden wir diese erkennen und dich unterstützen. Bei allergischen Symptomen solltest du umgehend einen Arzt aufsuchen.
-''',
-  ),
-  Lesson(
-    index: 2,
-    title: 'Atemtests zur Diagnose von Unverträglichkeiten',
-    readingTime: '2 Minuten Lesezeit',
-    body: '''Der H2 Atemtest ist eines der wichtigsten Verfahren zur Abklärung von Nahrungsmittelunverträglichkeiten. Für Fruktose und Laktosemalabsorption gilt er als diagnostischer Goldstandard, auch eine Sorbitmalabsorption kann damit untersucht werden.
-
-Was misst der H₂ Atemtest?
-
-Beim H₂ Atemtest wird gemessen, wie viel Wasserstoff (H₂) - und teilweise auch Methan (CH4) - in der Ausatemluft entsteht, nachdem eine festgelegte Menge eines Zuckers getrunken wurde.
-
-Kann dieser Zucker im Dünndarm nicht ausreichend aufgenommen werden, wird er von Darmbakterien vergoren. Die entstehenden Gase gelangen über das Blut in die Lunge und werden ausgeatmet.
-
-Da Wasserstoff im menschlichen Stoffwechsel kaum vorkommt, eignet er sich gut als Marker für eine Malabsorption.
-
-Was sind die Chancen und Grenzen des H2 Atemtests?
-
-Studien zeigen, dass der H₂ Atemtest bei klarer Symptomatik und guter Vorbereitung in vielen Fällen hilfreiche Hinweise auf Unverträglichkeiten liefert.
-
-Der Test wird in der Regel in gastroenterologischen oder spezialisierten internistischen Praxen durchgeführt, auch manche Hausärzt:innen und Kinderärtz:innen bieten ihn an. Allerdings ist er nicht überall verfügbar, und die Wartezeiten können je nach Region lang sein.
-
-Wenngleich der H₂-Atemtest der Goldstandard ist, hat er wie alle diagnostischen Tests -seine Grenzen. Sowohl falsch negative als auch falsch positive Ergebnisse können vorkommen zum Beispiel bei Menschen, die sogenannte Non-H2-Producer sind oder eine Darmfehlbesiedelung (SIBO) haben.
-
-Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang mit Symptomen und im Gesamtbild bewertet werden.
 ''',
   ),
   Lesson(
@@ -105,7 +87,7 @@ Deshalb sollte ein Testergebnis nicht für sich allein, sondern im Zusammenhang 
   Lesson(
     index: 4,
     title: 'Lebensmittelreaktionstest und IgG-Selbsttests',
-    readingTime: '2 Minuten Lesezeit',
+    readingTime: '4 Minuten Lesezeit',
     body: '''Wenn du schon länger versuchst, die Ursache für diffuse Beschwerden einzugrenzen, bist du in der Drogerie oder im Internet vielleicht s einmal auf Selbsttests gestoßen. Sie versprechen, dass du ganz einfach selbst herausfinden kannst, was die Lösung ist kleiner Piks, dann deine Probe einschicker kurz darauf flattert dir eine Liste unverträg Lebensmittel ins Haus. Diese Selbsttests basieren in der Regel auf einer Messung sogenannter IgG- Antikörper im Blut.
 
 Aus medizinischer Sicht bereiten IgG-Tests jedoch Sorgen: Denn dieser Antikörper-Typ zeigt nur an, womit der Körper in Kontakt war und nicht, was er tatsächlich verträgt oder nicht verträgt. Diese Lebensmittel wegzulassen, führt zu unnötigen Einschränkungen und verzögert die Suche nach den tatsächlichen Auslösern deiner Beschwerden.
@@ -175,95 +157,110 @@ Diese Tipps können dir dabei helfen, akute Beschwerden wie Blähungen und Bauch
   ),
   Lesson(
     index: 6,
-    title: 'Symptome richtig dokumentieren',
+    title: 'Tipps bei Durchfall',
     readingTime: '2 Minuten Lesezeit',
-    body: '''Mahlzeitendokumentation
+    body: '''Durchfall zählt zu den häufigsten Verdauungsbeschwerden – und kann den Körper rasch aus dem Gleichgewicht bringen. Mit den folgenden Maßnahmen unterstützt du deine Darmgesundheit und hilfst deinem Körper, sich zu regenerieren.
 
-Über den „+"-Button kannst du bequem die Mahlzeiten-Eingabe aufrufen. Anschließend kannst du über den Button „+ Zutat hinzufügen" deine verzehrten Lebensmittel hinzufügen.
+1. Flüssigkeit ist jetzt besonders wichtig
 
-Erfasse Zutaten einzeln
+Durchfall entzieht dem Körper viel Wasser. Trinke regelmäßig kleine Mengen stilles Wasser oder Kräutertee wie Kamille und Fenchel – beide beruhigen zusätzlich den Verdauungstrakt. Ein verbreiteter Irrtum ist, dass Cola bei Durchfall hilft – tatsächlich können Zucker und Koffein die Symptome sogar verschlimmern.
 
-Erfasse die Zutaten von Gerichten einzeln, damit unser Algorithmus sie richtig klassifizieren kann. Das wäre z.B. bei einem Nudelauflauf: Nudeln, Sahne, Paprika, Brokkoli und Käse. Gewürze müssen nicht erfasst werden, da sie aufgrund der geringen Menge in der Regel nicht im Zusammenhang mit Nahrungsmittelunverträglichkeiten stehen.
+2. Elektrolyte auffüllen – so geht’s
 
-Nutze die Autovervollständigung
+Mit der Flüssigkeit verliert der Körper auch wichtige Mineralstoffe wie Natrium und Kalium. Elektrolytlösungen aus der Apotheke sind ideal, aber auch salzige Brühe oder Kokoswasser können helfen. Du kannst auch selbst eine einfache Lösung mischen: 1 Liter Wasser, ½ Teelöffel Salz und 4 Teelöffel Zucker. Diese Mischung stabilisiert den Kreislauf und stärkt die Darmbarriere.
 
-Bei der Eingabe hilft dir unsere smarte Autovervollständigung, die dir Zutaten aus unserer Datenbank mit über 10.000 Lebensmitteln vorschlägt. Bitte nutze die Vorschläge, wann immer möglich, damit deine Analyse möglichst genau wird. Solltest du ein bestimmtes Lebensmittel gar nicht finden, kannst du dieses manuell hinzufügen.
+3. Sanfte Ernährung für den gereizten Darm
 
-Falls du Spezial-Produkte, beispielsweise glutenfreie oder laktosefreie Lebensmittel, zu dir nimmst wähle explizit die entsprechende Variante aus den Vorschlägen aus. 
+Bei akutem Durchfall ist Schonkost das A und O. Leicht verdauliche Lebensmittel wie Bananen, Reis, gekochte Karotten, Kartoffeln oder Haferflocken schonen den Darm und unterstützen die Regeneration der Darmflora. Vermeide dagegen fettige, stark gewürzte oder schwer verdauliche Speisen sowie Milchprodukte – sie können die Symptome verschlimmern, besonders bei einer bestehenden Nahrungsmittelunverträglichkeit.
 
-Mengenangaben
+4. Ruhe hilft dem Darm, sich zu erholen
 
-Erfasse bei der Eingabe deiner Lebensmittel jeweils die grobe Menge. Diese muss nicht unbedingt abgewogen werden, eine gute Schätzung reicht aus. Um dir das einfacher zu machen, haben wir für jede Zutat eine typische Standardportionsgröße hinterlegt. Nutze diese, wenn du dir beim genauen Gewicht unsicher bist. Falls es nicht explizit anders angegeben ist, nimm das Gewicht des Lebensmittels in rohem Zustand an.
+Stress kann Durchfall verstärken und die Verdauung zusätzlich belasten. Gönn dir Ruhe, lege dich hin, atme bewusst durch oder mache kurze Entspannungsübungen. So gibst du deinem Körper die Chance, wieder ins Gleichgewicht zu kommen.
 
-Zeitpunkt der Mahlzeit
+5. Nicht ignorieren: Ein Fall für die Ärztin oder den Arzt
 
-Trage deine Mahlzeiten täglich mit möglichst genauen Uhrzeiten in das digitale Ernährungstagebuch ein. Solltest du über einen längeren Zeitraum essen, wie es häufig bei Restaurantbesuchen der Fall sein kann, trage als Zeitpunkt die grobe Mitte des Zeitraums ein (z.B. Essen von 11 bis 12 Uhr → Zeitpunkt der Mahlzeit: 11:30 Uhr).
+Beobachte deine Symptome aufmerksam. Wenn Durchfall länger als zwei Tage anhält, von Fieber oder Schmerzen begleitet wird oder regelmäßig wiederkehrt, solltest du ärztlichen Rat einholen. Das gilt auch bei auffälligen Veränderungen im Stuhlgang – um mögliche Infektionen oder chronische Verdauungserkrankungen rechtzeitig zu erkennen.
 
-Dokumentiere kontinuierlich
-
-Achte darauf, dein gewöhnliches Essverhalten beizubehalten und keine größeren Pausen bei der Dokumentation zu machen. Dokumentiere deine Mahlzeiten möglichst sofort nach dem Essen, um keine Einträge zu vergessen.
-
-Symptomdokumentation
-
-Über,+" → „Symptom erfassen" kannst du bequem Symptome in der App notieren.
-
-Dokumentiere deine Beschwerden konsequent und mit dem genauen Zeitpunkt des Auftretens. Wir empfehlen, die Symptome umgehend nach dem Auftreten einzutragen, um den genauen Zeitpunkt zu erfassen und keinen Eintrag zu vergessen. Wähle zunächst das Datum und die Uhrzeit aus, wann das Symptom aufgetreten ist.
-
-Erfasse Symptomstärke & -art
-
-Teile uns anschließend mit, welches Symptom bei dir aufgetreten ist. Nutze dafür die Auswahlliste. Findest du ein Symptom nicht in der Liste, kannst du unter „Sonstiges, bitte spezifizieren" eigene Symptome eintragen. Zuletzt solltest du erfassen, wie stark dich deine Beschwerden beeinträchtigen.
-
-Dokumentiere 14 Tage kontinuierlich
-
-Wir verstehen, dass die Dokumentation all deiner Mahlzeiten und Symptome mit Zeitaufwand und Mühe verbunden ist. Trotzdem ist es wichtig, diese so detailliert wie möglich mit den exakten Zeitpunkten zu erfassen, um eine genaue Analyse zu ermöglichen. Dein persönlicher Ernährungsberater schaut sich diese Einträge am Ende der Erkennungsphase an. Jeder Eintrag bringt uns einen Schritt näher zur Linderung deiner Beschwerden.''',
+''',
   ),
   Lesson(
     index: 7,
-    title: 'Mahlzeiten verständlich erfassen',
+    title: 'Sport und Unverträglichkeiten',
     readingTime: '2 Minuten Lesezeit',
-    body: 'Je genauer Zutaten und Portionsgrößen erfasst werden, desto besser können Muster erkannt werden. Für den Prototyp reicht eine vereinfachte Eingabe.',
+    body: '''Eine intensive Trainingseinheit kann den Darm für einige Stunden empfindlicher machen. Längerfristig hat regelmäßige Bewegung insgesamt vor allem positive Effekte auf die Verdauung. Beides ist gut belegt und erklärt, warum du deinen Bauch an Trainingstagen manchmal stärker spürst.
+
+Was passiert im Darm während intensiver Belastung?
+
+Bei moderater bis hoher Intensität verlagert der Körper Blut und Sauerstoff in die arbeitenden Muskeln. Der Darm wird vorübergehend weniger durchblutet (,,splanchnische Hypoperfusion"). In Studien zeigt sich dabei, dass die Darmzellen kurzzeitig unter Stress geraten und die Darmwand etwas durchlässiger wird. Dadurch kann der Darm während intensiver Belastung sensibler reagieren - manche Menschen spüren dann eher Krämpfe, Druck, Übelkeit oder ein stärkeres Rumoren.
+
+Wie Sport deinen Darm langfristig stärkt
+
+Wenn du regelmäßig in einem für dich passenden Tempo trainierst, gewöhnt sich dein Darm an diese Belastung (Hormesis-Prinzip). Der leichte Stress während des Sports führt langfristig zu positiven Veränderungen: Die (,,Tight Darmzellen, ihre Verbindungen (,,T Junctions) und die schutzende Schleimschicht arbeiten besser zusammen. Die Darmbarriere kann dadurch wirksamer arbeiten. Das trägt langfristig dazu bei, dass du insgesamt weniger zu Magen-Darm-Beschwerden neigst.
+
+Gut zu wissen: 
+
+Die Darmbarriere trennt den Darminhalt vom Körperinneren. Sie sorgt dafür, dass Nährstoffe ins Blut gelangen, während unerwünschte Stoffe draußen bleiben. Dadurch spielt sie eine enorm wichtige Rolle für unser Immunsystem sowie unser gesamtes Wohlbefinden.
+
+
+Drei Tipps für die Praxis
+
+Ein kurzer Spaziergang kann die Verdauung anregen und möglicherweise helfen, eingeschlossene Gase zu lösen. Vermeide jedoch anstrengende Sportarten, da diese die Symptome verschlimmern könnten.
+
+Gib dir Zeit zur Verdauung: 
+
+Plane zwischen „größerer" Mahlzeit und intensiver Einheit 1-3 Stunden Abstand ein, damit sich dein Magen schon vorher in den Dünndarm entleeren kann. So vermeidest du, dass Essen während der Belastung im Magen „stehen bleibt". Das beugt Übelkeit und Bauchschmerzen vor.
+
+Gut zu wissen: 
+
+Generell solltest du vor dem Training eher kohlenhydratreiche Mahlzeiten zu dir nehmen, die nur eine Magenverweildauer von 1-3 Stunden haben, während fettreiche Mahlzeiten dir über 4-6 Stunden „schwer" im Magen liegen können.
+
+Starte gut hydriert in deine Sporteinheit: Ausreichend zu trinken, hält das Blutvolumen und die Körpertemperatur stabiler. Da bei einer Sporteinheit sowieso schon weniger Blut in deinen Bauchraum fließt, ist dein Bauch durch bessere Flüssigkeitsversorgung besser vor Belastung geschützt.
+
+Finde deine richtige Intensität: 
+
+Wenn du an bestimmten Tagen empfindlicher reagierst, reduziere z.B. Tempo oder Dauer deiner Sporteinheit etwas. Leichter bis moderater Sport ist oft besser verträglich und hat trotzdem positive Effekte auf den Darm.''',
   ),
   Lesson(
     index: 8,
-    title: 'Trinken und Verdauung',
-    readingTime: '1 Minute Lesezeit',
-    body: 'Ausreichend Flüssigkeit unterstützt alltägliche Körperfunktionen. Bei Beschwerden kann es hilfreich sein, auch Getränke mit zu dokumentieren.',
+    title: 'Einfluss von stress auf deine Verdauung',
+    readingTime: '5 Minute Lesezeit',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 9,
-    title: 'Stress als Einflussfaktor',
-    readingTime: '2 Minuten Lesezeit',
-    body: 'Stress kann die Wahrnehmung von Beschwerden und die Verdauung beeinflussen. Deshalb kann ein kurzer Stimmungseintrag zusätzliche Hinweise liefern.',
+    title: 'Gesunde Ernährung',
+    readingTime: '3 Minuten Lesezeit',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 10,
     title: 'Bewegung im Alltag',
     readingTime: '1 Minute Lesezeit',
-    body: 'Leichte Bewegung nach dem Essen kann manchen Menschen guttun. Entscheidend ist, eigene Muster zu beobachten und nicht alles auf einzelne Lebensmittel zurückzuführen.',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 11,
     title: 'Analyse vorbereiten',
     readingTime: '2 Minuten Lesezeit',
-    body: 'Je vollständiger dein Tagebuch ist, desto besser kann die spätere Analyse Zusammenhänge sichtbar machen.',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 12,
     title: 'Lebensmittelguide verstehen',
     readingTime: '2 Minuten Lesezeit',
-    body: 'Der Lebensmittelguide hilft dabei, Empfehlungen im Alltag leichter umzusetzen und passende Alternativen zu finden.',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 13,
     title: 'Empfehlungen anwenden',
     readingTime: '2 Minuten Lesezeit',
-    body: 'Nach der Analyse geht es darum, Empfehlungen Schritt für Schritt in den Alltag zu übertragen.',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
   Lesson(
     index: 14,
     title: 'Ziel erreicht',
     readingTime: '1 Minute Lesezeit',
-    body: 'Du hast die Erkennungsphase abgeschlossen. Im nächsten Schritt können Ergebnisse und Empfehlungen besprochen werden.',
+    body: 'Unsere Ernährungsexperten bearbeiten diese Lektion gerade für dich.',
   ),
 ];
 
@@ -271,20 +268,42 @@ Wir verstehen, dass die Dokumentation all deiner Mahlzeiten und Symptome mit Zei
 /// Quiz-Fragen gruppiert nach Lektion (Key = Lesson.index).
 /// Jede Lektion hat genau 3 Fragen.
 ///
-/// Fragetypen-Freischaltung: Lektion 0 startet bewusst mit reinem Multiple
-/// Choice. Ab Lektion 1 wird in jeder Lektion GENAU EIN neuer Fragetyp
-/// eingeführt (siehe _typeUnlockLesson in quiz_screen.dart), bevor er ab
-/// Lektion 8 frei mit den bereits freigeschalteten Typen gemischt wird:
-///   0 Baseline · 1 Richtig/Falsch · 2 Was passt nicht? · 3 Lückentext ·
-///   4 Mehrfachauswahl · 5 Zuordnen · 6 Reihenfolge · 7 Schätzfrage
+/// Fragetypen-Freischaltung: Lektion 0 ist die App-Einführung und bleibt
+/// bewusst reines Multiple Choice, damit die Grundmechanik zuerst ohne
+/// Überraschungen sitzt. Ab Lektion 1 wird in jeder Lektion GENAU EIN neuer
+/// Fragetyp eingeführt (siehe _typeUnlockLesson in quiz_screen.dart), bevor
+/// er ab Lektion 8 frei mit den bereits freigeschalteten Typen gemischt wird:
+///   0 Baseline (App-Erklärung) · 1 Richtig/Falsch · 2 Was passt nicht? ·
+///   3 Lückentext · 4 Mehrfachauswahl · 5 Zuordnen · 6 Reihenfolge ·
+///   7 Schätzfrage
+///
+/// Lektionen 8-14: Inhalte sind noch nicht final (leerer/Platzhalter-Body),
+/// deshalb bekommen sie bewusst neutrale "Kommt bald"-Platzhalterfragen
+/// statt inhaltlicher Fragen. Sobald echter Lektionstext vorliegt, einfach
+/// den jeweiligen Block ersetzen.
 const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
-  // --- 0: Baseline — nur Multiple Choice, damit die Grundmechanik sitzt ---
+  // --- 0: App-Erklärung — reines Multiple Choice, keine Lektion-Inhalte,
+  // sondern die Grundmechanik der App selbst ---
   0: [
     QuizQuestion(
-      question: 'Was dokumentierst du laut Lektion in den nächsten Tagen?',
-      answers: ['Mahlzeiten und Symptome', 'Nur Mahlzeiten', 'Nur Symptome', 'Nur deine Stimmung'],
+      question: 'Was musst du an einem Tag erledigen, damit sich das Tages-Quiz freischaltet?',
+      answers: ['Alle 3 Mahlzeiten dokumentieren', 'Nur eine Mahlzeit dokumentieren', 'Eine Lektion lesen', 'Nichts, es ist immer offen'],
       correctIndex: 0,
     ),
+    QuizQuestion(
+      question: 'Wie viele Fragen hat ein Quiz zu einer Lektion normalerweise?',
+      answers: ['Drei', 'Eine', 'Fünf', 'Zehn'],
+      correctIndex: 0,
+    ),
+    QuizQuestion(
+      question: 'Wofür bekommst du Sterne im Quiz?',
+      answers: ['Für richtig beantwortete Fragen', 'Für das Öffnen der App', 'Für das Lesen der Lektion', 'Für falsche Antworten'],
+      correctIndex: 0,
+    ),
+  ],
+
+  // --- 1: Unlock Richtig/Falsch ---
+  1: [
     QuizQuestion(
       question: 'Was kann laut Lektion helfen, die Verdauung zu verbessern?',
       answers: ['Langsames Kauen', 'Sehr schnelles Essen', 'Große Portionen auf einmal', 'Essen ohne Pausen'],
@@ -295,23 +314,9 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
       answers: ['Fünf', 'Zwei', 'Zehn', 'Drei'],
       correctIndex: 0,
     ),
-  ],
-
-  // --- 1: Unlock Richtig/Falsch ---
-  1: [
-    QuizQuestion(
-      question: 'Was unterscheidet Allergien von Unverträglichkeiten grundsätzlich?',
-      answers: ['Allergien sind immer ungefährlich', 'Unverträglichkeiten betreffen nur die Haut', 'Allergien betreffen das Immunsystem', 'Es gibt keinen Unterschied'],
-      correctIndex: 2,
-    ),
-    QuizQuestion(
-      question: 'Wie viel Prozent der Bevölkerung sind laut Lektion von einer Unverträglichkeit betroffen?',
-      answers: ['Etwa 25-30%', 'Etwa 2-5%', 'Etwa 60%', 'Fast niemand'],
-      correctIndex: 0,
-    ),
     QuizQuestion(
       type: QuestionType.trueFalse,
-      question: 'Allergien und Unverträglichkeiten können ähnliche Beschwerden auslösen.',
+      question: 'Ausreichend zu trinken kann laut Lektion die Verdauung unterstützen.',
       answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
@@ -320,24 +325,24 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   // --- 2: Unlock "Was passt nicht?" (Odd-one-out) ---
   2: [
     QuizQuestion(
-      question: 'Was wird vor dem H₂-Atemtest getrunken?',
-      answers: ['Wasser', 'Zucker', 'Mundspülung', 'Coke zero'],
-      correctIndex: 1,
+      question: 'Was unterscheidet Allergien von Unverträglichkeiten grundsätzlich?',
+      answers: ['Allergien sind immer ungefährlich', 'Unverträglichkeiten betreffen nur die Haut', 'Allergien betreffen das Immunsystem', 'Es gibt keinen Unterschied'],
+      correctIndex: 2,
     ),
     QuizQuestion(
       type: QuestionType.trueFalse,
-      question: 'Der H₂-Atemtest gilt als diagnostischer Goldstandard bei Fruktose- und Laktosemalabsorption.',
+      question: 'Allergien und Unverträglichkeiten können ähnliche Beschwerden auslösen.',
       answers: ['Richtig', 'Falsch'],
       correctIndex: 0,
     ),
     QuizQuestion(
       type: QuestionType.oddOneOut,
-      question: 'Welche Aussage passt NICHT zum H₂-Atemtest?',
+      question: 'Welche Aussage passt NICHT zu Nahrungsmittelallergien?',
       answers: [
-        'Er misst Wasserstoff in der Ausatemluft',
-        'Er gilt als Goldstandard bei Fruktose-/Laktosemalabsorption',
-        'Er wird vor dem Test mit einer Zuckerlösung vorbereitet',
-        'Er wird ausschließlich im Schlaflabor durchgeführt',
+        'Sie werden vom Immunsystem ausgelöst',
+        'Sie können bis zur Anaphylaxie reichen',
+        'Sie betreffen etwa 2-5% der Deutschen',
+        'Sie sind meist verzögerte Reaktionen, die erst Tage später auftreten',
       ],
       correctIndex: 3,
     ),
@@ -346,25 +351,25 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   // --- 3: Unlock Lückentext (Fill-in-blank) ---
   3: [
     QuizQuestion(
-      question: 'Was passiert, wenn der Zucker im Dünndarm nicht ausreichend aufgenommen wird?',
-      answers: ['Er wird von Darmbakterien vergoren', 'Er wird sofort ausgeschieden', 'Er wird im Magen neutralisiert', 'Er wird in der Leber gespeichert'],
+      question: 'Wofür gilt der H₂-Atemtest laut Lektion als diagnostischer Goldstandard?',
+      answers: ['Fruktose- und Laktosemalabsorption', 'Glutenunverträglichkeit', 'Nussallergien', 'Histaminintoleranz'],
       correctIndex: 0,
     ),
     QuizQuestion(
       type: QuestionType.oddOneOut,
-      question: 'Welche Aussage passt NICHT zu den Grenzen des H₂-Atemtests?',
+      question: 'Welche Aussage passt NICHT zum H₂-Atemtest?',
       answers: [
+        'Er misst Wasserstoff in der Ausatemluft',
         'Er kann bei Non-H2-Producern falsch negativ ausfallen',
-        'Er kann bei SIBO falsch positiv ausfallen',
         'Er liefert immer ein hundertprozentig sicheres Ergebnis',
-        'Er sollte im Zusammenhang mit Symptomen bewertet werden',
+        'Er wird meist in gastroenterologischen oder internistischen Praxen durchgeführt',
       ],
       correctIndex: 2,
     ),
     QuizQuestion(
       type: QuestionType.fillBlank,
-      question: 'Da ___ im menschlichen Stoffwechsel kaum vorkommt, eignet es sich gut als Marker für eine Malabsorption.',
-      answers: ['Wasserstoff', 'Sauerstoff', 'Kohlenstoff', 'Stickstoff'],
+      question: 'Kann der Zucker im Dünndarm nicht ausreichend aufgenommen werden, wird er von ___ vergoren.',
+      answers: ['Darmbakterien', 'Magensäure', 'Leberenzymen', 'Speichel'],
       correctIndex: 0,
     ),
   ],
@@ -372,20 +377,20 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   // --- 4: Unlock Mehrfachauswahl (Multi-select) ---
   4: [
     QuizQuestion(
-      question: 'Welche Art von Selbsttests sollte kritisch betrachtet werden?',
-      answers: ['IgG-Selbsttests', 'H₂-Atemtests', 'Blutdruckmessungen', 'Gewichtskontrollen'],
+      question: 'Was zeigen IgG-Antikörper laut Lektion an?',
+      answers: ['Womit der Körper in Kontakt war', 'Ob eine Allergie vorliegt', 'Ob eine Unverträglichkeit vorliegt', 'Den Vitaminspiegel im Blut'],
       correctIndex: 0,
     ),
     QuizQuestion(
       type: QuestionType.fillBlank,
-      question: 'IgG-Antikörper zeigen nur an, womit der Körper in ___ war, nicht was er tatsächlich verträgt.',
+      question: 'IgG-Tests zeigen nur an, womit der Körper in ___ war, nicht was er tatsächlich verträgt.',
       answers: ['Kontakt', 'Widerspruch', 'Konkurrenz', 'Einklang'],
       correctIndex: 0,
     ),
     QuizQuestion(
       type: QuestionType.multiSelect,
-      question: 'Was kritisieren Fachleute an IgG-Selbsttests? (Mehrfachauswahl)',
-      answers: ['Sie können zu unnötigen Einschränkungen führen', 'Sie zeigen nur Kontakt, nicht Verträglichkeit', 'Sie sind gesetzlich verboten', 'Sie verzögern die Suche nach echten Auslösern'],
+      question: 'Was kritisiert die Lektion an IgG-Selbsttests? (Mehrfachauswahl)',
+      answers: ['Sie können zu unnötigen Einschränkungen führen', 'Sie verzögern die Suche nach echten Auslösern', 'Sie sind gesetzlich verboten', 'Sie messen keine tatsächliche Verträglichkeit'],
       correctIndices: [0, 1, 3],
     ),
   ],
@@ -418,28 +423,25 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   // --- 6: Unlock Reihenfolge (Sequence) ---
   6: [
     QuizQuestion(
-      question: 'Wie viele Lebensmittel enthält die Datenbank für die Autovervollständigung laut Lektion ungefähr?',
-      answers: ['Über 10.000', 'Etwa 100', 'Etwa 500', 'Über 1 Million'],
+      question: 'Was sollte man laut Lektion bei Durchfall vermeiden, obwohl es oft als Hausmittel gilt?',
+      answers: ['Cola zur Flüssigkeitszufuhr', 'Stilles Wasser', 'Kräutertee', 'Elektrolytlösungen'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.matching,
-      question: 'Ordne jeden Schritt der Dokumentation seinem Zweck zu.',
-      pairs: [
-        MatchPair(left: 'Zutaten einzeln erfassen', right: 'Damit der Algorithmus richtig klassifiziert'),
-        MatchPair(left: 'Autovervollständigung nutzen', right: 'Für eine genauere Analyse'),
-        MatchPair(left: 'Mengenangaben schätzen', right: 'Grobe Menge reicht aus'),
-        MatchPair(left: 'Zeitnah dokumentieren', right: 'Damit kein Eintrag vergessen wird'),
-      ],
+      type: QuestionType.trueFalse,
+      question: 'Bei Durchfall verliert der Körper auch wichtige Mineralstoffe wie Natrium und Kalium.',
+      answers: ['Richtig', 'Falsch'],
+      correctIndex: 0,
     ),
     QuizQuestion(
       type: QuestionType.sequence,
-      question: 'Bring die Schritte der Mahlzeiten-Erfassung in die richtige Reihenfolge.',
+      question: 'Bring die 5 Tipps bei Durchfall in die richtige Reihenfolge, wie sie in der Lektion vorgestellt werden.',
       sequenceItems: [
-        '"+"-Button drücken',
-        '"+ Zutat hinzufügen" antippen',
-        'Zutaten einzeln auswählen',
-        'Menge angeben',
+        'Flüssigkeit auffüllen',
+        'Elektrolyte auffüllen',
+        'Sanfte Ernährung wählen',
+        'Ruhe gönnen',
+        'Bei Alarmzeichen ärztlichen Rat einholen',
       ],
     ),
   ],
@@ -447,164 +449,145 @@ const demoQuizQuestionsByLesson = <int, List<QuizQuestion>>{
   // --- 7: Unlock Schätzfrage (Estimate) ---
   7: [
     QuizQuestion(
-      question: 'Wie detailliert ist die Eingabe im Prototyp gehalten?',
-      answers: ['Vereinfacht', 'Maximal komplex', 'Nur per Sprachsteuerung', 'Automatisch ohne Eingabe'],
+      question: 'Was passiert laut Lektion kurzfristig im Darm bei intensiver körperlicher Belastung?',
+      answers: ['Er wird weniger durchblutet', 'Er wird stärker durchblutet', 'Er verdaut schneller', 'Er verändert sich nicht'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.oddOneOut,
-      question: 'Welcher Aspekt gehört NICHT zu einer genauen Mahlzeiten-Erfassung?',
-      answers: ['Zutaten einzeln erfassen', 'Portionsgröße angeben', 'Uhrzeit der Mahlzeit', 'Lieblingsfarbe angeben'],
-      correctIndex: 3,
+      type: QuestionType.multiSelect,
+      question: 'Was empfiehlt die Lektion vor einer intensiven Trainingseinheit? (Mehrfachauswahl)',
+      answers: ['Genug Zeit zur Verdauung einplanen', 'Gut hydriert starten', 'Direkt nach einer großen Mahlzeit trainieren', 'Die eigene Intensität finden'],
+      correctIndices: [0, 1, 3],
     ),
     QuizQuestion(
       type: QuestionType.estimate,
-      question: 'Erinnerst du dich? Wie viele Tage sollst du laut App durchgehend dokumentieren?',
+      question: 'Wie viele Stunden Abstand solltest du laut Lektion zwischen einer größeren Mahlzeit und einer intensiven Trainingseinheit einplanen?',
       estimateMin: 0,
-      estimateMax: 30,
-      estimateTarget: 14,
-      estimateUnit: 'Tage',
-      estimateTolerance: 0.15,
+      estimateMax: 8,
+      estimateTarget: 2,
+      estimateUnit: 'Stunden',
+      estimateTolerance: 0.2,
     ),
   ],
 
-  // --- 8 ff.: freie Mischung aus allen freigeschalteten Fragetypen ---
+  // --- 8-14: Lektion noch nicht final — neutrale Platzhalterfragen ---
   8: [
     QuizQuestion(
-      question: 'Was unterstützt ausreichende Flüssigkeitszufuhr laut Lektion?',
-      answers: ['Alltägliche Körperfunktionen', 'Nur die Verdauung von Fett', 'Nur den Schlaf', 'Nur die Konzentration'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.trueFalse,
-      question: 'Bei Beschwerden kann es hilfreich sein, auch Getränke zu dokumentieren.',
-      answers: ['Richtig', 'Falsch'],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.fillBlank,
-      question: 'Ausreichend ___ unterstützt alltägliche Körperfunktionen.',
-      answers: ['Flüssigkeit', 'Schlaf', 'Bewegung', 'Sonnenlicht'],
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
       correctIndex: 0,
     ),
   ],
   9: [
     QuizQuestion(
-      question: 'Was kann laut Lektion die Verdauung beeinflussen?',
-      answers: ['Stress', 'Nur die Tageszeit', 'Nur die Raumtemperatur', 'Nur die Kleidung'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.trueFalse,
-      question: 'Ein kurzer Stimmungseintrag kann zusätzliche Hinweise liefern.',
-      answers: ['Richtig', 'Falsch'],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.multiSelect,
-      question: 'Was kann Stress laut Lektion beeinflussen? (Mehrfachauswahl)',
-      answers: ['Die Wahrnehmung von Beschwerden', 'Die Verdauung', 'Die Augenfarbe', 'Die Schuhgröße'],
-      correctIndices: [0, 1],
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
+      correctIndex: 0,
     ),
   ],
   10: [
     QuizQuestion(
-      question: 'Was kann manchen Menschen nach dem Essen guttun?',
-      answers: ['Leichte Bewegung', 'Sofortiges Hinlegen', 'Schweres Training', 'Langes Sitzen'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.trueFalse,
-      question: 'Beschwerden sollten immer auf ein einzelnes Lebensmittel zurückgeführt werden.',
-      answers: ['Richtig', 'Falsch'],
-      correctIndex: 1,
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
+      correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.oddOneOut,
-      question: 'Welche Aussage passt NICHT zum Thema „Bewegung im Alltag"?',
-      answers: [
-        'Leichte Bewegung kann nach dem Essen guttun',
-        'Eigene Muster sollten beobachtet werden',
-        'Beschwerden sollten nicht vorschnell einem Lebensmittel zugeordnet werden',
-        'Schweres Training direkt nach dem Essen wird empfohlen',
-      ],
-      correctIndex: 3,
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
+      correctIndex: 0,
     ),
   ],
   11: [
     QuizQuestion(
-      question: 'Was wirkt sich positiv auf die spätere Analyse aus?',
-      answers: ['Ein möglichst vollständiges Tagebuch', 'Ein leeres Tagebuch', 'Nur ein Eintrag pro Woche', 'Tagebuch ohne Datum'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.fillBlank,
-      question: 'Je ___ dein Tagebuch ist, desto besser kann die Analyse Zusammenhänge sichtbar machen.',
-      answers: ['vollständiger', 'kürzer', 'unvollständiger', 'bunter'],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.multiSelect,
-      question: 'Was kann eine vollständige Dokumentation laut Lektion sichtbar machen? (Mehrfachauswahl)',
-      answers: ['Zusammenhänge zwischen Mahlzeiten und Beschwerden', 'Muster im Alltag', 'Die Kalorienzahl', 'Den Wetterbericht'],
-      correctIndices: [0, 1],
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
+      correctIndex: 0,
     ),
   ],
   12: [
     QuizQuestion(
-      question: 'Worum geht es in dieser Lektion?',
-      answers: ['Den Lebensmittelguide zu verstehen', 'Symptome zu dokumentieren', 'Den H₂-Atemtest durchzuführen', 'Bewegung im Alltag zu steigern'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.multiSelect,
-      question: 'Wobei hilft der Lebensmittelguide laut Lektion? (Mehrfachauswahl)',
-      answers: ['Empfehlungen im Alltag umzusetzen', 'Passende Alternativen zu finden', 'Kalorien automatisch zu zählen', 'Rezepte zu erfinden'],
-      correctIndices: [0, 1],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
+      correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.oddOneOut,
-      question: 'Welche Aussage passt NICHT zum Lebensmittelguide?',
-      answers: ['Er hilft, Empfehlungen leichter umzusetzen', 'Er zeigt passende Alternativen', 'Er wird in dieser Lektion vorgestellt', 'Er ersetzt die persönliche Beratung komplett'],
-      correctIndex: 3,
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
+      correctIndex: 0,
     ),
   ],
   13: [
     QuizQuestion(
-      type: QuestionType.fillBlank,
-      question: 'Nach der Analyse geht es darum, Empfehlungen ___ in den Alltag zu übertragen.',
-      answers: ['Schritt für Schritt', 'Sofort alle gleichzeitig', 'Nur am Wochenende', 'Gar nicht'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.trueFalse,
-      question: 'Diese Lektion behandelt die Zeit nach der Analyse.',
-      answers: ['Richtig', 'Falsch'],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      question: 'Wann kommt diese Lektion im Ablauf?',
-      answers: ['Nach der Analyse', 'Vor der Erkennungsphase', 'Direkt am ersten Tag', 'Unabhängig vom Ablauf'],
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
       correctIndex: 0,
     ),
   ],
   14: [
     QuizQuestion(
-      question: 'Was hast du laut dieser Lektion abgeschlossen?',
-      answers: ['Die Erkennungsphase', 'Den H₂-Atemtest', 'Den Lebensmittelguide', 'Das Tutorial-Quiz'],
+      question: 'Diese Lektion ist bald verfügbar.',
+      answers: ['Ok', 'Alles klar', 'Bin gespannt', 'Verstanden'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.trueFalse,
-      question: 'Nach der Erkennungsphase können Ergebnisse und Empfehlungen besprochen werden.',
-      answers: ['Richtig', 'Falsch'],
+      question: 'Unsere Ernährungsexperten arbeiten gerade an diesem Inhalt.',
+      answers: ['Ok', 'Super', 'Danke', 'Klingt gut'],
       correctIndex: 0,
     ),
     QuizQuestion(
-      type: QuestionType.multiSelect,
-      question: 'Was kann im nächsten Schritt laut Lektion passieren? (Mehrfachauswahl)',
-      answers: ['Ergebnisse werden besprochen', 'Empfehlungen werden besprochen', 'Die App wird gelöscht', 'Die Erkennungsphase beginnt erneut'],
-      correctIndices: [0, 1],
+      question: 'Schau bald wieder vorbei für neue Inhalte!',
+      answers: ['Mach ich', 'Ok', 'Klar doch', 'Bin dabei'],
+      correctIndex: 0,
     ),
   ],
 };
