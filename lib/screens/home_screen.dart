@@ -8,6 +8,7 @@ import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
 import 'lesson_detail_screen.dart'; 
 import '../core/mock_data.dart';  
+import 'dart:math' as math;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -144,8 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
           const SizedBox(height: 90), // 12
           //const Spacer(), // ← füllt den leeren Raum oberhalb
+          //------------------------------------ Add-Boxen ---------------------------------------
           SizedBox(
-          height: 220, //318 ---------------------------------------------------------------------------------      
+          height: 220, //318  
                child: Stack(
               clipBehavior: Clip.none, // clipBehavior: Clip.none,
               children: [
@@ -173,6 +175,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+                //---------------------------------- Grass_Background ---------------------------------------------------
+                if (controller.currentDay >= 2)                        
+                  const Positioned(
+                    right: -13,
+                    bottom: 40,
+                    child: _GrassRow_background(),
+                  ),
+                if (controller.currentDay >= 2)
+                  const Positioned(
+                    right: -10,
+                    bottom: 10,
+                    child: _GrassRow_background_near(),
+                  ),
+                //+++++++++++++++++++++++++++++++++++ plantBuddy ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 Positioned(
                   right: 15,
                   bottom: 15,
@@ -183,6 +199,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     size: 152, // 152
                   ),
                 ),
+                //----------------------------------- Butterfly --------------------------------------------------------
+                 if (controller.currentDay >= 4)                       
+                  const Positioned(    
+                    right: - 100,
+                    bottom: 75,
+                    child: _Butterfly(),
+                  ),
+                  //----------------------------------- Bee --------------------------------------------------------
+                  if (controller.currentDay == 7 || controller.currentDay == 14)  
+                  const Positioned(                  
+                    right: 15 + 76 - 6,
+                    bottom: 15 + 128,
+                    child: _Bee(),
+                  ),   
+                  //---------------------------------- Grass ---------------------------------------------------
+                if (controller.currentDay >= 2)                          
+                  const Positioned(
+                    right: -15,
+                    bottom: - 30,
+                    child: _GrassRow(),
+                  ),
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  
                  /* Positioned(                                                                               
                     right: 4,                                                                                 
@@ -197,6 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
           ),
         ),
+        //------------------------------------------- Onboarding Hinweis --------------------------------------------------------------
         if (!controller.hintDismissed && !controller.todayQuizUnlocked)           
             Positioned(                                                            
               top: 235,                                                             
@@ -225,7 +263,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),                                                              
                 ),                                                                 
               ),                                                             
-            ),                                                               
+            ),      
+            //---------------------------------------- Speech Bubble ----------------------------------------------------------                                                         
             Positioned(                                                        
           right: 19,                                                          
           top: 448,                                                          
@@ -419,6 +458,256 @@ class _MealRow extends StatelessWidget {
       ),
     );
   }
+}
+
+class _GrassRow extends StatelessWidget {
+  const _GrassRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(   
+      child: SizedBox(
+        width: 240,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(3, (i) {
+            return Icon(
+              Icons.grass,
+              size: i.isEven ? 68 : 58, // 22 : 16
+              color: i.isEven ? const Color.fromARGB(255, 67, 141, 70) : const Color(0xFF6FBF73),
+              
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+class _GrassRow_background extends StatelessWidget {
+  const _GrassRow_background();
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(   
+      child: SizedBox(
+        width: 220,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(9, (i) {
+            return Icon(
+              Icons.grass,
+              size: i.isEven ? 16 : 12,
+              color: i.isEven ? const Color(0xFF6FBF73) : const Color(0xFF6FBF73),
+              
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+class _GrassRow_background_near extends StatelessWidget {
+  const _GrassRow_background_near();
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(   
+      child: SizedBox(
+        width: 240,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(5, (i) {
+            return Icon(
+              Icons.grass,
+              size: i.isEven ? 26 : 32,
+              color: i.isEven ? const Color(0xFF6FBF73) : const Color(0xFF6FBF73),
+              
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
+class _Butterfly extends StatefulWidget {
+  const _Butterfly();
+
+  @override
+  State<_Butterfly> createState() => _ButterflyState();
+}
+
+class _ButterflyState extends State<_Butterfly> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 15),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(  
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          const activeFraction = 0.55;   // ADD — 85% Kreisen, 15% Pause
+          final v = _controller.value;
+
+          final t = v < activeFraction   // ADD
+              ? (v / activeFraction) * 2 * math.pi   // ADD — normaler Kreis-Fortschritt
+              : 0.0;
+          final dx = 250 * math.cos(t);
+          final dy = 100 * math.sin(t * 2);
+          final movingLeft = math.sin(t) < 0;
+
+          return Transform.translate(
+            offset: Offset(dx, dy),
+            child: Transform.flip(
+              flipX: movingLeft,
+              child: const Text('🦋', style: TextStyle(fontSize: 22)),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _Bee extends StatefulWidget {
+  const _Bee();
+
+  @override
+  State<_Bee> createState() => _BeeState();
+}
+
+class _BeeState extends State<_Bee> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          const activeFraction = 1;
+          final v = _controller.value;
+
+          final t = v < activeFraction
+              ? (v / activeFraction) * 2 * math.pi
+              : 0.0;
+
+          final dx = 22 * math.cos(t);        // radius um blüte
+          final dy = 12 * math.sin(t * 2);
+          final movingLeft = math.sin(t) < 0;
+          final wingFlap = math.sin(v * 40 * math.pi);
+
+          return Transform.translate(
+            offset: Offset(dx, dy),
+            child: Transform.flip(
+              flipX: movingLeft,
+              child: CustomPaint(                                
+                size: const Size(22, 18),
+                painter: _CuteBeePainter(wingFlap: wingFlap),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CuteBeePainter extends CustomPainter {
+  const _CuteBeePainter({required this.wingFlap});
+
+  final double wingFlap;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2 + 2);
+
+    // Flügel (leicht hinter dem Körper, flattern per Skalierung)
+    final wingFill = Paint()..color = const Color(0xFFEAF6FF); 
+    final wingStroke = Paint()                                               
+      ..color = const Color(0xFFB8DDF2)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    final wingScale = 0.7 + 0.3 * wingFlap.abs();
+    canvas.save();
+    canvas.translate(center.dx - 3, center.dy - 5);
+    canvas.scale(1, wingScale);
+    canvas.drawOval(const Rect.fromLTWH(-6, -4, 7, 6), wingFill);
+    canvas.drawOval(const Rect.fromLTWH(-6, -4, 7, 6), wingStroke);
+    canvas.restore();
+    canvas.save();
+    canvas.translate(center.dx + 3, center.dy - 5);
+    canvas.scale(1, wingScale);
+    canvas.drawOval(const Rect.fromLTWH(-1, -4, 7, 6), wingFill);
+    canvas.drawOval(const Rect.fromLTWH(-1, -4, 7, 6), wingStroke); 
+    canvas.restore();
+
+    // Körper (rundlich, gelb-schwarz gestreift)
+    const bodyRadius = 8.0;
+    canvas.drawCircle(center, bodyRadius, Paint()..color = const Color(0xFFFFC94D));
+
+    canvas.save();
+    canvas.clipPath(Path()..addOval(Rect.fromCircle(center: center, radius: bodyRadius)));
+    final stripePaint = Paint()..color = const Color(0xFF3A3A3A);
+    for (final dy in [0.5, 5.0]) {
+      canvas.drawRect(
+        Rect.fromCenter(center: Offset(center.dx, center.dy + dy), width: 18, height: 2.6),
+        stripePaint,
+      );
+    }
+    canvas.restore();
+
+    // Süße Punktaugen
+    final eyePaint = Paint()..color = const Color(0xFF3A3A3A);
+    canvas.drawCircle(Offset(center.dx - 3.5, center.dy - 3), 1.3, eyePaint);
+    canvas.drawCircle(Offset(center.dx + 3.5, center.dy - 3), 1.3, eyePaint);
+
+    // Kleiner Stachel
+    final path = Path()
+      ..moveTo(center.dx, center.dy + 6)
+      ..lineTo(center.dx - 1.5, center.dy + 9)
+      ..lineTo(center.dx + 1.5, center.dy + 9)
+      ..close();
+    canvas.drawPath(path, Paint()..color = const Color(0xFF3A3A3A));
+  }
+
+  @override
+  bool shouldRepaint(covariant _CuteBeePainter oldDelegate) => oldDelegate.wingFlap != wingFlap;
 }
 
 class _BudProgressRow extends StatelessWidget {
