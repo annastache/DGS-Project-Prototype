@@ -1,5 +1,13 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  # Verschachtelte Kopie und generierte Ordner NICHT analysieren.
+  # Verhindert doppelte / falsche Import-Warnungen aus "DGS Project Prototype".
+  exclude:
+    - "DGS Project Prototype/**"
+    - "build/**"
+    - ".dart_tool/**"
+
 linter:
   rules:
     prefer_const_constructors: true

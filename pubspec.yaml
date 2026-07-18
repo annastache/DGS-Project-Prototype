@@ -21,3 +21,5 @@ flutter:
   uses-material-design: true
   assets:
     - lib/pictures/logo_viatolea.png
+    - lib/pictures/overview_image_15749785_3496557.png
+    

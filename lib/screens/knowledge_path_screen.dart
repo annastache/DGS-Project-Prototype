@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 import '../core/app_colors.dart';
@@ -78,7 +80,7 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Wissenspfad - Erkennungsphase',
+                  '   Wissenspfad - Erkennungsphase',
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge
@@ -196,7 +198,6 @@ class _GlobalRoadPainter extends CustomPainter {
       path.lineTo(xNext, absHorizY);
       // Senkrecht runter bis Oberkante des nächsten Circles
       path.lineTo(xNext, nodeTop + _nodeHeight + _circleTop);
-
       canvas.drawPath(path, paint);
     }
   }
@@ -231,13 +232,13 @@ class _PathNode extends StatelessWidget {
     final circleCx = _circleCx(lesson.index, screenWidth);
     final circleLeft = circleCx - _circleR;
 
-    const double starsW = 20.0;
-    const double starsGap = 8.0;
+    const double starsW = 30.0;
+    const double starsGap =3.0;
     final double starsLeft = onRight
         ? circleCx + _circleR + starsGap
         : circleCx - _circleR - starsGap - starsW;
 
-    const double textWidth = 145.0;
+    const double textWidth = 170.0;
     final double textLeft = onRight
         ? circleCx - _circleR - textWidth - 12
         : circleCx + _circleR + 12;
@@ -265,23 +266,23 @@ class _PathNode extends StatelessWidget {
             if (quizAvailable && unlocked)
               Positioned(
                 left: starsLeft,
-                top: _circleTop + 4,
+                top: _circleTop -4,
                 child: _Stars(stars: stars, color: color),
               ),
 
             // Titel
             Positioned(
               left: textLeft,
-              top: _circleTop + 12,
+              top: lesson.index==0 ? _circleTop + 25 : lesson.index==6 ? _circleTop + 25 : lesson.index==9 ? _circleTop + 25 : lesson.index==10 ? _circleTop + 25 : lesson.index==11 ? _circleTop + 25 : lesson.index==13 ? _circleTop + 25 : lesson.index==14 ? _circleTop + 25 : _circleTop + 15,
               width: textWidth,
               child: Text(
                 lesson.title,
                 textAlign: onRight ? TextAlign.right : TextAlign.left,
-                maxLines: 3,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 14.5,
+                  fontWeight: FontWeight.w600,
                   color: unlocked ? AppColors.primary : AppColors.muted,
                   height: 1.3,
                 ),
@@ -354,7 +355,7 @@ class _Stars extends StatelessWidget {
         final filled = index < stars;
         return Icon(
           filled ? Icons.star_rounded : Icons.star_outline_rounded,
-          size: 20,
+          size: 25,
           color: filled ? color : AppColors.muted,
         );
       }),
