@@ -53,7 +53,7 @@ class _PhonePreviewFrame extends StatelessWidget {
       child: Center(
         child: Container(
           width: 390,
-          height: size.height < 860 ? size.height - 28 : 844,
+          height: size.height < 860 ? size.height - 28 : 814,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: AppColors.background,
