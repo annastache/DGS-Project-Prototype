@@ -168,6 +168,7 @@ class LessonDetailScreen extends StatelessWidget {
               style: TextStyle(fontSize: 17, height: 1.45, color: AppColors.text),
             ),
             Text('', style: TextStyle(fontSize: 17, height: 1.45)),
+            Image.asset('lib/pictures/overview_image_259444708_3409114.png'),
             Text(
               'Unverträglichkeit',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
@@ -199,6 +200,7 @@ class LessonDetailScreen extends StatelessWidget {
                style: TextStyle(fontSize: 17, height: 1.45, color: AppColors.text),
             ),
             Text('', style: TextStyle(fontSize: 17, height: 1.45)),
+            Image.asset('lib/pictures/wissen03.png'),
             Text(
               'Was sind die Chancen und Grenzen des H₂ Atemtests?',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
@@ -210,6 +212,7 @@ class LessonDetailScreen extends StatelessWidget {
             ),
           ],
           if (lesson.index == 4) ...[
+            Image.asset('lib/pictures/wissen04.png'),
             Text(
               'Was meinen IgG-Tests mit "Unverträglichkeit"?',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),

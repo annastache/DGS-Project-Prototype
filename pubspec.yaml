@@ -22,4 +22,7 @@ flutter:
   assets:
     - lib/pictures/logo_viatolea.png
     - lib/pictures/overview_image_15749785_3496557.png
+    - lib/pictures/overview_image_259444708_3409114.png
+    - lib/pictures/wissen03.png
+    - lib/pictures/wissen04.png
     
