@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.primary),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           //const Spacer(flex: 1),
           Center(
             child: Text(
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.text),
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 5),
           //const Spacer(flex: 1),
          /* Row(
             children: [
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _BudProgressRow(currentDay: controller.currentDay),
 
           //const Spacer(flex: 2),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           //_ProgressHint(controller: controller),
           GestureDetector(
             onTap: controller.todayStarted
@@ -138,13 +138,13 @@ class _HomeScreenState extends State<HomeScreen> {
         
          // const Spacer(flex: 3),
          
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           //const Spacer(flex: 3),
           _MealCard(controller: controller),
           //const Spacer(flex: 3),
           //if (controller.todayQuizUnlocked) _SpeechBubble(day: controller.currentDay),
-          const SizedBox(height: 90), // 12
-          //const Spacer(), // ← füllt den leeren Raum oberhalb
+          //const SizedBox(height: 90), // 12
+          const Spacer(), // ← füllt den leeren Raum oberhalb
           //------------------------------------ Add-Boxen ---------------------------------------
           SizedBox(
           height: 220, //318  
@@ -179,13 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (controller.currentDay >= 5)                        
                   Positioned(
                     right: -13,
-                    bottom: 40,
+                    bottom: 45,
                     child: _GrassRow_background(growth: grassGrowth),
                   ),
                 if (controller.currentDay >= 5)
                   Positioned(
-                    right: -10,
-                    bottom: 10,
+                    right: -16,
+                    bottom: 20,
                     child: _GrassRow_background_near(growth: grassGrowth),
                   ),
                 //+++++++++++++++++++++++++++++++++++ plantBuddy ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     key: _plantKey,
                     stage: controller.plantStage,
                     day: controller.currentDay,
-                    size: 152, // 152
+                    size: 140, // 152
                   ),
                 ),
                 //----------------------------------- Butterfly --------------------------------------------------------
@@ -222,8 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   //---------------------------------- Grass ---------------------------------------------------
                 if (controller.currentDay >= 3)                          
                   Positioned(
-                    right: -15,
-                    bottom: - 30,
+                    right: - 30,
+                    bottom: - 20,
                     child: _GrassRow(growth: grassGrowth),
                   ),
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  
@@ -243,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //------------------------------------------- Onboarding Hinweis --------------------------------------------------------------
         if (!controller.hintDismissed && !controller.todayQuizUnlocked)           
             Positioned(                                                            
-              top: 235,                                                             
+              top: 228,                                                             
               left: 18,                                                            
               right: 18,      
               height: 200,                                                     
@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //---------------------------------------- Speech Bubble ----------------------------------------------------------                                                         
             Positioned(                                                        
           right: 19,                                                          
-          top: 448,                                                          
+          top: 435,                                                          
           child: GestureDetector(
             onTap: controller.todayStarted
             ? () => _goToTodaysLesson(context, controller)
@@ -476,14 +476,14 @@ class _GrassRow extends StatelessWidget {
     final scale = 0.35 + 0.65 * growth;
     return IgnorePointer(   
       child: SizedBox(
-        width: 240,
+        width: 190,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: List.generate(3, (i) {
+          children: List.generate(2, (i) {
             return Icon(
               Icons.grass,
-              size: (i.isEven ? 68 : 58) * scale, // 22 : 16
+              size: (i.isEven ? 78 : 68) * scale, // 22 : 16
               color: i.isEven ? const Color.fromARGB(255, 67, 141, 70) : const Color(0xFF6FBF73),
               
             );
@@ -511,7 +511,7 @@ class _GrassRow_background extends StatelessWidget {
           children: List.generate(9, (i) {
             return Icon(
               Icons.grass,
-              size: (i.isEven ? 16 : 12) * scale,
+              size: (i.isEven ? 14 : 10) * scale,
               color: i.isEven ? const Color(0xFF6FBF73) : const Color(0xFF6FBF73),
               
             );
