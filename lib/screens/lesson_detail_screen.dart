@@ -200,7 +200,7 @@ class LessonDetailScreen extends StatelessWidget {
                style: TextStyle(fontSize: 17, height: 1.45, color: AppColors.text),
             ),
             Text('', style: TextStyle(fontSize: 17, height: 1.45)),
-            Image.asset('lib/pictures/wissen03.png'),
+            Image.asset('lib/pictures/wissen01.png'),
             Text(
               'Was sind die Chancen und Grenzen des H₂ Atemtests?',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
@@ -289,6 +289,7 @@ class LessonDetailScreen extends StatelessWidget {
             ),
           ],
           if (lesson.index == 5) ...[
+            Image.asset('lib/pictures/wissen03.png'),
             Text(
               'Wärme anwenden',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
