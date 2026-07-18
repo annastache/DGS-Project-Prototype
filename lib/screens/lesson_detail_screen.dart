@@ -212,7 +212,7 @@ class LessonDetailScreen extends StatelessWidget {
             ),
           ],
           if (lesson.index == 4) ...[
-            Image.asset('lib/pictures/wissen04.png'),
+            Image.asset('lib/pictures/wissen06.png'),
             Text(
               'Was meinen IgG-Tests mit "Unverträglichkeit"?',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary),
