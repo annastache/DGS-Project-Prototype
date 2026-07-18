@@ -6,6 +6,8 @@ import '../state/app_state.dart';
 import '../widgets/action_tile.dart';
 import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
+import 'lesson_detail_screen.dart'; 
+import '../core/mock_data.dart';  
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -125,7 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
           //const Spacer(flex: 2),
           const SizedBox(height: 16),
-          _ProgressHint(controller: controller),
+          //_ProgressHint(controller: controller),
+          GestureDetector(
+            onTap: controller.todayStarted
+                ? () => _goToTodaysLesson(context, controller)
+                : null,
+            child: _ProgressHint(controller: controller),
+          ),
         
          // const Spacer(flex: 3),
          
@@ -176,11 +184,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  
-                  Positioned(                                                                               
+                 /* Positioned(                                                                               
                     right: 4,                                                                                 
                     bottom: 209,                                                                              
                     child: _SpeechBubble(day: controller.currentDay),                                          
-                  ),   
+                  ),   */
                 
               ],
             ),
@@ -207,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [                                                    
                       Expanded(                                                    
                         child: Text(                                               
-                          'Dokumentiere täglich:\n\nFrühstück,\nMittagessen\nund Abendessen.\n\n\nNach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', 
+                          'Dokumentiere hier täglich:\n\nFrühstück,\nMittagessen\nund Abendessen.\n\n\nNach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', 
                           style: TextStyle(fontSize: 12.5, color: AppColors.text), textAlign: TextAlign.center,
                         ),                                                         
                       ),                                                           
@@ -218,7 +226,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),                                                                 
               ),                                                             
             ),                                                               
-                                                                                                                                                      
+            Positioned(                                                        
+          right: 19,                                                          
+          top: 448,                                                          
+          child: GestureDetector(
+            onTap: controller.todayStarted
+            ? () => _goToTodaysLesson(context, controller)
+            : null,
+            child: _SpeechBubble(day: controller.currentDay),
+),                   
+        ),   
           ]
         );
       },
@@ -452,41 +469,50 @@ class _SpeechBubble extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
-    return InkWell(
-      onTap: () => controller.setSelectedIndex(4),
-      child: Column(                                   
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,     // tail hugs the right side, toward the plant
-        children: [
-          ConstrainedBox(                                  //  caps the bubble's width
-            constraints: const BoxConstraints(maxWidth:350), 
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: AppColors.primary, width: 2),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Text(
-              _bubbleText(controller),
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+    return Column(                                     
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 350),
+          child: Material(                              
+            color: Colors.transparent,                  
+            child: /*InkWell(                             
+              borderRadius: BorderRadius.circular(24),   
+              onTap: () {
+                if (controller.todayStarted) {
+                  _goToTodaysLesson(context, controller);
+                }
+              },
+              child: */Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: AppColors.primary, width: 2),
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Text(
+                  _bubbleText(controller),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w700),
+                ),
+              //),
             ),
           ),
-          ),
-          Transform.translate(                        
-            offset: const Offset(0, -2),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 34),
-              child: CustomPaint(
-                size: const Size(22, 12),
-                painter: const _BubbleTailPainter(),
+        ),
+        Transform.translate(
+          offset: const Offset(0, -2),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 34),
+            child: CustomPaint(
+              size: const Size(22, 12),
+              painter: const _BubbleTailPainter()
               ),
             ),
           ),
         ],
-      ),
+       
     );
   }
 }
@@ -515,3 +541,14 @@ class _BubbleTailPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
+void _goToTodaysLesson(BuildContext context, AppController controller) {
+  final lesson = demoLessons.firstWhere(
+    (l) => l.index == controller.currentDay,
+    orElse: () => demoLessons.first,
+  );
+  Navigator.of(context).push(
+    MaterialPageRoute<void>(
+      builder: (_) => LessonDetailScreen(lesson: lesson),
+    ),
+  );
+}

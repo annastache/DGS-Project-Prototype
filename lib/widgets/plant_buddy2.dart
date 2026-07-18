@@ -308,7 +308,7 @@ class _SingleTapHeartState extends State<_SingleTapHeart> with SingleTickerProvi
     _startTop = 90 + (random.nextDouble() - 0.5) * 50;   
     _startRight = 50 + (random.nextDouble() - 0.5) * 70; 
     _randomsize = 40 + (random.nextDouble() - 0.5) * 30; 
-    _heartColor = HSLColor.fromColor(Colors.green)          // ADD
+    _heartColor = HSLColor.fromColor(Colors.green)          
         .withLightness(
           (HSLColor.fromColor(Colors.green).lightness +
                   (random.nextDouble() - 0.5) * 0.25)
@@ -324,8 +324,8 @@ class _SingleTapHeartState extends State<_SingleTapHeart> with SingleTickerProvi
       duration: const Duration(milliseconds: 1000),
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {   // ADD
-      if (mounted) _controller.forward();                // ADD
+    WidgetsBinding.instance.addPostFrameCallback((_) {   
+      if (mounted) _controller.forward();                
     });
 
     _position = Tween<double>(begin: 0, end: -36).animate(
