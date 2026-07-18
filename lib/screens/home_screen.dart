@@ -63,11 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
       _plantKey.currentState?.triggerHearts();
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
-  
+    final grassGrowth = ((controller.currentDay - 2) / 12).clamp(0.0, 1.0);
 
     return SafeArea(
       bottom: false,
@@ -176,17 +176,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 //---------------------------------- Grass_Background ---------------------------------------------------
-                if (controller.currentDay >= 2)                        
-                  const Positioned(
+                if (controller.currentDay >= 5)                        
+                  Positioned(
                     right: -13,
                     bottom: 40,
-                    child: _GrassRow_background(),
+                    child: _GrassRow_background(growth: grassGrowth),
                   ),
-                if (controller.currentDay >= 2)
-                  const Positioned(
+                if (controller.currentDay >= 5)
+                  Positioned(
                     right: -10,
                     bottom: 10,
-                    child: _GrassRow_background_near(),
+                    child: _GrassRow_background_near(growth: grassGrowth),
                   ),
                 //+++++++++++++++++++++++++++++++++++ plantBuddy ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                 Positioned(
@@ -200,25 +200,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 //----------------------------------- Butterfly --------------------------------------------------------
-                 if (controller.currentDay >= 4)                       
+                 if (controller.currentDay == 2 || controller.currentDay == 7 || controller.currentDay == 13)                       
                   const Positioned(    
-                    right: - 100,
-                    bottom: 75,
+                    right:  85,
+                    bottom: 140,
+                    child: _Butterfly(),
+                  ),
+                  if (controller.currentDay == 14)                       
+                  const Positioned(    
+                    right:  85,
+                    bottom: 125,
                     child: _Butterfly(),
                   ),
                   //----------------------------------- Bee --------------------------------------------------------
-                  if (controller.currentDay == 7 || controller.currentDay == 14)  
+                  if (controller.currentDay == 4 || controller.currentDay == 10 || controller.currentDay == 14)  
                   const Positioned(                  
                     right: 15 + 76 - 6,
-                    bottom: 15 + 128,
+                    bottom: 184,
                     child: _Bee(),
                   ),   
                   //---------------------------------- Grass ---------------------------------------------------
-                if (controller.currentDay >= 2)                          
-                  const Positioned(
+                if (controller.currentDay >= 3)                          
+                  Positioned(
                     right: -15,
                     bottom: - 30,
-                    child: _GrassRow(),
+                    child: _GrassRow(growth: grassGrowth),
                   ),
                 //if (controller.todayQuizUnlocked && controller.starsForLesson(controller.currentDay) == 0)  
                  /* Positioned(                                                                               
@@ -461,10 +467,13 @@ class _MealRow extends StatelessWidget {
 }
 
 class _GrassRow extends StatelessWidget {
-  const _GrassRow();
+  const _GrassRow({required this.growth});
+
+  final double growth;
 
   @override
   Widget build(BuildContext context) {
+    final scale = 0.35 + 0.65 * growth;
     return IgnorePointer(   
       child: SizedBox(
         width: 240,
@@ -474,7 +483,7 @@ class _GrassRow extends StatelessWidget {
           children: List.generate(3, (i) {
             return Icon(
               Icons.grass,
-              size: i.isEven ? 68 : 58, // 22 : 16
+              size: (i.isEven ? 68 : 58) * scale, // 22 : 16
               color: i.isEven ? const Color.fromARGB(255, 67, 141, 70) : const Color(0xFF6FBF73),
               
             );
@@ -486,10 +495,13 @@ class _GrassRow extends StatelessWidget {
 }
 
 class _GrassRow_background extends StatelessWidget {
-  const _GrassRow_background();
+  const _GrassRow_background({required this.growth});
+
+   final double growth;
 
   @override
   Widget build(BuildContext context) {
+    final scale = 0.35 + 0.65 * growth;
     return IgnorePointer(   
       child: SizedBox(
         width: 220,
@@ -499,7 +511,7 @@ class _GrassRow_background extends StatelessWidget {
           children: List.generate(9, (i) {
             return Icon(
               Icons.grass,
-              size: i.isEven ? 16 : 12,
+              size: (i.isEven ? 16 : 12) * scale,
               color: i.isEven ? const Color(0xFF6FBF73) : const Color(0xFF6FBF73),
               
             );
@@ -511,10 +523,13 @@ class _GrassRow_background extends StatelessWidget {
 }
 
 class _GrassRow_background_near extends StatelessWidget {
-  const _GrassRow_background_near();
+  const _GrassRow_background_near({required this.growth});
+
+  final double growth;
 
   @override
   Widget build(BuildContext context) {
+    final scale = 0.35 + 0.65 * growth;
     return IgnorePointer(   
       child: SizedBox(
         width: 240,
@@ -524,7 +539,7 @@ class _GrassRow_background_near extends StatelessWidget {
           children: List.generate(5, (i) {
             return Icon(
               Icons.grass,
-              size: i.isEven ? 26 : 32,
+              size: (i.isEven ? 26 : 32) * scale,
               color: i.isEven ? const Color(0xFF6FBF73) : const Color(0xFF6FBF73),
               
             );
@@ -550,7 +565,7 @@ class _ButterflyState extends State<_Butterfly> with SingleTickerProviderStateMi
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 15),
+      duration: const Duration(seconds: 6),
     )..repeat();
   }
 
@@ -566,27 +581,90 @@ class _ButterflyState extends State<_Butterfly> with SingleTickerProviderStateMi
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
-          const activeFraction = 0.55;   // ADD — 85% Kreisen, 15% Pause
+          const activeFraction = 1;   
           final v = _controller.value;
 
-          final t = v < activeFraction   // ADD
-              ? (v / activeFraction) * 2 * math.pi   // ADD — normaler Kreis-Fortschritt
+          final t = v < activeFraction   
+              ? (v / activeFraction) * 2 * math.pi   
               : 0.0;
-          final dx = 250 * math.cos(t);
-          final dy = 100 * math.sin(t * 2);
+          final dx = 24 * math.cos(t); 
+          final dy = 14 * math.sin(t * 2);
           final movingLeft = math.sin(t) < 0;
 
           return Transform.translate(
             offset: Offset(dx, dy),
             child: Transform.flip(
               flipX: movingLeft,
-              child: const Text('🦋', style: TextStyle(fontSize: 22)),
+              child: CustomPaint(                                        
+                size: const Size(26, 22),
+                painter: _CuteButterflyPainter(wingFlap: math.sin(v * 30 * math.pi)),
+              ),
             ),
           );
         },
       ),
     );
   }
+}
+
+class _CuteButterflyPainter extends CustomPainter {
+  const _CuteButterflyPainter({required this.wingFlap});
+
+  final double wingFlap;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+
+    // Flügel: zwei Paare, oben größer, unten kleiner
+    final wingFill = Paint()..color = const Color(0xFFFFC9E0);
+    final wingStroke = Paint()
+      ..color = const Color(0xFFE58AB5)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
+     void drawWingPair(double dxOffset, double dyOffset, double w, double h) {
+      final closeAmount = wingFlap.abs();        
+      final widthScale = 0.35 + 0.65 * closeAmount; 
+      final xOffset = dxOffset * (0.4 + 0.6 * closeAmount); 
+      for (final side in [-1.0, 1.0]) {
+        canvas.save();
+        canvas.translate(center.dx + side * xOffset, center.dy + dyOffset);   
+        canvas.scale(side * widthScale, 1);                                   
+        final oval = Rect.fromCenter(center: Offset.zero, width: w, height: h);
+        canvas.drawOval(oval, wingFill);
+        canvas.drawOval(oval, wingStroke);
+        canvas.restore();
+      }
+    }
+
+    drawWingPair(6, -2, 12, 11);
+    drawWingPair(5, 5, 8, 7); 
+
+    // Körper: schmales rundes Oval in der Mitte
+    final bodyRect = Rect.fromCenter(center: center, width: 4, height: 14);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(bodyRect, const Radius.circular(2)),
+      Paint()..color = const Color(0xFF6B4A3A),
+    );
+
+    // Süße Punktaugen und Fühler
+    final facePaint = Paint()..color = const Color(0xFF3A3A3A);
+    canvas.drawCircle(Offset(center.dx - 1.2, center.dy - 5), 1.0, facePaint);
+    canvas.drawCircle(Offset(center.dx + 1.2, center.dy - 5), 1.0, facePaint);
+
+    final antennaPaint = Paint()
+      ..color = const Color(0xFF6B4A3A)
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+    canvas.drawLine(Offset(center.dx - 1, center.dy - 7), Offset(center.dx - 3, center.dy - 10), antennaPaint);
+    canvas.drawLine(Offset(center.dx + 1, center.dy - 7), Offset(center.dx + 3, center.dy - 10), antennaPaint);
+    canvas.drawCircle(Offset(center.dx - 3, center.dy - 10), 1.2, Paint()..color = const Color(0xFF6B4A3A));
+    canvas.drawCircle(Offset(center.dx + 3, center.dy - 10), 1.2, Paint()..color = const Color(0xFF6B4A3A));
+  }
+
+  @override
+  bool shouldRepaint(covariant _CuteButterflyPainter oldDelegate) => oldDelegate.wingFlap != wingFlap;
 }
 
 class _Bee extends StatefulWidget {
