@@ -40,6 +40,8 @@ class KnowledgePathScreen extends StatefulWidget {
 
 class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
   bool _markedSeen = false;
+  bool _scrolledToCurrent = false;
+  final _scrollController = ScrollController();
 
   @override
   void didChangeDependencies() {
@@ -50,6 +52,29 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
         if (mounted) AppStateScope.of(context).markKnowledgeHintSeen();
       });
     }
+    if (!_scrolledToCurrent) {                                      
+      _scrolledToCurrent = true;                             
+      WidgetsBinding.instance.addPostFrameCallback((_) {       
+        if (!mounted) return;                     
+        final controller = AppStateScope.of(context);               
+        final viewportHeight = _scrollController.position.viewportDimension; 
+        final targetTop = controller.unlockedLessonIndex * _nodeHeight; 
+        final targetOffset = (targetTop - viewportHeight / 2 + _nodeHeight / 2)  
+            .clamp(0.0, _scrollController.position.maxScrollExtent);
+
+        _scrollController.animateTo(          
+          targetOffset,                                                
+          duration: const Duration(milliseconds: 500),                
+          curve: Curves.easeOut,                                       
+        );                                                              
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -97,6 +122,7 @@ class _KnowledgePathScreenState extends State<KnowledgePathScreen> {
           ),
           Expanded(
             child: SingleChildScrollView(
+              controller: _scrollController,
               padding: const EdgeInsets.only(bottom: 112),
               child: SizedBox(
                 width: screenWidth,
