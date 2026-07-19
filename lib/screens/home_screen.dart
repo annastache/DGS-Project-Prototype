@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [                                                    
                       Expanded(                                                    
                         child: Text(                                               
-                          'Dokumentiere hier täglich:\n\nFrühstück,\nMittagessen\nund Abendessen.\n\n\nNach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', 
+                          'Willkommen!\nDokumentiere hier täglich:\n\nFrühstück,\nMittagessen\nund Abendessen.\n\n\nNach der ersten Mahlzeit wird die Tageslektion freigeschaltet, nach der dritten Mahlzeit das passende Quiz.', 
                           style: TextStyle(fontSize: 12.5, color: AppColors.text), textAlign: TextAlign.center,
                         ),                                                         
                       ),                                                           
