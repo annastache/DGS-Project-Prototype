@@ -4,6 +4,7 @@ import '../core/app_colors.dart';
 import '../models/meal.dart';
 import '../state/app_state.dart';
 import '../widgets/top_brand_header.dart';
+import '../widgets/symptom_picker.dart';
 
 class QuickAddScreen extends StatelessWidget {
   const QuickAddScreen({super.key});
@@ -38,15 +39,17 @@ class QuickAddScreen extends StatelessWidget {
             subtitle: 'Frühstück, Mittagessen oder Abendessen eintragen',
             onTap: () => _showMealPicker(context),
           ),
-          const _AddOption(
+          _AddOption(
             icon: Icons.add_circle,
             label: 'Snack hinzufügen',
-            subtitle: 'Platzhalter für den Click-Dummy',
+            subtitle: 'Ein Ort für die kleinen Snacks',
+            onTap: () => _addSnack(context),
           ),
-          const _AddOption(
+           _AddOption(
             icon: Icons.health_and_safety,
             label: 'Symptom erfassen',
-            subtitle: 'Platzhalter für Bauchschmerzen, Müdigkeit usw.',
+            subtitle: 'Bauchschmerzen, Müdigkeit und mehr eintragen',
+            onTap: () => _goToHomeAndPickSymptom(context),
           ),
           const SizedBox(height: 20),
           const Text(
@@ -57,6 +60,21 @@ class QuickAddScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+   Future<void> _goToHomeAndPickSymptom(BuildContext context) async {   // TO
+    final controller = AppStateScope.of(context);
+    final selected = await showSymptomPicker(context);
+    if (selected != null && context.mounted) {
+      controller.requestPlantHearts();
+      controller.setSelectedIndex(0);
+    }
+  }
+
+  void _addSnack(BuildContext context) {
+    final controller = AppStateScope.of(context);
+    controller.requestPlantHearts();
+    controller.setSelectedIndex(0);
   }
 
   void _showMealPicker(BuildContext context) {
@@ -89,9 +107,17 @@ class QuickAddScreen extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w800, color: AppColors.primary),
                       ),
                       subtitle: Text(controller.mealStatuses[i].label),
-                      trailing: const Icon(Icons.check_circle_outline, color: AppColors.primary),
+                      trailing: Icon(
+                        controller.mealStatuses[i] == MealStatus.pending
+                            ? Icons.add_circle
+                            : Icons.check_circle_outline,
+                        color: controller.mealStatuses[i] == MealStatus.pending
+                            ? AppColors.accentYellow
+                            : AppColors.primary,
+                      ),
                       onTap: () {
                         controller.setMealStatus(i, MealStatus.eaten);
+                        controller.requestPlantHearts();
                         Navigator.pop(sheetContext);
                         controller.setSelectedIndex(0);
                       },

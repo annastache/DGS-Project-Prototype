@@ -6,6 +6,7 @@ class AppController extends ChangeNotifier {
   int selectedIndex = 0;
   int currentDay = 1;
   int unlockedLessonIndex = 0;
+  bool pendingPlantHearts = false;
   int? latestQuizHintLesson;
   bool knowledgeHintSeen = false;
   bool hintDismissed = false; // Introductionary hint on home screen -L
@@ -115,7 +116,14 @@ class AppController extends ChangeNotifier {
     knowledgeHintSeen = true;
     notifyListeners();
   }
+   void requestPlantHearts() {
+    pendingPlantHearts = true;
+    notifyListeners();
+  }
 
+  void consumePlantHeartsRequest() {
+    pendingPlantHearts = false;
+  }
 // home page start message -L
   void dismissHint() {
     hintDismissed = true;

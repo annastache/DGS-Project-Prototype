@@ -8,6 +8,7 @@ import '../widgets/plant_buddy2.dart';
 import '../widgets/top_brand_header.dart';
 import 'lesson_detail_screen.dart'; 
 import '../core/mock_data.dart';  
+import '../widgets/symptom_picker.dart';
 import 'dart:math' as math;
 
 class HomeScreen extends StatefulWidget {
@@ -19,8 +20,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _plantKey = GlobalKey<PlantBuddyState>();   
+ 
 
-  Future<void> _selectSymptom(BuildContext context) async {   
+  Future<void> _selectSymptom(BuildContext context) async {
+     final controller = AppStateScope.of(context);
+    final selected = await showSymptomPicker(context);
+    if (selected != null) {
+       controller.requestPlantHearts();
+    }
+  }
+  /*Future<void> _selectSymptom(BuildContext context) async {   
     const symptoms = [
       'Bauchschmerzen',
       'Übelkeit',
@@ -62,8 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
     if (selected != null) {
       _plantKey.currentState?.triggerHearts();
     }
+  }*/
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final controller = AppStateScope.of(context);
+    if (controller.pendingPlantHearts) {
+      controller.consumePlantHeartsRequest();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _plantKey.currentState?.triggerHearts();
+      });
+    }
   }
-  
   @override
   Widget build(BuildContext context) {
     final controller = AppStateScope.of(context);
